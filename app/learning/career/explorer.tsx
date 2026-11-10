@@ -1,5 +1,6 @@
 "use client";
 
+import { sitePath } from "../../../lib/site-path";
 import { useEffect, useState } from "react";
 import type { Family } from "./catalog";
 import type { PathCard } from "./path-cards";
@@ -16,7 +17,7 @@ export function PathExplorer({ cards, families, view }: { cards: PathCard[]; fam
   useEffect(() => {
     if (view !== "cards") return;
     function followLegacyMapLink() {
-      if (window.location.hash === "#domain-map") window.location.replace("/learning/domain-map");
+      if (window.location.hash === "#domain-map") window.location.replace(sitePath("/learning/domain-map"));
     }
     followLegacyMapLink();
     window.addEventListener("hashchange", followLegacyMapLink);
@@ -42,12 +43,12 @@ export function PathExplorer({ cards, families, view }: { cards: PathCard[]; fam
             <div className="compare-panel">
               <div><h3>Compare paths</h3><button className="compare-clear" type="button" onClick={() => setCompare([])}>Clear selection</button></div>
               <DataTable label="Selected career paths" columns={["Path", "Target roles", "Prerequisites", "Subjects"]} rows={compared.map((card) => [
-                <a key="path" href={`/learning/${card.id}`}>{card.title}</a>, card.roles.join(" · "), card.needs.join(" · "), card.subjects.join(" · "),
+                <a key="path" href={sitePath(`/learning/${card.id}`)}>{card.title}</a>, card.roles.join(" · "), card.needs.join(" · "), card.subjects.join(" · "),
               ])} />
             </div>
           )}
           <DataTable label="Career role matrix" columns={["Career path", "Target roles", "Subjects", "Compare"]} rows={filtered.map((card) => [
-            <a key="path" href={`/learning/${card.id}`}>{card.title}</a>, card.roles.join(" · "), card.subjects.join(" · "),
+            <a key="path" href={sitePath(`/learning/${card.id}`)}>{card.title}</a>, card.roles.join(" · "), card.subjects.join(" · "),
             <input key="compare" type="checkbox" aria-label={`Compare ${card.title}`} checked={compare.includes(card.id)} disabled={compare.length >= 3 && !compare.includes(card.id)} onChange={() => changeCompare(card.id)} />,
           ])} />
         </>
@@ -66,11 +67,11 @@ export function PathExplorer({ cards, families, view }: { cards: PathCard[]; fam
                       <div className="career-card-rail" aria-hidden="true"><i/><i/><i/></div>
                       <div className="career-card-body">
                         <p className="eyebrow">{card.sourced ? "CAREER COLLECTION" : "ADDED PATH"}</p>
-                        <h3><a href={`/learning/${card.id}`}>{card.title}</a></h3>
+                        <h3><a href={sitePath(`/learning/${card.id}`)}>{card.title}</a></h3>
                         <p>{card.intro}</p>
                         <ul className="topic-tags">{card.roles.slice(0, 2).map((role) => <li key={role}>{role}</li>)}</ul>
                         <p className="career-card-meta">{card.subjects.length} core subjects · {card.resources} linked resources</p>
-                        <div className="career-card-footer"><a className="text-link" href={`/learning/${card.id}`}>Open path <span aria-hidden="true">→</span></a></div>
+                        <div className="career-card-footer"><a className="text-link" href={sitePath(`/learning/${card.id}`)}>Open path <span aria-hidden="true">→</span></a></div>
                       </div>
                     </article>
                   ))}

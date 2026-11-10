@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { sitePath } from "../lib/site-path";
 import { MonteCarlo, SignalMonitor } from "./experiments";
 import { atlas, ExternalLink, github, Icon, precisionLab, SiteFooter, SiteHeader } from "./site-chrome";
 
@@ -141,19 +141,19 @@ export default function Home() {
 
         <section className="paper chapter-gateway" aria-label="More from Field Notes">
           <div className="wrap gateway-grid">
-            <Link className="gateway-card" href="/learning">
+            <a className="gateway-card" href={sitePath("/learning")}>
               <span className="eyebrow">THE LEARNING NOTEBOOK</span>
               <strong>Career Learning Atlas</strong>
               <span>Career paths, study roadmaps, and experiments.</span>
               <span className="gateway-arrow"><Icon name="arrow" /></span>
-            </Link>
-            <a className="gateway-card" href="/projects">
+            </a>
+            <a className="gateway-card" href={sitePath("/projects")}>
               <span className="eyebrow">THE PROJECT STUDIO</span>
               <strong>Avenra AI &amp; other builds</strong>
               <span>Explore projects, concepts, and prototypes.</span>
               <span className="gateway-arrow"><Icon name="arrow" /></span>
             </a>
-            <a className="gateway-card" href="/frameworks">
+            <a className="gateway-card" href={sitePath("/frameworks")}>
               <span className="eyebrow">FRAMEWORKS</span>
               <strong>My 8 Life Boxes</strong>
               <span>Plan activities, budget time, and review the week.</span>

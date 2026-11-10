@@ -1,3 +1,4 @@
+import { sitePath } from "../lib/site-path";
 import type { ReactNode } from "react";
 import { Icon } from "./site-chrome";
 
@@ -36,5 +37,5 @@ export function NotebookHeading({ id, label, title, detail }: { id: string; labe
 }
 
 export function NotebookLink({ href, children }: { href: string; children: ReactNode }) {
-  return <a className="text-link notebook-link" href={href}>{children}<Icon name="arrow" /></a>;
+  return <a className="text-link notebook-link" href={sitePath(href)}>{children}<Icon name="arrow" /></a>;
 }

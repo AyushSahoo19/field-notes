@@ -1,5 +1,6 @@
 "use client";
 
+import { sitePath } from "../../lib/site-path";
 import { useState, type FormEvent } from "react";
 import { Icon } from "../site-chrome";
 import { useBrowserState } from "./browser-state";
@@ -77,7 +78,7 @@ export function FrameworkShelf() {
           <h3>My 8 Life Boxes</h3>
           <p>One map for work, exams, Avenra, money, health, relationships, and creative life. Schedule the activities you choose and review the week.</p>
           <ul className="framework-card-tags"><li>8 activity boxes</li><li>Daily plans</li><li>Weekly review</li></ul>
-          <a className="planner-button planner-button-primary" href="/frameworks/life-boxes">Open framework <Icon name="arrow" /></a>
+          <a className="planner-button planner-button-primary" href={sitePath("/frameworks/life-boxes")}>Open framework <Icon name="arrow" /></a>
         </article>
         {saved.map((item) => (
           <article className="framework-card" key={item.id}>

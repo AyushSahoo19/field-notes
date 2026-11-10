@@ -1,5 +1,6 @@
 "use client";
 
+import { sitePath } from "../../../lib/site-path";
 import { useEffect, useId, useRef, useState, type ChangeEvent } from "react";
 import { domainLinks, findRoute, layers, type DomainId, type DomainLink, type LinkKind } from "./circuit-data";
 
@@ -124,7 +125,7 @@ function RouteDetails({ route, from, to }: { route: DomainLink[] | null; from: D
           <li key={id}>
             <span className="circuit-step">{String(i + 1).padStart(2, "0")}</span>
             <div>
-              <a href={`/learning/${id}`}>{nameOf(id)} <span aria-hidden="true">↗</span></a>
+              <a href={sitePath(`/learning/${id}`)}>{nameOf(id)} <span aria-hidden="true">↗</span></a>
               {i > 0 && <p>{route[i - 1].detail}</p>}
             </div>
           </li>
@@ -257,7 +258,7 @@ export function DomainCircuit({ directory, focus, onFocus }: {
         <div className="circuit-inspector">
           <div className="circuit-inspector-header">
             <div><p className="eyebrow">DOMAIN IN FOCUS</p><h3>{current.title}</h3><p>{current.intro}</p></div>
-            <a className="circuit-open-path" href={`/learning/${focus}`}>Open learning path <span aria-hidden="true">→</span></a>
+            <a className="circuit-open-path" href={sitePath(`/learning/${focus}`)}>Open learning path <span aria-hidden="true">→</span></a>
           </div>
           <div className="circuit-connection-grid">
             <ConnectionList title="What feeds into it" links={incoming} incoming onSelect={onFocus} />

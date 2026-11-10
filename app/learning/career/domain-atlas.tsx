@@ -1,5 +1,6 @@
 "use client";
 
+import { sitePath } from "../../../lib/site-path";
 import { useState } from "react";
 import type { CareerPath, Family } from "./catalog";
 import { domainLinks, layers, type DomainId, type DomainLink } from "./circuit-data";
@@ -26,7 +27,7 @@ const views = [
 ] as const;
 
 function PathLink({ id, label = "Open learning path" }: { id: DomainId; label?: string }) {
-  return <a className="atlas-path-link" href={`/learning/${id}`}>{label} <span aria-hidden="true">↗</span></a>;
+  return <a className="atlas-path-link" href={sitePath(`/learning/${id}`)}>{label} <span aria-hidden="true">↗</span></a>;
 }
 
 function TopicFlow({ domain, id }: { domain: AtlasDomain; id: DomainId }) {

@@ -1,5 +1,5 @@
+import { sitePath } from "../../../lib/site-path";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Icon } from "../../site-chrome";
 import { curriculum } from "../career/catalog";
 import { CareerHero, CareerNav } from "../career/hero";
@@ -19,7 +19,7 @@ export default async function MasterRoadmap({ searchParams }: { searchParams: Pr
       <CareerNav current="master" />
       <CareerHero label="CAREER LEARNING ATLAS / WORKBOOK EXPLORER" title="26-Week Engineering Mastery"
         intro="The workbook sequence from programming and algorithms to operating systems, databases, distributed systems, and AI. Explore the source lessons, projects, and open-source missions."
-        actions={<><a className="button primary" href="#master-plan">Browse the plan <Icon name="down" /></a><Link className="quiet-link" href="/learning#path-catalog">All career paths <Icon name="arrow" /></Link></>}>
+        actions={<><a className="button primary" href="#master-plan">Browse the plan <Icon name="down" /></a><a className="quiet-link" href={sitePath("/learning#path-catalog")}>All career paths <Icon name="arrow" /></a></>}>
         <div className="notebook-panel career-hero-panel">
           <p className="panel-meta"><span className="dot" /> SOURCE WORKBOOK</p>
           <div className="career-stat-grid">

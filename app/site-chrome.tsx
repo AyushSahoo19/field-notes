@@ -1,3 +1,4 @@
+import { sitePath } from "../lib/site-path";
 import type { ReactNode } from "react";
 
 export const github = "https://github.com/AyushSahoo19";
@@ -22,7 +23,7 @@ export function Icon({ name }: { name: "arrow" | "out" | "down" | "pulse" | "pin
 
 function Brand({ home }: { home: boolean }) {
   return (
-    <a className="brand" href={home ? "#top" : "/"}>
+    <a className="brand" href={home ? "#top" : sitePath("/")}>
       <span className="brand-mark"><Icon name="pulse" /></span>
       <span>Ayush Kumar Sahoo<small>FIELD NOTES</small></span>
     </a>
@@ -53,7 +54,7 @@ export function SiteHeader({ section }: { section: "home" | "learning" | "projec
           <Brand home={home} />
           <nav aria-label="Main">
             {siteNavItems.map((item) => (
-              <a key={item.href} href={home && item.href.startsWith("/#") ? item.href.slice(1) : item.href}
+              <a key={item.href} href={home && item.href.startsWith("/#") ? item.href.slice(1) : sitePath(item.href)}
                 aria-current={item.section === section ? "true" : undefined}>{item.label}</a>
             ))}
           </nav>

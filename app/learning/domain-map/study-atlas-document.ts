@@ -1,3 +1,4 @@
+import { sitePath } from "../../../lib/site-path";
 import { github, siteNavItems } from "../../site-chrome";
 import { careerNavItems } from "../career/hero";
 import { domainMapSections, type studyAtlas } from "./study-atlases";
@@ -10,14 +11,14 @@ function escapeHtml(value: string) {
 }
 
 const siteLinks = siteNavItems.map(({ href, label, section }) =>
-  `<a href="${escapeHtml(href)}"${section === "learning" ? ' aria-current="true"' : ""}>${escapeHtml(label)}</a>`).join("");
+  `<a href="${escapeHtml(sitePath(href))}"${section === "learning" ? ' aria-current="true"' : ""}>${escapeHtml(label)}</a>`).join("");
 const careerLinks = careerNavItems.map(({ href, label, section }) =>
-  `<a href="${escapeHtml(href)}"${section === "map" ? ' aria-current="page"' : ""}>${escapeHtml(label)}</a>`).join("");
+  `<a href="${escapeHtml(sitePath(href))}"${section === "map" ? ' aria-current="page"' : ""}>${escapeHtml(label)}</a>`).join("");
 const pulseIcon = '<svg width="21" height="21" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1.5 9h3l2-5 3 9 2-5h3" stroke="currentColor" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
 export function renderStudyAtlas(html: string, atlas: NonNullable<ReturnType<typeof studyAtlas>>) {
   const tabs = domainMapSections.map(({ id, href, title, subtitle }, index) =>
-    `<a href="${escapeHtml(href)}"${id === atlas.id ? ' aria-current="page"' : ""}><span>0${index + 1}</span><strong>${escapeHtml(title)}</strong><small>${escapeHtml(subtitle)}</small></a>`).join("");
+    `<a href="${escapeHtml(sitePath(href))}"${id === atlas.id ? ' aria-current="page"' : ""}><span>0${index + 1}</span><strong>${escapeHtml(title)}</strong><small>${escapeHtml(subtitle)}</small></a>`).join("");
   const jumps = atlas.sections.map(([anchor, label]) =>
     `<a href="#${escapeHtml(anchor)}">${escapeHtml(label)}</a>`).join("");
 
@@ -25,7 +26,7 @@ export function renderStudyAtlas(html: string, atlas: NonNullable<ReturnType<typ
 <a class="field-notes-skip" href="#field-notes-atlas-content">Skip to atlas</a>
 <header id="field-notes-top" class="field-notes-header">
   <div class="field-notes-wrap field-notes-header-inner">
-    <a class="field-notes-brand" href="/">
+    <a class="field-notes-brand" href="${escapeHtml(sitePath("/"))}">
       <span class="field-notes-brand-mark">${pulseIcon}</span>
       <span>Ayush Kumar Sahoo<small>FIELD NOTES</small></span>
     </a>

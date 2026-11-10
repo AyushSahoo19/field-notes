@@ -1,3 +1,4 @@
+import { sitePath } from "../../lib/site-path";
 import type { Metadata } from "next";
 import { Icon } from "../site-chrome";
 import { boxes } from "./life-boxes/life-data";
@@ -18,7 +19,7 @@ export default function Frameworks() {
             <h1 id="framework-title">Make time for<br /><em>what matters.</em></h1>
             <p>A home for the frameworks you use to learn, plan your time, and follow through. Start with the eight life boxes, or save a framework of your own.</p>
             <div className="hero-actions framework-actions">
-              <a className="button primary" href="/frameworks/life-boxes">Open Life Boxes <Icon name="arrow" /></a>
+              <a className="button primary" href={sitePath("/frameworks/life-boxes")}>Open Life Boxes <Icon name="arrow" /></a>
               <a className="quiet-link" href="#framework-library">Browse frameworks <Icon name="down" /></a>
             </div>
           </div>

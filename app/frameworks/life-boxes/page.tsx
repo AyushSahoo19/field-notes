@@ -1,3 +1,4 @@
+import { sitePath } from "../../../lib/site-path";
 import type { Metadata } from "next";
 import { ExternalLink } from "../../site-chrome";
 import { LifePlanner } from "./planner";
@@ -13,7 +14,7 @@ export default function LifeBoxes() {
       <section className="paper life-hero" aria-labelledby="life-title">
         <div className="wrap life-hero-inner">
           <div>
-            <a className="framework-breadcrumb" href="/frameworks"><span aria-hidden="true">←</span> All frameworks</a>
+            <a className="framework-breadcrumb" href={sitePath("/frameworks")}><span aria-hidden="true">←</span> All frameworks</a>
             <p className="eyebrow"><span className="eyebrow-rule" /> FRAMEWORK 01 / TIME & ACTIVITIES</p>
             <h1 id="life-title">My 8 Life Boxes<span>.</span></h1>
             <p>Pick a box, plan your day, and review the week.</p>

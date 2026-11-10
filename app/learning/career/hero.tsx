@@ -1,3 +1,4 @@
+import { sitePath } from "../../../lib/site-path";
 import type { ReactNode } from "react";
 
 export function CareerHero({ label, title, intro, children, actions }: { label: string; title: string; intro: string; children: ReactNode; actions: ReactNode }) {
@@ -28,7 +29,7 @@ export function CareerNav({ current }: { current: "paths" | "map" | "roles" | "p
     <div className="track-nav paper">
       <nav className="wrap track-nav-inner career-atlas-nav" aria-label="Career atlas navigation">
         {careerNavItems.map((item) => (
-          <a key={item.href} href={item.href} aria-current={item.section === current ? "page" : undefined}>{item.label}</a>
+          <a key={item.href} href={sitePath(item.href)} aria-current={item.section === current ? "page" : undefined}>{item.label}</a>
         ))}
         {current === "path" && <a href="#study-path">Path workbench</a>}
       </nav>

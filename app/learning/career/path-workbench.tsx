@@ -1,5 +1,6 @@
 "use client";
 
+import { sitePath } from "../../../lib/site-path";
 import { useState } from "react";
 import type { CareerPath, pathContent } from "./catalog";
 import { DataTable, matches, MilestoneMap, PanelHeading, ResourceShelf, SearchField, useChecklist, Workbench } from "./workbench";
@@ -58,7 +59,7 @@ export function PathWorkbench({ path, content }: { path: CareerPath; content: Re
         <div className="career-checklist">
           {[...path.subjects.map((s) => [s[0], s[0]]), ["capstone", path.capstone[0]]].map(([id, label]) => <label key={id}><input type="checkbox" checked={checked.includes(id)} onChange={() => toggle(id)} /> {label}</label>)}
         </div>
-        {content.weeks.length > 0 && <><h3 className="career-subheading">Linked workbook weeks</h3><DataTable label="Related engineering roadmap weeks" columns={["Week", "Module", "Deliverable", "Open-source mission"]} rows={content.weeks.map((r) => [<a key="week" href={`/learning/master-roadmap?week=${r.week}#master-plan`}>Week {r.week}</a>, r.title, r.output, r.mission])} /></>}
+        {content.weeks.length > 0 && <><h3 className="career-subheading">Linked workbook weeks</h3><DataTable label="Related engineering roadmap weeks" columns={["Week", "Module", "Deliverable", "Open-source mission"]} rows={content.weeks.map((r) => [<a key="week" href={sitePath(`/learning/master-roadmap?week=${r.week}#master-plan`)}>Week {r.week}</a>, r.title, r.output, r.mission])} /></>}
         {quant && <><h3 className="career-subheading">19-phase quant sequence</h3><DataTable label="Quant roadmap" columns={["Phase", "Pace from source", "Starting topics"]} rows={quant.phases.map((r) => [r.title, r.tempo, r.topics.slice(0, 3).join(" · ")])} /></>}
       </>}
       {tab === 3 && <>

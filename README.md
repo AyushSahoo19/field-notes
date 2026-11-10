@@ -2,6 +2,8 @@
 
 Field Notes is Ayush Kumar Sahoo’s engineering portfolio and learning notebook. It brings together work in industrial sensing, AI systems, and applied mathematics, alongside interactive study maps and planning tools.
 
+[Open Field Notes on GitHub Pages](https://ayushsahoo19.github.io/field-notes/).
+
 ## Explore the site
 
 - **Home** (`/`) presents the portfolio, work, and experiments.
@@ -42,15 +44,17 @@ The last command previews the production Worker locally. Open the URL it prints.
 - `worker/`, `vite.config.ts`, and `.openai/hosting.json` configure the Cloudflare Worker and Sites runtime.
 - `db/`, `drizzle/`, and `examples/d1/` contain optional database scaffolding. D1 and R2 bindings are currently disabled.
 
-The build uses Vinext and writes its generated output to `dist/`. To host the site, use a runtime that serves the built Worker, including the dynamic atlas routes. A static GitHub Pages deployment cannot serve those routes.
+## Deployment
 
-## Push to GitHub
+Pushes to `main` deploy to GitHub Pages. The [Pages workflow](.github/workflows/pages.yml) builds Vinext with the GitHub Pages URL prefix, renders the portfolio, learning tracks, and atlas documents to HTML, and uploads `dist/pages/`. Browser-side interactions and local storage are available on the static site.
 
-Create an empty GitHub repository named `field-notes`, then replace `YOUR-USERNAME` below with the account or organization that owns it.
+To reproduce the static export in PowerShell, set the prefix before building and leave it set for the export command.
 
-```sh
-git remote add origin https://github.com/YOUR-USERNAME/field-notes.git
-git push -u origin main
+```powershell
+$env:NEXT_PUBLIC_PAGES_BASE = "/field-notes"
+npm.cmd run build
+node scripts/export-pages.mjs
+Remove-Item Env:NEXT_PUBLIC_PAGES_BASE
 ```
 
-This publishes the source repository. Website deployment is a separate step.
+The regular build still generates the Cloudflare Worker for local preview with `npm start`.

@@ -1,18 +1,29 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useState, useSyncExternalStore } from "react";
 import type { curriculum, Reading } from "./catalog";
 import { CountFilters, DataTable, matches, MilestoneMap, PanelHeading, ResourceShelf, SearchField, useChecklist, Workbench } from "./workbench";
 
 type Curriculum = typeof curriculum;
 const tabs = ["26-week roadmap", "Lesson syllabus", "Skill matrix", "Resource library", "Project catalog", "Open source"];
 
+function subscribeToLocation(callback: () => void) {
+  window.addEventListener("popstate", callback);
+  return () => window.removeEventListener("popstate", callback);
+}
+
+function weekFromLocation() {
+  return Number(new URLSearchParams(window.location.search).get("week")) || undefined;
+}
+
 export function MasterWorkbench({ data, initialWeek }: { data: Omit<Curriculum, "quant" | "subjects">; initialWeek: number }) {
   const [tab, setTab] = useState(0);
   const [query, setQuery] = useState("");
   const [skillDomain, setSkillDomain] = useState("");
   const phases = [...new Set(data.weeks.map((w) => w.phase))];
-  const [phase, setPhase] = useState(Math.max(0, phases.indexOf(data.weeks.find((w) => w.week === initialWeek)?.phase ?? "")));
+  const linkedWeek = useSyncExternalStore(subscribeToLocation, weekFromLocation, () => initialWeek) ?? initialWeek;
+  const [selectedPhase, setPhase] = useState<number>();
+  const phase = selectedPhase ?? Math.max(0, phases.indexOf(data.weeks.find((w) => w.week === linkedWeek)?.phase ?? ""));
   const { checked, toggle } = useChecklist("field-notes-workbook-weeks-v1");
   const weeks = data.weeks.filter((w) => w.phase === phases[phase]);
   const count = data.weeks.filter((w) => checked.includes(String(w.week))).length;
@@ -26,7 +37,7 @@ export function MasterWorkbench({ data, initialWeek }: { data: Omit<Curriculum, 
         <MilestoneMap stages={phases} active={phase} onSelect={setPhase} />
         <div className="career-progress"><span aria-live="polite">{count} of {data.weeks.length} weeks complete</span><progress aria-label="Engineering roadmap progress" value={count} max={data.weeks.length} /></div>
         <DataTable label="Engineering Mastery weekly roadmap" columns={["Week", "Module and topics", "Hands-on work", "Deliverable", "Done"]} rows={weeks.map((w) => [
-          <span key="week" className={w.week === initialWeek ? "highlight-week" : undefined}>Week {w.week}</span>,
+          <span key="week" className={w.week === linkedWeek ? "highlight-week" : undefined}>Week {w.week}</span>,
           <Fragment key="module"><strong>{w.title}</strong><p>{w.topics.join(" · ")}</p></Fragment>,
           w.practice, w.output,
           <input key="done" type="checkbox" aria-label={`Mark week ${w.week} complete`} checked={checked.includes(String(w.week))} onChange={() => toggle(String(w.week))} />,
