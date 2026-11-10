@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 export const github = "https://github.com/AyushSahoo19";
 export const atlas = "https://ai-mastery-atlas-ayush.ayush-kumar-sahoo10.chatgpt.site";
 export const precisionLab = github + "/lab-m01-reproducible-calculation-and-error-lab";
+export const brandInitials = "AS";
 
 export function Icon({ name }: { name: "arrow" | "out" | "down" | "pulse" | "pin" | "code" }) {
   const paths = {
@@ -24,7 +25,7 @@ export function Icon({ name }: { name: "arrow" | "out" | "down" | "pulse" | "pin
 function Brand({ home }: { home: boolean }) {
   return (
     <a className="brand" href={home ? "#top" : sitePath("/")}>
-      <span className="brand-mark"><Icon name="pulse" /></span>
+      <span className="brand-mark" aria-hidden="true">{brandInitials}</span>
       <span>Ayush Kumar Sahoo<small>FIELD NOTES</small></span>
     </a>
   );
