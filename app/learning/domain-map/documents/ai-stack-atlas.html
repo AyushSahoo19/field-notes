@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The AI Stack — a core sample from electrons to embodiment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --abyss:#07090E; --strata:#0D111A; --panel:#111621; --rule:#1D2432; --rule2:#2A3346;
+  --ink:#E8ECF4; --ink2:#98A3B8; --ink3:#5F6B82;
+  --oss:#3FD1A0; --com:#7FA0C9; --hw:#FF7A45; --std:#C9A227; --idea:#9B8BF2; --model:#37B7D9;
+  --f-disp:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;overflow-x:hidden;background:var(--abyss);color:var(--ink);font-family:var(--f-disp);
+  font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(1200px 600px at 70% -10%,rgba(255,77,28,.07),transparent 60%),
+                   radial-gradient(900px 700px at 10% 110%,rgba(139,107,242,.07),transparent 60%);}
+a{color:inherit}
+::selection{background:#FF4D1C33}
+.mono{font-family:var(--f-mono)}
+
+/* ── masthead ─────────────────────────────── */
+.mast{border-bottom:1px solid var(--rule);padding:30px 26px 0;max-width:1560px;margin:0 auto}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3)}
+h1{font-size:clamp(34px,5.6vw,66px);line-height:.95;font-weight:800;letter-spacing:-.035em;margin:12px 0 0;max-width:20ch}
+h1 em{font-style:normal;display:block;color:var(--ink3);font-weight:500;letter-spacing:-.02em;font-size:.56em;margin-top:6px}
+.lede{max-width:62ch;color:var(--ink2);margin:20px 0 0;font-size:16.5px}
+.spectrum{display:flex;height:5px;margin:26px 0 0;border-radius:2px;overflow:hidden}
+.spectrum i{flex:1}
+.mastfoot{display:flex;flex-wrap:wrap;gap:26px;padding:14px 0 26px;font-family:var(--f-mono);font-size:11.5px;color:var(--ink3);letter-spacing:.06em}
+.mastfoot b{color:var(--ink);font-weight:600}
+
+/* ── control bar ──────────────────────────── */
+.controls{position:sticky;top:0;z-index:40;background:rgba(7,9,14,.93);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--rule);padding:11px 26px}
+.controls-in{max-width:1560px;margin:0 auto;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+#q{flex:1;min-width:220px;background:var(--panel);border:1px solid var(--rule2);color:var(--ink);
+  font-family:var(--f-mono);font-size:13px;padding:9px 13px;border-radius:3px;outline:none}
+#q:focus{border-color:#FF7A45;box-shadow:0 0 0 3px rgba(255,122,69,.13)}
+#q::placeholder{color:var(--ink3)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-family:var(--f-mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  background:transparent;border:1px solid var(--rule2);color:var(--ink2);padding:7px 11px;border-radius:3px;cursor:pointer}
+.chip:hover{border-color:var(--ink3);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--abyss);border-color:var(--ink);font-weight:600}
+.chip .dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.readout{font-family:var(--f-mono);font-size:11.5px;color:var(--ink3);white-space:nowrap}
+.readout b{color:var(--hw)}
+
+/* ── shell ────────────────────────────────── */
+.shell{max-width:1560px;margin:0 auto;display:grid;grid-template-columns:340px 1fr;gap:0;align-items:start}
+.rail{position:sticky;top:57px;padding:26px 20px 40px;border-right:1px solid var(--rule);align-self:start}
+.rail h2{font-family:var(--f-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink3);font-weight:500;margin:0 0 4px}
+.gauge{font-family:var(--f-mono);font-size:11.5px;color:var(--ink2);margin:0 0 14px;height:16px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gauge b{color:var(--ink);font-weight:600}
+.pyr{display:flex;flex-direction:column-reverse;gap:2px}
+.tier{display:grid;grid-template-columns:15px 108px 1fr auto;align-items:center;gap:9px;cursor:pointer;
+  background:none;border:0;padding:0;font-family:var(--f-mono);text-align:left;opacity:.42;transition:opacity .18s}
+.tier:hover,.tier.on{opacity:1}
+.tier .bar{height:13px;border-radius:1.5px;margin:0 auto;transition:transform .18s}
+.tier:hover .bar{transform:scaleY(1.35)}
+.tier.on .bar{box-shadow:0 0 0 1px var(--abyss),0 0 14px currentColor}
+.tier .num{font-size:9.5px;color:var(--ink3)}
+.tier .nm{font-size:10px;letter-spacing:.01em;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tier.on .nm{color:var(--ink);font-weight:600}
+.tier.dim{opacity:.13}
+.tier .hits{font-size:9.5px;color:var(--hw);font-weight:600}
+.railnote{font-family:var(--f-mono);font-size:10px;color:var(--ink3);line-height:1.6;margin-top:18px;
+  border-top:1px solid var(--rule);padding-top:12px}
+
+/* ── strata log ───────────────────────────── */
+.log{padding:26px 26px 120px;min-width:0}
+.trace{scroll-margin-top:70px}
+.layer{border-top:1px solid var(--rule);padding:30px 0 34px;scroll-margin-top:70px}
+.layer:first-child{border-top:0;padding-top:6px}
+.layer.hide{display:none}
+.lhead{display:flex;gap:16px;align-items:flex-start}
+.lnum{font-family:var(--f-mono);font-size:12px;font-weight:600;padding-top:7px;letter-spacing:.06em}
+.ltitle{font-size:clamp(21px,2.6vw,30px);font-weight:800;letter-spacing:-.025em;line-height:1.1;margin:0}
+.lkicker{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin:6px 0 0}
+.ldesc{color:var(--ink2);max-width:78ch;margin:14px 0 0;font-size:15px}
+.lmeta{font-family:var(--f-mono);font-size:11px;color:var(--ink3);margin:10px 0 0}
+.groups{margin:20px 0 0;display:grid;gap:2px}
+.grp{background:var(--strata);border-left:2px solid var(--rule2);padding:13px 16px 15px;min-width:0}
+.grp.hide{display:none}
+.gname{font-family:var(--f-mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink);font-weight:600}
+.gnote{font-family:var(--f-mono);font-size:10.5px;color:var(--ink3);margin-left:8px;letter-spacing:.02em;text-transform:none}
+.items{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px;min-width:0}
+.it{border:1px solid var(--rule2);background:var(--panel);border-radius:3px;padding:5px 9px;
+  font-size:12.5px;line-height:1.35;cursor:default;display:flex;align-items:baseline;gap:7px;
+  flex-wrap:wrap;max-width:100%;min-width:0}
+.it .nm2{min-width:0;overflow-wrap:anywhere}
+.it:hover{border-color:var(--ink3);background:#161C2A}
+.it.hide{display:none}
+.it .tick{width:5px;height:5px;border-radius:50%;flex:0 0 5px;align-self:center}
+.it .note{font-family:var(--f-mono);font-size:10.5px;color:var(--ink3);letter-spacing:.01em;
+  white-space:normal;overflow-wrap:anywhere;min-width:0}
+.it.hit{border-color:var(--hw);background:#1C1512}
+mark{background:transparent;color:var(--hw);font-weight:600}
+
+/* ── ladder + closing ─────────────────────── */
+.ladder{display:grid;gap:2px;margin-top:18px}
+.rung{display:grid;grid-template-columns:54px 1fr;gap:14px;background:var(--strata);padding:12px 16px;border-left:2px solid var(--rule2)}
+.rung .lv{font-family:var(--f-mono);font-size:11px;font-weight:600;letter-spacing:.06em}
+.rung h4{margin:0;font-size:14.5px;font-weight:600}
+.rung p{margin:4px 0 0;color:var(--ink2);font-size:13px}
+.rung .ex{font-family:var(--f-mono);font-size:10.5px;color:var(--ink3);margin-top:5px}
+.trace{border-top:1px solid var(--rule);margin-top:10px;padding-top:30px}
+.trace ol{list-style:none;padding:0;margin:16px 0 0;counter-reset:t}
+.trace li{border-left:1px solid var(--rule2);padding:0 0 16px 18px;position:relative;color:var(--ink2);font-size:13.5px}
+.trace li::before{content:'';position:absolute;left:-3.5px;top:7px;width:6px;height:6px;border-radius:50%;background:var(--hw)}
+.trace li b{color:var(--ink);font-family:var(--f-mono);font-size:11.5px;letter-spacing:.05em;display:block;margin-bottom:2px}
+.empty{font-family:var(--f-mono);color:var(--ink3);font-size:13px;padding:40px 0}
+footer{border-top:1px solid var(--rule);padding:24px 26px 60px;max-width:1560px;margin:0 auto;
+  font-family:var(--f-mono);font-size:11px;color:var(--ink3);line-height:1.8}
+
+@media (max-width:1080px){
+  .shell{grid-template-columns:1fr}
+  .rail{position:static;border-right:0;border-bottom:1px solid var(--rule);padding:20px 22px}
+  .pyr{max-height:none}
+  .tier .nm{font-size:11px}
+  .log{padding:20px 22px 100px}
+  .rung{grid-template-columns:38px 1fr;gap:10px;padding:11px 13px}
+  .trace{padding-left:22px!important;padding-right:22px!important}
+  .lhead{gap:11px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+:focus-visible{outline:2px solid var(--hw);outline-offset:2px}
+</style>
+</head>
+<body>
+<header class="mast">
+  <p class="eyebrow">A core sample of the field · 24 strata · mid-2026</p>
+  <h1>The AI Stack<em>from electrons to embodiment</em></h1>
+  <p class="lede">Nobody works on "AI." They work on one stratum of a stack that runs from doped silicon to autonomous machines, and the layer you stand on determines which problems are even visible to you. This is the whole section, drawn to scale, with the tools, libraries, chips, models and standards that actually populate each level.</p>
+  <div class="spectrum">
+    <i style="background:#FF3D14"></i><i style="background:#FF7A2A"></i><i style="background:#FFB03D"></i><i style="background:#DCD247"></i><i style="background:#8ECC55"></i><i style="background:#3FC79A"></i><i style="background:#3BA9E0"></i><i style="background:#7C82F0"></i><i style="background:#CF6ED6"></i><i style="background:#FF5B57"></i>
+  </div>
+  <div class="mastfoot">
+    <span><b id="total">0</b> ENTRIES MAPPED</span>
+    <span>HOT END: SILICON &amp; ENERGY</span>
+    <span>COLD END: COGNITION &amp; GOVERNANCE</span>
+    <span>PRESS <b>/</b> TO SEARCH</span>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="controls-in">
+    <input id="q" type="search" aria-label="Search the AI stack" placeholder="Search the entries — try &quot;CUDA&quot;, &quot;LoRA&quot;, &quot;SLAM&quot;, &quot;vector&quot;, &quot;MoE&quot;, &quot;robot&quot;…" autocomplete="off">
+    <div class="chips">
+      <button class="chip" data-tag="all" aria-pressed="true">All</button>
+      <button class="chip" data-tag="oss" aria-pressed="false"><span class="dot" style="background:var(--oss)"></span>Open source</button>
+      <button class="chip" data-tag="com" aria-pressed="false"><span class="dot" style="background:var(--com)"></span>Commercial</button>
+      <button class="chip" data-tag="hw" aria-pressed="false"><span class="dot" style="background:var(--hw)"></span>Hardware</button>
+      <button class="chip" data-tag="std" aria-pressed="false"><span class="dot" style="background:var(--std)"></span>Standard</button>
+      <button class="chip" data-tag="idea" aria-pressed="false"><span class="dot" style="background:var(--idea)"></span>Concept</button>
+    </div>
+    <span class="readout"><b id="shown" aria-live="polite">0</b> SHOWING</span>
+  </div>
+</div>
+
+<div class="shell">
+  <nav class="rail">
+    <h2>Stratigraphic column</h2>
+    <p class="gauge" id="gauge">DEPTH 00 / 23</p>
+    <div class="pyr" id="pyr"></div>
+    <p class="railnote">Widest at the base: each layer below supports everything above it and constrains what is buildable there. Scrolling down the log climbs the column. Searching dims every stratum that doesn't contain a match — so you can see where a thing lives.</p>
+  </nav>
+
+  <main class="log" id="log"></main>
+</div>
+
+<div class="empty" id="empty" style="display:none;padding:0 26px 60px">No entry matches that. Try a broader term, or press Esc to reset.</div>
+
+<section class="trace" id="request-trace" style="max-width:1560px;margin:0 auto;padding:30px 26px 20px">
+  <h3 style="font-size:26px;font-weight:800;letter-spacing:-.025em;margin:0">One request, all the way down</h3>
+  <p style="color:var(--ink2);max-width:70ch;margin-top:10px">The layers aren't just a taxonomy — they're a call stack. Here is what happens between typing a question and getting an answer, and which stratum each step belongs to.</p>
+  <ol>
+    <li><b>L15 → L17 · APP</b> Your text hits an SDK, gets a system prompt, tool schemas, and conversation history attached.</li>
+    <li><b>L16 · RETRIEVAL</b> The query is embedded, searched against a vector index plus BM25, fused, reranked; the top passages are pasted into the context.</li>
+    <li><b>L13 · SERVING</b> A gateway routes to an engine. The tokenizer splits your text into ~4-character pieces. The scheduler slots you into a continuous batch with 200 strangers.</li>
+    <li><b>L12 · WEIGHTS</b> ~100–700 billion parameters are already resident in HBM — loaded once, shared by every request on that machine.</li>
+    <li><b>L08 → L07 · ARCHITECTURE</b> Prefill: your whole prompt runs through every layer at once — attention, MoE routing, FFN, RMSNorm, residual add — writing a KV cache as it goes.</li>
+    <li><b>L04 · KERNELS</b> Each of those operations dispatches a fused CUDA/Triton kernel that tiles the matrices to fit in on-chip SRAM, because HBM is 100× further away than registers.</li>
+    <li><b>L02 · SILICON</b> Tensor cores execute the matmuls in FP8, accumulating in higher precision. Billions of MACs per token.</li>
+    <li><b>L03 · FABRIC</b> If the model is sharded, partial results cross NVLink between GPUs — an allreduce inside the forward pass itself.</li>
+    <li><b>L00 · PHYSICS</b> Roughly a joule of electricity per few tokens becomes heat, is carried off by a cold plate, and leaves the building as warm water.</li>
+    <li><b>↑ BACK UP</b> Decode emits one token at a time, each pass re-reading the KV cache. Tokens stream out through the gateway, get logged and traced at <b style="display:inline">L20</b>, and arrive as text — where an agent at <b style="display:inline">L17</b> may decide it now needs to call a tool, and the whole descent begins again.</li>
+  </ol>
+</section>
+
+<script>
+const LAYERS=[
+{n:"00",t:"Physics & Materials",k:"electrons · bandgaps · heat",c:"#FF3D14",
+d:"Everything above this line is a story we tell about moving electrons through doped silicon. An AI model is, physically, a pattern of charge being pushed through a lattice — and every constraint higher up (context length, batch size, cost per token) traces back to physics that stopped scaling around 2006.",
+g:[
+["Physical substrate","what the field is literally made of",[
+["Semiconductor bandgap","Si 1.12eV, GaN 3.4eV, SiC 3.3eV","idea"],["Doping / p-n junction","n-type & p-type carrier control","idea"],
+["MOSFET / FinFET / GAAFET","gate geometry across nodes","idea"],["CMOS","complementary logic, near-zero static draw","idea"],
+["Electron mobility","how fast carriers actually move","idea"],["Quantum tunneling","the leakage wall under ~5nm","idea"],
+["Photonics","light as interconnect, co-packaged optics","idea"],["Memristor / ReRAM","resistance as stored weight","idea"],
+["Spintronics / MRAM","electron spin as state","idea"],["Superconducting logic","Josephson junctions, cryo-CMOS","idea"]]],
+["Scaling laws of matter","the walls the industry hit",[
+["Moore's Law","transistor count doubling, now economic not physical","idea"],["Dennard Scaling","died ~2006 → the power wall","idea"],
+["Amdahl's Law","serial fraction caps parallel speedup","idea"],["Landauer Limit","~2.8 zJ minimum per bit erased at 300K","idea"],
+["Memory Wall","compute grew ~50000x faster than DRAM bandwidth","idea"],["Koomey's Law","compute per joule doubling rate","idea"],
+["Roofline Model","arithmetic intensity vs bandwidth ceiling","idea"],["Dark Silicon","the % of die you can't power on at once","idea"]]],
+["Energy, heat & power","the real limiter on frontier scale",[
+["Thermal Design Power","GB200 ~1200W per package","idea"],["Direct-to-chip liquid cooling","cold plates, the >700W default","hw"],
+["Immersion cooling","single & two-phase dielectric baths","hw"],["PUE","datacenter power usage effectiveness","std"],
+["Power delivery network","48V DC bus bars, VRMs","hw"],["Grid interconnect queue","the actual 2026 bottleneck","idea"],
+["SMR / nuclear PPAs","Microsoft, Amazon, Google power deals","idea"],["Water usage effectiveness","WUE, cooling's second cost","std"]]],
+["Fabrication","turning sand into a die",[
+["EUV lithography","13.5nm light, ASML monopoly","hw"],["High-NA EUV","0.55 NA, next-gen ASML tools","hw"],
+["Process nodes","N3/N2/A16, 18A, SF2 — marketing names now","idea"],["Wafer yield & binning","defect density decides your SKU","idea"],
+["Advanced packaging","CoWoS, SoIC, InFO, EMIB, Foveros","hw"],["Chiplets / UCIe","die-to-die standard interconnect","std"],
+["3D stacking","HBM through-silicon vias","hw"],["Backside power delivery","PowerVia, moving rails under the die","hw"]]],
+["Who owns the physical layer","",[
+["TSMC","the foundry the whole field depends on","com"],["ASML","only EUV supplier on Earth","com"],
+["Samsung Foundry","GAA at 3nm/2nm","com"],["Intel Foundry","18A, backside power","com"],
+["Applied Materials / Lam / KLA","deposition, etch, metrology","com"],["SK hynix / Micron","HBM3E / HBM4 supply","com"],
+["Zeiss SMT","EUV optics","com"],["Rapidus / SMIC","Japan & China node efforts","com"]]]
+]},
+
+{n:"01",t:"Electronics & Digital Logic",k:"gates · rtl · verification",c:"#FF5A1E",
+d:"Between physics and a chip sits the discipline of turning boolean intent into a mask set. This layer is why an open-source RISC-V AI accelerator is now a weekend-scale project rather than a $50M one — the toolchain went free.",
+g:[
+["Logic building blocks","",[
+["Logic gates","NAND as the universal primitive","idea"],["Flip-flops & latches","state, held between clock edges","idea"],
+["Adders / multipliers","ripple-carry → Wallace tree","idea"],["MAC unit","multiply-accumulate: the atom of a neural net","idea"],
+["Systolic array","the TPU's core idea, from 1978","idea"],["Register file / SRAM cell","6T cell, the fastest memory you have","idea"],
+["Clock tree & PLL","distributing time across a die","idea"],["Pipelining & hazards","stalls, forwarding, branch prediction","idea"]]],
+["Hardware description","code that becomes copper",[
+["Verilog / SystemVerilog","the industry default HDL","std"],["VHDL","aerospace & EU defaults","std"],
+["Chisel","Scala-embedded HDL, built RISC-V cores","oss"],["Amaranth (nMigen)","Python HDL","oss"],
+["SpinalHDL","Scala HDL, hardware generators","oss"],["Bluespec","rule-based high-level synthesis","oss"],
+["HLS (Vitis/Catapult)","C++ → RTL","com"],["Veryl / Clash","modern & Haskell-based HDLs","oss"]]],
+["EDA & open silicon","",[
+["Cadence / Synopsys / Siemens EDA","the closed big three","com"],["OpenROAD","RTL-to-GDSII, fully open","oss"],
+["Yosys","open synthesis, the workhorse","oss"],["Verilator","fastest open Verilog simulator","oss"],
+["cocotb","Python testbenches","oss"],["KLayout / Magic","layout editing & DRC","oss"],
+["OpenLane / OpenLane2","tapeout flow used by Efabless","oss"],["SkyWater SKY130 / IHP","open PDKs you can actually tape out","oss"],
+["Tiny Tapeout","get your design on real silicon for ~$100","com"],["ngspice / Xyce","circuit simulation","oss"]]],
+["FPGA & prototyping","",[
+["AMD Xilinx Vivado / Vitis","Versal, Alveo, Zynq","com"],["Intel Altera Quartus","Agilex, Stratix","com"],
+["Lattice / Efinix","low-power edge FPGAs","com"],["Project IceStorm / nextpnr","open FPGA bitstream flow","oss"],
+["LiteX","SoC builder framework","oss"],["FINN / hls4ml","NN → FPGA dataflow (CERN-born)","oss"],
+["Vitis AI / DPU","AMD's FPGA inference stack","com"],["Verilog-AI accelerators","open MAC array generators","oss"]]]
+]},
+
+{n:"02",t:"Silicon: Chips & Accelerators",k:"gpu · tpu · npu · asic · wafer-scale",c:"#FF7A2A",
+d:"The compute layer. Architecturally these all do the same thing — dense matmul with a memory hierarchy — and differ almost entirely in how much SRAM they keep near the ALUs and how they get weights in from DRAM. This is where the field's capital is concentrated.",
+g:[
+["NVIDIA","~90% of the training market",[
+["Blackwell B200 / GB200","2-die, NVL72 rack scale","hw"],["Blackwell Ultra GB300","2025 refresh, more HBM","hw"],
+["Rubin / Vera Rubin","the 2026 platform","hw"],["Hopper H100 / H200","the model that trained most of what you use","hw"],
+["Ada L40S / L4","inference & graphics","hw"],["RTX 5090 / 4090","the prosumer training card","hw"],
+["Jetson Orin / Thor","robotics edge modules","hw"],["DGX Spark / Station","desktop-side big-memory boxes","hw"],
+["Tensor Cores","FP4/FP8/BF16 matrix units","idea"],["Transformer Engine","per-layer dynamic precision","idea"]]],
+["Challengers & custom silicon","",[
+["Google TPU v5e/v5p, Trillium, Ironwood","the only credible full alternative","hw"],
+["AMD Instinct MI300X / MI325X / MI355X","big HBM, ROCm's hope","hw"],["AWS Trainium2/3 & Inferentia2","Anthropic's Project Rainier","hw"],
+["Cerebras WSE-3","a whole wafer, 900k cores","hw"],["Groq LPU","deterministic, SRAM-only, low latency","hw"],
+["Tenstorrent Wormhole/Blackhole","RISC-V + open SDK, Keller's bet","hw"],["SambaNova SN40L","dataflow RDU","hw"],
+["Graphcore IPU","acquired by SoftBank","hw"],["Etched Sohu","transformer-only ASIC","hw"],
+["Microsoft Maia","Azure in-house","hw"],["Meta MTIA","recommendation + LLM inference","hw"],
+["Huawei Ascend 910B/C","China's frontier substitute","hw"],["Cambricon / Biren / Moore Threads","China accelerator field","hw"]]],
+["Client & edge NPUs","AI that ships in a device",[
+["Apple Silicon M4/M5 + Neural Engine","unified memory = local LLM sweet spot","hw"],
+["Qualcomm Snapdragon X / Hexagon NPU","45+ TOPS laptops & phones","hw"],["Intel Core Ultra / NPU 4","Lunar/Panther Lake","hw"],
+["AMD Ryzen AI XDNA2","50 TOPS client","hw"],["Google Tensor G5 / Edge TPU","Pixel + Coral","hw"],
+["Hailo-8/10H","edge vision accelerators","hw"],["Rockchip RK3588 NPU","cheap SBC inference","hw"],
+["Kneron / Ambarella / Axelera","embedded vision silicon","hw"],["Raspberry Pi AI HAT+","Hailo on a Pi 5","hw"]]],
+["Architectural concepts","",[
+["SIMT & warps","how a GPU actually schedules","idea"],["Streaming multiprocessor","SM = the real unit of a GPU","idea"],
+["Memory hierarchy","registers → SMEM → L2 → HBM → NVMe","idea"],["Arithmetic intensity","FLOPs per byte, decides if you're bound","idea"],
+["Sparsity 2:4","structured sparsity for 2x throughput","idea"],["Numeric formats","FP32/TF32/BF16/FP8-E4M3/FP4/INT8/MXFP","idea"],
+["In-memory computing","analog matmul in the array","idea"],["Neuromorphic","Intel Loihi 2, IBM NorthPole, SpiNNaker","hw"],
+["Wafer-scale integration","skip the network entirely","idea"],["RISC-V vector extension","open ISA for AI cores","std"]]]
+]},
+
+{n:"03",t:"Memory, Interconnect & Datacenter",k:"hbm · nvlink · fabric · racks",c:"#FF9633",
+d:"Frontier training is a networking problem wearing a compute costume. Once a model doesn't fit on one device, the bottleneck moves permanently to how fast gradients cross the fabric — which is why NVLink and InfiniBand are as strategically important as the GPU dies themselves.",
+g:[
+["Memory","",[
+["HBM3E / HBM4","stacked DRAM on the package, the scarce input","hw"],["GDDR7","consumer card bandwidth","hw"],
+["DDR5 / MRDIMM","host memory","hw"],["CXL 3.x","memory pooling & coherence across the rack","std"],
+["LPDDR5X unified memory","why Macs run 70B locally","hw"],["SRAM scaling stall","why cache stopped getting cheaper","idea"],
+["NVMe / SSD offload","weights streamed from disk","hw"],["Memory bandwidth per FLOP","the number to actually watch","idea"]]],
+["Interconnect","",[
+["NVLink 5 / NVSwitch","1.8 TB/s per GPU inside a rack","hw"],["NVLink Fusion / UALink","opening & the open counter-standard","std"],
+["InfiniBand NDR/XDR","400/800G lossless scale-out","hw"],["RoCEv2 / Ultra Ethernet","Ethernet fights back","std"],
+["PCIe Gen5 / Gen6","host attach","std"],["Infinity Fabric","AMD's equivalent","hw"],
+["Optical circuit switching","Google's TPU fabric trick","hw"],["Co-packaged optics","light onto the package","hw"],
+["SHARP in-network reduce","allreduce inside the switch","idea"],["Topologies","fat-tree, dragonfly, torus, rail-optimized","idea"]]],
+["Datacenter & orchestration","",[
+["NVIDIA NVL72 / SuperPOD","72 GPUs as one coherent unit","hw"],["Slurm","still how most HPC clusters schedule","oss"],
+["Kubernetes + Kueue / Volcano","batch AI on k8s","oss"],["Ray","the Python-native distributed runtime","oss"],
+["NVIDIA Run:ai","GPU fractioning & scheduling","com"],["SkyPilot","run across any cloud, chase spot prices","oss"],
+["Determined AI / Flyte","training platform orchestration","oss"],["dstack / Kubeflow Trainer","open GPU orchestration","oss"],
+["Lustre / WEKA / VAST","parallel filesystems for checkpoints","com"],["Silent data corruption","real, and it kills long runs","idea"]]],
+["Where you rent it","",[
+["AWS / GCP / Azure","hyperscaler capacity","com"],["CoreWeave / Lambda / Crusoe","GPU-native neoclouds","com"],
+["Nebius / Together / Fireworks","training + fast inference","com"],["Modal / Baseten / Replicate","serverless GPU","com"],
+["RunPod / Vast.ai / Prime Intellect","cheap & decentralized spot GPUs","com"],["Hugging Face Spaces / Endpoints","the community default","com"],
+["Google Colab / Kaggle","free tier that taught a generation","com"],["Oracle OCI / IBM Cloud","enterprise GPU","com"]]]
+]},
+
+{n:"04",t:"Kernels, Compilers & Runtimes",k:"cuda · triton · mlir · flashattention",c:"#FFB03D",
+d:"The translation layer between a Python line and a matrix unit. This is CUDA's moat: not the language, but twenty years of tuned kernels. It's also the layer where a single algorithmic rewrite — FlashAttention — bought the entire field longer context windows without any new hardware.",
+g:[
+["Vendor compute platforms","",[
+["CUDA","the moat, ~20 years deep","com"],["ROCm / HIP","AMD's stack, finally usable","oss"],
+["oneAPI / SYCL","Intel's cross-vendor bet","oss"],["Metal / MPS","Apple GPU compute","com"],
+["Vulkan Compute","cross-platform, used by llama.cpp","std"],["OpenCL","the older portable standard","std"],
+["WebGPU / WGSL","GPU in the browser","std"],["PTX / SASS","NVIDIA's IR and real ISA","idea"]]],
+["Kernel libraries","",[
+["cuDNN","conv & attention primitives","com"],["cuBLAS / cuBLASLt","the matmul that matters","com"],
+["CUTLASS / CuTe","templated GEMM you can actually modify","oss"],["FlashAttention 2/3","IO-aware exact attention","oss"],
+["FlashInfer","kernels built for serving engines","oss"],["ThunderKittens","tile-based kernel DSL from Stanford","oss"],
+["NCCL / RCCL","collective communication","oss"],["CUB / Thrust","parallel primitives","oss"],
+["xFormers","memory-efficient blocks","oss"],["DeepGEMM / DeepEP","DeepSeek's open FP8 & MoE kernels","oss"]]],
+["Compilers & IR","",[
+["Triton","write CUDA-class kernels in Python","oss"],["torch.compile / TorchInductor","graph capture → fused kernels","oss"],
+["XLA / OpenXLA","JAX & TPU compiler","oss"],["MLIR","the compiler infrastructure everything now builds on","oss"],
+["IREE","MLIR-based deployment runtime","oss"],["TVM / Apache TVM Unity","auto-scheduling for odd targets","oss"],
+["Mojo / MAX","Modular's Python-superset for kernels","com"],["TensorRT / TensorRT-LLM","NVIDIA's inference compiler","com"],
+["Halide","the ancestor of schedule/algorithm split","oss"],["Hidet / BladeDISC","alternative DL compilers","oss"]]],
+["Optimization concepts","",[
+["Kernel fusion","stop round-tripping to HBM","idea"],["Tiling & blocking","fit the working set in SRAM","idea"],
+["Operator scheduling","the schedule matters more than the math","idea"],["CUDA graphs","kill launch overhead","idea"],
+["Occupancy vs register pressure","the classic tradeoff","idea"],["Warp specialization","producer/consumer inside an SM","idea"],
+["Async copy / TMA","Hopper's tensor memory accelerator","idea"],["Mixed precision accumulate","FP8 in, FP32 accumulate","idea"]]]
+]},
+
+{n:"05",t:"The Mathematics",k:"linear algebra · calculus · probability · optimization",c:"#F3C63F",
+d:"The layer that doesn't change. Every architecture on this chart is a rearrangement of the same four subjects — and understanding them is the difference between using models and building them.",
+g:[
+["Linear algebra","the language of the whole field",[
+["Vector spaces & bases","embeddings live here","idea"],["Matrix multiplication","~99% of all FLOPs spent on AI","idea"],
+["Eigendecomposition","PCA, spectral methods, stability","idea"],["SVD","low-rank truth behind LoRA","idea"],
+["Rank & null space","why LoRA works at all","idea"],["Norms (L1/L2/spectral)","regularization & clipping","idea"],
+["Tensor algebra & einsum","notation that survives any framework","idea"],["Orthogonality & rotations","RoPE, whitening, Muon","idea"]]],
+["Calculus & optimization","",[
+["Chain rule","backprop is just this, applied carefully","idea"],["Jacobian & Hessian","curvature, second-order methods","idea"],
+["Gradient descent","the entire training loop","idea"],["Convexity & saddle points","why high-dim optimization works","idea"],
+["Lagrange multipliers / KKT","constrained optimization","idea"],["Loss landscape geometry","flat minima generalize better","idea"],
+["Automatic differentiation","forward vs reverse mode","idea"],["Convergence rates","why LR schedules have that shape","idea"]]],
+["Probability & statistics","",[
+["Bayes' theorem","the inference backbone","idea"],["Maximum likelihood","most losses are MLE in disguise","idea"],
+["Distributions","Gaussian, categorical, Dirichlet, Beta","idea"],["Expectation & variance","the reason for batch norm","idea"],
+["Markov chains / MCMC","sampling, diffusion's ancestor","idea"],["Bias-variance decomposition","the oldest tradeoff","idea"],
+["Hypothesis testing & CIs","how to not fool yourself with evals","idea"],["Concentration inequalities","generalization bounds","idea"]]],
+["Information & geometry","",[
+["Entropy & cross-entropy","the loss function you use daily","idea"],["KL divergence","RLHF, VAEs, distillation","idea"],
+["Mutual information","representation learning objectives","idea"],["Manifold hypothesis","why 4096 dims can hold meaning","idea"],
+["Curse of dimensionality","and why embeddings dodge it","idea"],["Fisher information / natural gradient","K-FAC, Shampoo","idea"],
+["Optimal transport","Wasserstein, flow matching","idea"],["Measure & functional analysis","the formal floor","idea"]]],
+["Where to actually learn it","",[
+["3Blue1Brown","Essence of Linear Algebra / Calculus","oss"],["Mathematics for Machine Learning","Deisenroth, free PDF","oss"],
+["MIT 18.06 (Strang)","the linear algebra course","oss"],["Probabilistic ML (Murphy)","Books 1 & 2, free","oss"],
+["Boyd Convex Optimization","free Stanford text","oss"],["Elements of Statistical Learning","the classical ML bible","oss"],
+["Dive into Deep Learning (d2l.ai)","math + runnable code","oss"],["The Matrix Cookbook","the identity you forgot","oss"]]]
+]},
+{n:"06",t:"Numerical Software & Frameworks",k:"pytorch · jax · autodiff · tensors",c:"#DCD247",
+d:"Where math becomes callable. The whole field runs on a handful of libraries that share one idea: a tensor object that records what was done to it, so gradients can be replayed backwards. Everything else is API taste.",
+g:[
+["Deep learning frameworks","",[
+["PyTorch","research default; ~90%+ of new papers","oss"],["JAX","functional, XLA-native, Google/DeepMind","oss"],
+["TensorFlow / Keras 3","legacy production + multi-backend Keras","oss"],["Flax NNX / Equinox / Haiku","neural net layers on JAX","oss"],
+["MLX","Apple Silicon native, unified memory","oss"],["tinygrad","~10k lines, geohot's teaching weapon","oss"],
+["ggml / GGUF","the C tensor lib behind llama.cpp","oss"],["Burn / Candle","Rust DL frameworks","oss"],
+["PaddlePaddle / MindSpore","Baidu & Huawei stacks","oss"],["ONNX","the interchange format","std"],
+["micrograd / nanoGPT","Karpathy's from-scratch canon","oss"],["Thinc / Chainer","the historically important ones","oss"]]],
+["Numerics & data science","",[
+["NumPy","the substrate under everything","oss"],["SciPy","optimize, signal, stats, sparse","oss"],
+["pandas / Polars","dataframes, slow vs fast","oss"],["DuckDB","in-process OLAP, the analyst's new default","oss"],
+["CuPy / cuDF (RAPIDS)","NumPy/pandas on GPU","oss"],["Numba","JIT Python to machine code","oss"],
+["Dask","out-of-core & parallel arrays","oss"],["Apache Arrow","zero-copy columnar memory","oss"],
+["scikit-learn","classical ML, still the right answer often","oss"],["XGBoost / LightGBM / CatBoost","still beat NNs on tabular","oss"],
+["statsmodels","proper statistics","oss"],["SymPy","symbolic math","oss"]]],
+["Core mechanics","",[
+["Tensor & strides","views, contiguity, and the bugs they cause","idea"],["Autograd / computational graph","the tape that makes learning possible","idea"],
+["Eager vs graph mode","debuggability vs speed","idea"],["vmap / pmap / shard_map","vectorize & shard by transformation","idea"],
+["Broadcasting","the silent shape bug generator","idea"],["Dataloaders & collate","where your GPU actually starves","idea"],
+["Device placement & pinned memory","host↔device transfer cost","idea"],["Determinism & seeding","why your run isn't reproducible","idea"]]],
+["Visualization","",[
+["Matplotlib / Seaborn","the default plot stack","oss"],["Plotly / Bokeh / Altair","interactive charts","oss"],
+["TensorBoard","the original training dashboard","oss"],["Weights & Biases","the one most teams actually use","com"],
+["Netron","open any model file and see the graph","oss"],["Gradio / Streamlit","demo UIs in 20 lines","oss"],
+["Manim","math animation (3Blue1Brown's engine)","oss"],["D3.js / Observable Plot","custom web viz","oss"]]]
+]},
+
+{n:"07",t:"Core Algorithms & Techniques",k:"backprop · optimizers · attention · tokenizers",c:"#B8D449",
+d:"The reusable tricks. Architectures come and go; these persist across all of them. Most 'new model' announcements are a permutation of items in this layer.",
+g:[
+["Learning mechanics","",[
+["Backpropagation","reverse-mode autodiff on a loss","idea"],["Loss functions","CE, MSE, focal, contrastive, triplet, Huber","idea"],
+["Weight initialization","Xavier, He, μP — decides if you train at all","idea"],["Batch/Layer/RMS/Group norm","stabilizing the signal path","idea"],
+["Residual connections","the reason depth works","idea"],["Dropout & stochastic depth","regularization by noise","idea"],
+["Gradient clipping","the loss-spike seatbelt","idea"],["Vanishing/exploding gradients","the problem all of the above solve","idea"],
+["Label smoothing / mixup / cutmix","augmentation of the target","idea"],["Early stopping & checkpoint averaging","cheap generalization","idea"]]],
+["Optimizers & schedules","",[
+["SGD + momentum / Nesterov","still the vision baseline","idea"],["Adam / AdamW","the LLM default","idea"],
+["Muon","2025's newton-schulz orthogonalized update","idea"],["Shampoo / SOAP / K-FAC","second-order approximations","idea"],
+["Lion / Sophia / Adafactor","memory-lean alternatives","idea"],["LAMB","large-batch training","idea"],
+["Cosine / warmup / WSD schedules","learning rate over time","idea"],["μP (maximal update parametrization)","tune small, transfer to big","idea"],
+["Gradient accumulation","fake a bigger batch","idea"],["EMA of weights","free eval boost","idea"]]],
+["Sequence machinery","",[
+["Self-attention & QKV","the 2017 primitive","idea"],["Multi-head / MQA / GQA","the KV-cache cost dial","idea"],
+["FlashAttention","exact attention, IO-aware","idea"],["Positional encoding","sinusoidal, learned, ALiBi","idea"],
+["RoPE + YaRN/NTK scaling","how context got to 1M+","idea"],["Sliding window & sparse attention","local + global patterns","idea"],
+["Linear & latent attention","MLA, Lightning, Performer","idea"],["KV cache","the reason inference is memory-bound","idea"],
+["Mixture-of-Experts routing","top-k gating, aux-loss-free balancing","idea"],["Speculative decoding","draft model + verify","idea"]]],
+["Representation & tokens","",[
+["BPE / WordPiece / Unigram","subword tokenization","idea"],["tiktoken / SentencePiece / tokenizers","the actual libraries","oss"],
+["Byte-latent & tokenizer-free","BLT, MegaByte","idea"],["Embeddings","dense vectors as meaning","idea"],
+["Contrastive learning","InfoNCE, SimCLR, CLIP objective","idea"],["Vector quantization","VQ-VAE, FSQ, RVQ for audio","idea"],
+["Weight tying","input/output embedding sharing","idea"],["Sparse autoencoders","features for interpretability","idea"]]],
+["Classical ML that still ships","",[
+["Linear/logistic regression","the correct baseline more often than you'd think","idea"],
+["Decision trees & random forests","interpretable, tabular-strong","idea"],["Gradient boosting","XGBoost still wins Kaggle tabular","idea"],
+["SVM & kernel methods","the pre-2012 frontier","idea"],["k-NN & ANN search","now the backbone of RAG","idea"],
+["k-means / DBSCAN / HDBSCAN","clustering","idea"],["PCA / t-SNE / UMAP","dimensionality reduction & viz","idea"],
+["HMM / Kalman filter","still standard in robotics","idea"],["Bayesian optimization","hyperparameter search","idea"],
+["Collaborative filtering / MF","the recsys workhorse","idea"]]]
+]},
+
+{n:"08",t:"Model Architectures",k:"transformer · diffusion · ssm · gnn · moe",c:"#8ECC55",
+d:"The shapes you can pour data into. The transformer's dominance is real but not total — diffusion owns generative media, GNNs own molecules and graphs, and state-space hybrids are quietly taking long-context work.",
+g:[
+["Foundational","",[
+["Perceptron / MLP","1958 → still every FFN block","idea"],["CNN","ResNet, VGG, Inception, EfficientNet, ConvNeXt","idea"],
+["RNN / LSTM / GRU","sequence modeling before attention","idea"],["Autoencoder & VAE","compression → generation","idea"],
+["GAN","StyleGAN, CycleGAN, pix2pix","idea"],["Seq2seq + attention","the 2014 bridge to transformers","idea"],
+["U-Net","segmentation, and diffusion's backbone","idea"],["Siamese / triplet nets","similarity learning","idea"]]],
+["Transformer family","",[
+["Encoder-only","BERT, RoBERTa, DeBERTa, ModernBERT","idea"],["Decoder-only","GPT lineage — the dominant form","idea"],
+["Encoder-decoder","T5, BART, Whisper","idea"],["Vision Transformer","ViT, DeiT, Swin, DINOv2","idea"],
+["Mixture-of-Experts","sparse params: DeepSeek, Mixtral, Qwen3-MoE","idea"],["Multi-head Latent Attention","DeepSeek's KV compression","idea"],
+["Multi-token prediction","predict n tokens ahead","idea"],["Diffusion LLMs","LLaDA, Mercury — parallel text decoding","idea"],
+["Recurrent-depth / looped transformers","test-time depth","idea"]]],
+["State space & alternatives","",[
+["Mamba / Mamba-2","selective SSM, linear in sequence length","idea"],["S4 / H3 / Hyena","the SSM lineage","idea"],
+["Jamba / Zamba / Samba","Mamba-transformer hybrids","idea"],["RWKV","attention-free RNN-transformer, v7 Goose","idea"],
+["RetNet","retention mechanism","idea"],["xLSTM","LSTM, revisited and scaled","idea"],
+["Liquid Foundation Models","LFM2, edge-oriented non-transformer","idea"],["Titans / test-time memory","learned memory at inference","idea"]]],
+["Generative media architectures","",[
+["DDPM / DDIM","the denoising diffusion base","idea"],["Latent diffusion","Stable Diffusion's key move","idea"],
+["Flow matching / rectified flow","SD3, FLUX — straighter paths","idea"],["DiT (diffusion transformer)","Sora's backbone","idea"],
+["Consistency & distillation models","1-4 step generation","idea"],["Autoregressive image models","VAR, Chameleon, Emu3","idea"],
+["NeRF","neural radiance fields","idea"],["3D Gaussian Splatting","real-time radiance, killed NeRF's lead","idea"],
+["Neural codecs","EnCodec, SoundStream, DAC","idea"]]],
+["Structured & scientific","",[
+["GNN / GCN / GAT / MPNN","graphs, molecules, meshes","idea"],["Equivariant nets","E(3)/SE(3) for physics & chemistry","idea"],
+["Neural ODE","continuous-depth models","idea"],["PINN","physics-informed networks","idea"],
+["Fourier Neural Operator","PDEs & weather","idea"],["Set transformer / DeepSets","permutation invariance","idea"],
+["Capsule networks","the road not taken","idea"],["JEPA / I-JEPA / V-JEPA","LeCun's predictive-embedding bet","idea"],
+["World models","Dreamer, Genie, Cosmos","idea"]]]
+]},
+
+{n:"09",t:"Learning Paradigms",k:"supervised · self-supervised · rl · rlhf · distillation",c:"#5FC66E",
+d:"How a model is taught, which matters more than its architecture. The 2024–26 story is the shift of compute from pretraining into reinforcement learning on verifiable rewards — that's where reasoning models came from.",
+g:[
+["Classical paradigms","",[
+["Supervised learning","labels, the baseline","idea"],["Unsupervised learning","structure without labels","idea"],
+["Self-supervised learning","the pretext task that ate the field","idea"],["Semi-supervised & pseudo-labeling","few labels, lots of data","idea"],
+["Reinforcement learning","reward, not target","idea"],["Active learning","the model picks what to label","idea"],
+["Online / streaming learning","update as data arrives","idea"],["Multi-task learning","shared trunk, many heads","idea"]]],
+["Pretraining & adaptation","",[
+["Next-token prediction","the universal objective","idea"],["Masked language modeling","BERT's objective","idea"],
+["Contrastive pretraining","CLIP, SigLIP","idea"],["Chinchilla scaling laws","tokens vs params, the compute-optimal rule","idea"],
+["Curriculum & data mixing","order and ratio matter","idea"],["Continued pretraining","domain adaptation at scale","idea"],
+["Instruction tuning (SFT)","turning a completer into an assistant","idea"],["Knowledge distillation","teacher → student","idea"],
+["Model merging","SLERP, TIES, DARE, task arithmetic","idea"],["Transfer & few/zero-shot","the emergent capability","idea"]]],
+["Alignment & preference learning","",[
+["RLHF","PPO on a human preference reward model","idea"],["RLAIF / Constitutional AI","AI feedback against written principles","idea"],
+["DPO / IPO / KTO / ORPO","preference tuning without a reward model","idea"],["GRPO","group-relative PPO — DeepSeek-R1's method","idea"],
+["RLVR","reinforcement learning on verifiable rewards","idea"],["Process vs outcome reward models","grade steps or answers","idea"],
+["Rejection sampling / Best-of-N","cheap alignment","idea"],["Self-play & self-improvement","STaR, self-taught reasoning","idea"],
+["Reward hacking","the thing that always happens","idea"],["Test-time compute scaling","think longer, score higher","idea"]]],
+["RL algorithms proper","",[
+["Q-learning / DQN","the Atari breakthrough","idea"],["Policy gradient / REINFORCE","direct policy optimization","idea"],
+["Actor-critic / A3C","variance reduction","idea"],["PPO","the workhorse everywhere","idea"],
+["SAC / TD3 / DDPG","continuous control","idea"],["MCTS","AlphaGo/AlphaZero search","idea"],
+["Model-based RL","Dreamer, MuZero","idea"],["Offline RL","learn from logged data only","idea"],
+["Multi-agent RL","MAPPO, emergent cooperation","idea"],["Inverse RL / reward learning","infer the objective","idea"]]],
+["Efficient & distributed learning","",[
+["LoRA / QLoRA / DoRA / rsLoRA","low-rank adaptation, the default finetune","idea"],
+["PEFT: adapters, prefix, IA3","parameter-efficient family","idea"],["Quantization-aware training","train for INT8/FP4","idea"],
+["Pruning & lottery tickets","structured & unstructured","idea"],["Federated learning","train without moving data","idea"],
+["Continual learning","and catastrophic forgetting","idea"],["Meta-learning","MAML, learning to learn","idea"],
+["Curriculum RL / self-distillation","bootstrap your own teacher","idea"]]]
+]},
+
+{n:"10",t:"Training at Scale",k:"fsdp · megatron · parallelism · finetuning",c:"#3FC79A",
+d:"Turning one GPU's worth of code into ten thousand GPUs' worth of run. Five kinds of parallelism, all composable, all with different communication costs — and a finetuning ecosystem that lets you do the last 5% on a single card.",
+g:[
+["Parallelism strategies","",[
+["Data parallel (DDP)","replicate model, split batch","idea"],["FSDP / ZeRO-3","shard params, grads & optimizer state","idea"],
+["Tensor parallel","split a single matmul across devices","idea"],["Pipeline parallel","split layers, mind the bubble","idea"],
+["Sequence / context parallel","split the sequence — Ring Attention","idea"],["Expert parallel","route MoE experts across nodes","idea"],
+["3D/5D parallelism","compose all of the above","idea"],["Activation checkpointing","recompute instead of store","idea"],
+["Overlap comm & compute","the actual optimization","idea"],["Gradient compression","PowerSGD, quantized allreduce","idea"]]],
+["Training frameworks","",[
+["PyTorch FSDP2 / DTensor","native sharding","oss"],["DeepSpeed","ZeRO, the original memory saver","oss"],
+["Megatron-LM / Megatron-Core","NVIDIA's reference scale stack","oss"],["TorchTitan","PyTorch-native large-scale reference","oss"],
+["NeMo Framework","NVIDIA end-to-end training","oss"],["Levanter / Marin","JAX training, bitwise reproducible","oss"],
+["MaxText / T5X / Paxml","JAX/TPU training stacks","oss"],["Composer / LLM Foundry","MosaicML's stack","oss"],
+["Colossal-AI / BMTrain","alternative scale frameworks","oss"],["Accelerate","HF's thin multi-GPU wrapper","oss"],
+["OpenRLHF / veRL / NeMo-RL","large-scale RLHF & GRPO","oss"],["Prime Intellect / OpenDiLoCo","decentralized training over the internet","oss"]]],
+["Finetuning stacks","the layer most builders actually touch",[
+["Hugging Face PEFT","LoRA & friends, canonical","oss"],["TRL","SFT, DPO, GRPO trainers","oss"],
+["Unsloth","2-5x faster, single-GPU king","oss"],["Axolotl","YAML-config finetuning","oss"],
+["LLaMA-Factory","100+ models, GUI included","oss"],["torchtune","PyTorch-native recipes","oss"],
+["Liger Kernel","fused Triton kernels for training","oss"],["MS-Swift","ModelScope's tuning suite","oss"],
+["Together / Fireworks / Predibase","managed finetuning APIs","com"],["OpenPipe / Modal finetune","distill your prod traffic","com"]]],
+["Practical realities","",[
+["Loss spikes & divergence","and the restart-from-checkpoint ritual","idea"],["Hardware failure rate","at 10k GPUs something dies hourly","idea"],
+["Checkpoint sharding & resume","async, distributed saves","idea"],["MFU (model FLOPs utilization)","the number that grades your run","idea"],
+["Hyperparameter transfer","μP, sweep small then scale","idea"],["Data contamination","your eval is in your train set","idea"],
+["Tokenizer mismatch","silent quality destroyer","idea"],["Carbon & cost accounting","$ per run, tCO2e per run","idea"]]]
+]},
+
+{n:"11",t:"The Data Layer",k:"corpora · curation · labeling · synthetic",c:"#37BFB4",
+d:"The most under-discussed and most decisive layer. Two labs with identical architectures and identical compute will produce very different models, and the difference is almost entirely here.",
+g:[
+["Public corpora","",[
+["Common Crawl","the raw web, the ur-source","oss"],["FineWeb / FineWeb-Edu","HF's cleaned 15T-token web set","oss"],
+["The Pile / RedPajama / Dolma","open pretraining corpora","oss"],["C4 / mC4","cleaned crawl, T5's diet","oss"],
+["The Stack v2 / StarCoder data","permissive code, 600+ languages","oss"],["LAION-5B / DataComp","image-text pairs","oss"],
+["Wikipedia / Books3 / arXiv / PubMed","high-quality domains","oss"],["OpenWebMath / FineMath / Proof-Pile","math corpora","oss"],
+["Common Voice / LibriSpeech / People's Speech","open audio","oss"],["Objaverse-XL / ScanNet","3D assets & scenes","oss"],
+["Nemotron-CC / Zyda / TxT360","2024-26 curated web sets","oss"],["Open Images / COCO / ImageNet","the vision classics","oss"]]],
+["Curation pipeline","",[
+["Deduplication","MinHash-LSH, exact & fuzzy","idea"],["Quality classifiers","fastText/model-scored filtering","idea"],
+["PII removal & toxicity filters","the compliance pass","idea"],["Language ID & script filtering","CLD3, fastText LID","idea"],
+["Decontamination","strip benchmark leakage","idea"],["Data mixing ratios","the real secret sauce","idea"],
+["datatrove / dolma toolkit / NeMo Curator","the open curation frameworks","oss"],["Curator / Lilac / DataDreamer","dataset inspection & generation","oss"]]],
+["Labeling & synthetic data","",[
+["Label Studio","open, general-purpose annotation","oss"],["CVAT","the vision annotation standard","oss"],
+["Argilla","LLM feedback & dataset curation","oss"],["Doccano / Prodigy","text annotation","oss"],
+["Scale AI / Surge / Handshake / Mercor","human data vendors & expert labeling","com"],["Snorkel","programmatic weak supervision","com"],
+["Distilabel","synthetic data pipelines","oss"],["Self-Instruct / Evol-Instruct / Magpie","synthetic instruction methods","idea"],
+["Cosmopedia / Nemotron-4 synthetic","open synthetic corpora","oss"],["Model collapse","the risk of training on your own output","idea"]]],
+["Data infrastructure","",[
+["HF Datasets / Hub","the field's default distribution","oss"],["WebDataset / MosaicML Streaming","shard streaming for training","oss"],
+["Delta Lake / Iceberg / Hudi","lakehouse table formats","oss"],["Parquet / Arrow / Lance","columnar & ML-native formats","oss"],
+["Spark / Ray Data / Daft","distributed processing","oss"],["Airbyte / Fivetran / dbt","ingestion & transformation","oss"],
+["DVC / LakeFS / Pachyderm","data versioning","oss"],["Feast / Tecton / Hopsworks","feature stores","oss"],
+["Great Expectations / Soda","data quality tests","oss"],["Firecrawl / Crawl4AI / Trafilatura","web → clean markdown","oss"]]]
+]},
+{n:"12",t:"The Models Themselves",k:"weights · checkpoints · frontier & open",c:"#31B4CC",
+d:"The artifacts everything below exists to produce. Two economies live here: closed frontier weights sold as an API, and open weights you can download and own. The gap between them is now measured in months, not generations.",
+g:[
+["Frontier closed models","",[
+["Claude (Opus / Sonnet / Haiku)","Anthropic — coding & agentic strength","com"],["GPT / o-series","OpenAI","com"],
+["Gemini (Pro / Flash)","Google DeepMind, long context","com"],["Grok","xAI","com"],
+["Mistral Large / Medium","European frontier","com"],["Command A / R+","Cohere, enterprise RAG focus","com"],
+["Nova","Amazon","com"],["Reasoning modes","extended thinking / test-time compute","idea"]]],
+["Open-weight LLMs","",[
+["Llama 3.x / 4","Meta — the ecosystem anchor","oss"],["Qwen 2.5 / 3","Alibaba — best breadth of sizes","oss"],
+["DeepSeek V3 / R1","MoE + open reasoning, the 2025 shock","oss"],["Mistral / Mixtral / Magistral","efficient European open models","oss"],
+["Gemma 2 / 3","Google's open family","oss"],["Phi-3 / Phi-4","Microsoft small-but-strong","oss"],
+["GLM-4.x","Zhipu","oss"],["Kimi K2","Moonshot, trillion-param MoE","oss"],
+["MiniMax / Yi / InternLM","strong Chinese open models","oss"],["OLMo 2 / Molmo","AI2 — fully open data + code","oss"],
+["Nemotron","NVIDIA's tuned Llama derivatives","oss"],["SmolLM / TinyLlama","sub-2B models that work","oss"],
+["Falcon / StableLM / Pythia","the earlier open wave","oss"],["Granite","IBM, Apache-2 enterprise","oss"]]],
+["Vision & multimodal","",[
+["CLIP / SigLIP 2","image-text alignment backbone","oss"],["DINOv2 / v3","self-supervised visual features","oss"],
+["SAM 2 / SAM 3","segment anything, now video","oss"],["YOLO v8-v12 / RT-DETR","realtime detection","oss"],
+["Grounding DINO / OWL-ViT","open-vocabulary detection","oss"],["Qwen-VL / InternVL / Molmo / Pixtral","open VLMs","oss"],
+["LLaVA / CogVLM","the open VLM lineage","oss"],["Depth Anything v2 / Metric3D","monocular depth","oss"],
+["OCR: PaddleOCR, Surya, dots.ocr, olmOCR","document vision","oss"],["Florence-2 / Kosmos","unified vision tasks","oss"]]],
+["Generative media","",[
+["FLUX.1 / Krea","open image generation SOTA","oss"],["Stable Diffusion 3.5 / SDXL","the open image base","oss"],
+["Qwen-Image / HiDream / Lumina","2025-26 open image models","oss"],["Midjourney / Ideogram / Imagen / Recraft","closed image products","com"],
+["Sora / Veo / Kling / Runway / Pika","closed video generation","com"],["Wan 2.x / HunyuanVideo / LTX-Video / Mochi","open video models","oss"],
+["Whisper / Parakeet / Canary","speech recognition","oss"],["XTTS / F5-TTS / Kokoro / Orpheus / Chatterbox","open TTS","oss"],
+["ElevenLabs / Cartesia / PlayHT","closed voice","com"],["Suno / Udio / MusicGen / Stable Audio","music generation","com"],
+["TripoSR / Hunyuan3D / Trellis / Rodin","image → 3D mesh","oss"],["Live portrait / SadTalker / Wav2Lip","avatars & lipsync","oss"]]],
+["Embeddings & retrieval models","",[
+["BGE-M3 / bge-reranker","multilingual retrieval standard","oss"],["E5 / GTE / Qwen3-Embedding","strong open embedders","oss"],
+["Nomic Embed / Jina v3","long-context open embeddings","oss"],["Voyage / Cohere Embed / OpenAI text-embedding","closed API embeddings","com"],
+["ColBERT / ColPali","late interaction, visual retrieval","oss"],["SPLADE","learned sparse retrieval","oss"],
+["Sentence-Transformers","the library that made this easy","oss"],["MTEB leaderboard","how you choose one","oss"]]],
+["Science & domain models","",[
+["AlphaFold 3 / Boltz-2 / Chai-1","structure prediction, open reimplementations","oss"],
+["ESM-2 / ESM-3","protein language models","oss"],["RFdiffusion / ProteinMPNN","de novo protein design","oss"],
+["MatterGen / GNoME / MACE","materials & interatomic potentials","oss"],["GraphCast / Aurora / Pangu / FourCastNet","weather forecasting","oss"],
+["AlphaGenome / Evo 2","genomics foundation models","oss"],["Med-Gemini / MedGemma / Med-PaLM","clinical models","com"],
+["BloombergGPT / FinGPT","finance","oss"],["Cosmos / Genie 3 / GR00T","world & robot foundation models","oss"]]]
+]},
+
+{n:"13",t:"Inference & Serving",k:"vllm · kv cache · quantization · throughput",c:"#3BA9E0",
+d:"Where the money is spent. Training is a one-time capital cost; inference is forever. This layer is a permanent engineering war over the KV cache — how to make it smaller, shared, paged, and reused.",
+g:[
+["Serving engines","",[
+["vLLM","PagedAttention; the open default","oss"],["SGLang","RadixAttention, prefix reuse, very fast","oss"],
+["TensorRT-LLM","NVIDIA's fastest path on NVIDIA","oss"],["llama.cpp","runs anywhere, CPU included","oss"],
+["Text Generation Inference (TGI)","Hugging Face serving","oss"],["LMDeploy / MLC-LLM","alt engines, broad hardware","oss"],
+["Triton Inference Server","multi-framework model server","oss"],["Ray Serve / BentoML / KServe","serving orchestration","oss"],
+["ExLlamaV2 / KTransformers","consumer-GPU max throughput","oss"],["NVIDIA Dynamo","disaggregated multi-node serving","oss"]]],
+["Inference techniques","",[
+["KV cache paging","PagedAttention, the core innovation","idea"],["Continuous batching","the 10x throughput trick","idea"],
+["Prefix / prompt caching","reuse the system prompt","idea"],["Speculative decoding","draft-verify, EAGLE, Medusa","idea"],
+["Prefill/decode disaggregation","two workloads, two machines","idea"],["Chunked prefill","smooth out long prompts","idea"],
+["Structured output / constrained decoding","grammar-forced JSON","idea"],["Batch vs latency tradeoff","TTFT vs throughput","idea"],
+["Multi-LoRA serving","hundreds of adapters, one base","idea"],["Semantic caching","cache the answer, not the tokens","idea"]]],
+["Compression","",[
+["GGUF / GGML quant","Q4_K_M and friends","oss"],["GPTQ / AWQ / HQQ","post-training quantization","oss"],
+["bitsandbytes","8-bit & 4-bit in transformers","oss"],["SmoothQuant / LLM.int8()","activation-aware methods","idea"],
+["FP8 / FP4 / MXFP","native low-precision inference","idea"],["llm-compressor / AutoRound","modern quant toolkits","oss"],
+["Structured pruning / SparseGPT","remove weights entirely","idea"],["Distillation for deployment","small student, big teacher","idea"]]],
+["Gateways & APIs","",[
+["LiteLLM","one API for 100+ providers","oss"],["OpenRouter","routing marketplace across labs","com"],
+["Portkey / Helicone / Cloudflare AI Gateway","observability + failover proxies","com"],["Groq / Cerebras / SambaNova Cloud","ultra-low-latency inference","com"],
+["Together / Fireworks / DeepInfra / Novita","open-model hosting","com"],["Bedrock / Vertex AI / Azure AI Foundry","hyperscaler model catalogs","com"],
+["Replicate / Fal.ai","model-as-endpoint, media-heavy","com"],["Modal / Baseten / Beam","serverless custom inference","com"],
+["Anthropic / OpenAI / Google SDKs","first-party clients","com"],["Batch APIs","~50% cheaper, async","idea"]]]
+]},
+
+{n:"14",t:"Local, Edge & On-Device AI",k:"ollama · gguf · npu · sovereignty",c:"#4A9DEC",
+d:"The counter-movement: a 30B model on a laptop with no network call, no per-token cost, and no data leaving the building. This layer went from hobbyist to genuinely production-viable in about eighteen months.",
+g:[
+["Local runtimes","",[
+["Ollama","one command to a running model","oss"],["LM Studio","the GUI most people start with","com"],
+["llama.cpp / llamafile","the C++ engine; single-file distribution","oss"],["Jan / GPT4All / Msty","open desktop chat apps","oss"],
+["MLX / MLX-LM","Apple Silicon native","oss"],["vLLM / SGLang local","serious local serving","oss"],
+["Llamafile","model + runtime in one executable","oss"],["Docker Model Runner / Podman AI Lab","containerized local models","oss"]]],
+["Local UIs & workspaces","",[
+["Open WebUI","the self-hosted ChatGPT clone","oss"],["AnythingLLM","local RAG workspace","oss"],
+["LibreChat","multi-provider self-hosted chat","oss"],["Text Generation WebUI","oobabooga, the tinkerer's console","oss"],
+["ComfyUI","node-graph image/video generation","oss"],["Automatic1111 / Forge / InvokeAI","SD front-ends","oss"],
+["SillyTavern","roleplay & character front-end","oss"],["Khoj / Reor / Obsidian plugins","local personal knowledge AI","oss"]]],
+["On-device & embedded","",[
+["ONNX Runtime / DirectML","cross-platform inference","oss"],["ExecuTorch","PyTorch on phones & MCUs","oss"],
+["LiteRT (TFLite) / MediaPipe","Google's mobile stack","oss"],["Core ML / Foundation Models framework","Apple on-device","com"],
+["NCNN / MNN / TNN","mobile inference engines","oss"],["TensorRT / DeepStream on Jetson","edge vision pipelines","com"],
+["OpenVINO","Intel CPU/NPU/iGPU","oss"],["Qualcomm AI Hub / QNN","Snapdragon deployment","com"],
+["TinyML / TFLite Micro / microTVM","MCU-class inference","oss"],["whisper.cpp / faster-whisper","local speech","oss"]]],
+["Local hardware builds","",[
+["Apple M-series 64-128GB","best memory-per-dollar for big local models","hw"],["RTX 5090 / 4090 / 3090","24-32GB VRAM tiers","hw"],
+["NVIDIA DGX Spark / Jetson Thor","desktop & robot dev kits","hw"],["AMD Strix Halo / Ryzen AI Max","128GB unified APU","hw"],
+["Multi-GPU rigs","P40/3090 stacks, PCIe lanes matter","hw"],["Mac Studio clusters","EXO / MLX distributed","hw"],
+["Raspberry Pi 5 + Hailo","tiny always-on inference","hw"],["Framework Desktop / Minisforum","compact AI boxes","hw"],
+["VRAM math","params × bytes/param + KV cache","idea"],["Offloading","layers to CPU/disk when you're short","idea"]]]
+]},
+
+{n:"15",t:"App Frameworks & SDKs",k:"langchain · dspy · structured output",c:"#5C90F0",
+d:"The glue between a model endpoint and a product. The lesson of 2024–26 was that thinner is better: heavyweight chains lost ground to typed, structured, mostly-plain-code approaches.",
+g:[
+["Orchestration frameworks","",[
+["LangChain / LangGraph","the biggest ecosystem; graph = the durable part","oss"],
+["LlamaIndex","data-centric, strong ingestion","oss"],["Haystack 2.x","deepset, production pipelines","oss"],
+["Semantic Kernel","Microsoft, .NET-first","oss"],["DSPy","program & compile prompts, don't write them","oss"],
+["Pydantic AI","type-safe agents from the Pydantic team","oss"],["Mastra / Genkit","TypeScript-first frameworks","oss"],
+["Vercel AI SDK","the React/Next streaming standard","oss"],["Spring AI / LangChain4j","the JVM side","oss"],
+["Burr / Griptape / Flowise / Langflow","alt & visual builders","oss"]]],
+["Structure & reliability","",[
+["Instructor","Pydantic-validated LLM output","oss"],["Outlines / XGrammar","regex & CFG constrained generation","oss"],
+["Guidance / LMQL","control the decode loop","oss"],["BAML","a typed DSL for prompts","oss"],
+["JSON Schema / tool schemas","the contract with the model","std"],["Marvin / Mirascope","ergonomic LLM function wrappers","oss"],
+["Tenacity / retries & fallbacks","the unglamorous 80%","idea"],["Prompt versioning","treat prompts as code","idea"]]],
+["Prompting techniques","",[
+["Zero/few-shot","the baseline lever","idea"],["Chain-of-thought","think step by step","idea"],
+["ReAct","reason + act interleaved","idea"],["Self-consistency","sample n, vote","idea"],
+["Tree/Graph of Thoughts","branch and evaluate","idea"],["Reflexion / self-critique","let it grade itself","idea"],
+["Prompt chaining & decomposition","small reliable steps","idea"],["Context engineering","the 2025 rename of prompt engineering","idea"],
+["System prompt design","role, constraints, output contract","idea"],["Prompt injection","the attack this layer must survive","idea"]]],
+["Frontend & UX","",[
+["Streamlit / Gradio / Chainlit","fastest path to a demo","oss"],["Next.js + Vercel AI SDK","the production default","oss"],
+["assistant-ui / CopilotKit","React chat & copilot components","oss"],["Streaming & SSE","token-by-token UX","idea"],
+["Server-side tool call UI","render tool state, not spinners","idea"],["Artifacts / canvas patterns","side-by-side generated output","idea"],
+["Voice UX / WebRTC / LiveKit","realtime voice agents","oss"],["Latency budgets","TTFT is the whole experience","idea"]]]
+]},
+
+{n:"16",t:"Retrieval, Memory & RAG",k:"vectors · hybrid search · graphrag · memory",c:"#7C82F0",
+d:"Giving a fixed-weight model access to facts it was never trained on. Naive RAG (chunk, embed, top-k) is a demo; production RAG is a search engineering discipline with hybrid retrieval, rerankers, and evaluation.",
+g:[
+["Vector databases","",[
+["pgvector / pgvectorscale","Postgres, usually the right first answer","oss"],["Qdrant","Rust, fast, great filtering","oss"],
+["Milvus / Zilliz","billion-scale open vector DB","oss"],["Weaviate","hybrid search built in","oss"],
+["Chroma","the prototyping default","oss"],["LanceDB","embedded, multimodal, serverless","oss"],
+["Vespa","Yahoo-born, serious ranking engine","oss"],["Pinecone / Turbopuffer","managed vector services","com"],
+["FAISS / hnswlib / ScaNN / Annoy","the underlying ANN libraries","oss"],["Elasticsearch / OpenSearch","BM25 + vectors, already in your stack","oss"],
+["Redis / MongoDB Atlas / SingleStore","vector bolted onto what you run","com"],["Vald / Marqo / Infinity","alternative engines","oss"]]],
+["Retrieval methods","",[
+["Chunking strategies","fixed, recursive, semantic, late","idea"],["Hybrid search","BM25 + dense, then fuse","idea"],
+["Reciprocal rank fusion","the merge that just works","idea"],["Reranking","cross-encoders, the biggest single win","idea"],
+["HyDE","embed a hypothetical answer","idea"],["Query expansion & rewriting","fix the user's question first","idea"],
+["Contextual retrieval","prepend chunk context before embedding","idea"],["Late chunking / ColBERT","token-level interaction","idea"],
+["Parent-document / small-to-big","retrieve small, return large","idea"],["Metadata filtering","the underrated precision lever","idea"],
+["RAPTOR","hierarchical summary trees","idea"],["Agentic RAG","let the agent decide what to search","idea"]]],
+["Graph & structured retrieval","",[
+["GraphRAG","Microsoft's community-summary approach","oss"],["LightRAG / nano-graphrag","lighter graph RAG","oss"],
+["Neo4j / Memgraph / Kùzu","graph databases","oss"],["Knowledge graph construction","entity & relation extraction","idea"],
+["Text-to-SQL / Table RAG","structured data retrieval","idea"],["Ontologies / RDF / SPARQL","the semantic web's legacy","std"],
+["Hybrid KG + vector","the enterprise pattern","idea"],["Multi-hop reasoning","chains across documents","idea"]]],
+["Ingestion & parsing","",[
+["Unstructured.io","the general document loader","oss"],["Docling","IBM, strong layout & tables","oss"],
+["LlamaParse / Reducto / Chunkr","complex PDF parsing services","com"],["Marker / MinerU / PyMuPDF4LLM","PDF → markdown","oss"],
+["Firecrawl / Crawl4AI / Jina Reader","web → LLM-ready text","oss"],["Tesseract / PaddleOCR / Surya","OCR engines","oss"],
+["Multimodal RAG","ColPali — retrieve the page image","idea"],["Table & chart extraction","Camelot, Table Transformer","oss"]]],
+["Memory systems","",[
+["Mem0","scoped long-term agent memory","oss"],["Zep / Graphiti","temporal knowledge graph memory","oss"],
+["Letta (MemGPT)","OS-inspired memory paging","oss"],["Cognee / Memobase","memory infrastructure","oss"],
+["Episodic vs semantic memory","event log vs distilled fact","idea"],["Context compaction","summarize to survive long sessions","idea"],
+["Working memory / scratchpads","the agent's short-term store","idea"],["Memory conflict & decay","what to forget, and when","idea"]]]
+]},
+
+{n:"17",t:"Agents & Orchestration",k:"tools · mcp · loops · sandboxes",c:"#9B7BEE",
+d:"A model in a loop with tools and a stopping condition. Everything hard about agents is control: how to keep a nondeterministic thing on task, recoverable when it fails, and observable while it runs.",
+g:[
+["Agent frameworks","",[
+["LangGraph","stateful graphs, checkpoints, human-in-the-loop","oss"],["Claude Agent SDK","Anthropic's harness for building agents","oss"],
+["OpenAI Agents SDK","successor to Swarm","oss"],["CrewAI","role-based crews, very popular","oss"],
+["AutoGen / AG2","Microsoft's conversational multi-agent","oss"],["Smolagents","HF, minimal, code-writing agents","oss"],
+["Agno / Atomic Agents","lightweight & modular","oss"],["Letta","stateful agents as a service","oss"],
+["MetaGPT / ChatDev / CAMEL","simulated software companies","oss"],["Strands / Bedrock AgentCore","AWS agent stacks","com"],
+["Google ADK / Vertex Agent Engine","Google's agent framework","oss"],["Temporal / Restate durable agents","crash-proof long-running loops","oss"]]],
+["Protocols & interop","",[
+["MCP (Model Context Protocol)","the tool-connection standard","std"],["MCP servers","filesystem, GitHub, Slack, Postgres, Blender, Puppeteer","oss"],
+["A2A (Agent2Agent)","agent-to-agent communication","std"],["Tool / function calling","the base capability","std"],
+["OpenAPI → tools","turn any REST API into tools","std"],["AGNTCY / ACP","alternative interop efforts","std"],
+["Computer Use / tool schemas","screenshot-and-click as an API","idea"],["Skills & progressive disclosure","load capability on demand","idea"]]],
+["Coding agents","the category that proved agents work",[
+["Claude Code","terminal-native agentic coding","com"],["Cursor / Windsurf","AI-first IDEs","com"],
+["GitHub Copilot / Copilot Workspace","the incumbent","com"],["Aider","open, git-aware pair programmer","oss"],
+["Cline / Roo Code / Kilo","open VS Code agents","oss"],["OpenHands (OpenDevin)","open autonomous SWE agent","oss"],
+["Devin","the first autonomous SWE product","com"],["SWE-agent / Agentless","the research baselines","oss"],
+["Codex / Jules / Amp","hosted async coding agents","com"],["Continue.dev / Tabby","self-hosted code assistants","oss"],
+["SWE-bench Verified","how these are actually graded","oss"]]],
+["Computer & browser control","",[
+["Playwright / Puppeteer","the automation substrate","oss"],["browser-use","open web agent, very popular","oss"],
+["Stagehand / Skyvern","AI-native browser automation","oss"],["Claude for Chrome / OpenAI Operator","first-party browser agents","com"],
+["Anthropic Computer Use","screen + mouse + keyboard","com"],["OSWorld / WebArena / WebVoyager","the benchmarks","oss"],
+["Selenium / Appium","the older & mobile automation","oss"],["Accessibility tree vs pixels","two ways to see a screen","idea"]]],
+["Execution & safety","",[
+["E2B / Daytona / Modal Sandbox","isolated code execution","com"],["Firecracker / gVisor / WASM","the isolation primitives","oss"],
+["Docker / dev containers","the practical sandbox","oss"],["Permission & approval gates","human confirms destructive actions","idea"],
+["Budget & step limits","the loop needs a fuse","idea"],["Rollback & checkpointing","undo an agent's damage","idea"],
+["Least privilege / scoped tokens","don't give an agent your admin key","idea"],["Prompt injection defense","the unsolved problem of this layer","idea"]]],
+["Agent design patterns","",[
+["ReAct loop","think → act → observe → repeat","idea"],["Planner-executor","separate strategy from steps","idea"],
+["Supervisor / hierarchical","a manager routing to specialists","idea"],["Swarm / handoff","peers pass control","idea"],
+["Reflection & critic loops","a second pass that grades the first","idea"],["Debate & ensembling","multiple agents argue to an answer","idea"],
+["Blackboard architecture","shared state, many writers","idea"],["Human-in-the-loop interrupts","pause, ask, resume","idea"],
+["Deterministic workflow > agent","choose the boring option when you can","idea"],["Context compaction & handoff","surviving long horizons","idea"]]]
+]},
+{n:"18",t:"The Automation Ladder",k:"L0 manual → L6 self-improving",c:"#B673E4",
+d:"Autonomy is not binary. Almost every failed AI project sits one rung higher than its reliability justifies. The rung you pick determines your architecture, your error budget, and who is accountable when it's wrong.",
+ladder:[
+["L0","Manual","A human does the work. Tools assist but decide nothing.","Spreadsheets · checklists · SOPs"],
+["L1","Scripted","Deterministic code runs on a trigger. Zero intelligence, total predictability.","cron · bash · Python scripts · GitHub Actions · Excel macros"],
+["L2","Workflow automation","Multi-step flows with branching and retries, still fully rule-based.","Zapier · Make · n8n · Airflow · Temporal · Prefect · Dagster · Power Automate"],
+["L3","AI-in-the-loop","A model does one bounded task inside a deterministic pipeline. The flow is fixed; only a step is fuzzy.","Classification · extraction · summarization · embedding steps"],
+["L4","Agentic with approval","The model chooses its own steps and tools, but a human approves consequential actions.","Claude Code · Cursor · Copilot Workspace · LangGraph interrupt() · approval gates"],
+["L5","Autonomous single-domain","Closed loop with no human in the path, inside a narrow domain with hard limits and rollback.","Async coding agents · SRE remediation · trading guardrails · warehouse robots"],
+["L6","Multi-agent / self-improving","Agents spawn agents, write their own tools, and update their own scaffolds. Mostly research territory.","Self-play · automated research loops · agent-generated tooling · AlphaEvolve-style search"]],
+g:[
+["Workflow & iPaaS tools","",[
+["n8n","open-source, self-hostable, AI-native nodes","oss"],["Zapier","the largest integration catalog","com"],
+["Make (Integromat)","visual scenario builder","com"],["Activepieces / Windmill","open Zapier alternatives","oss"],
+["Apache Airflow","the data engineering standard","oss"],["Prefect / Dagster","modern Python orchestration","oss"],
+["Temporal","durable execution — the right agent substrate","oss"],["Camunda / Zeebe","BPMN process orchestration","com"],
+["Power Automate / UiPath / Automation Anywhere","enterprise RPA","com"],["Node-RED","flow-based IoT & edge automation","oss"],
+["Trigger.dev / Inngest","event-driven background jobs","oss"],["Pipedream / Gumloop / Lindy","AI-flavored automation platforms","com"]]],
+["Reliability engineering for autonomy","",[
+["Idempotency","the same step twice must be safe","idea"],["Dead letter queues","where failures go to be inspected","idea"],
+["Circuit breakers & budgets","stop the loop before it burns money","idea"],["Compensating transactions (saga)","undo a partial success","idea"],
+["Confidence thresholds & escalation","route uncertainty to a human","idea"],["Shadow mode","run it silently before it acts","idea"],
+["Canary & progressive rollout","1% of traffic first","idea"],["Audit trail","every action attributable and replayable","idea"]]]
+]},
+
+{n:"19",t:"Multimodal & Multi-Agent Systems",k:"any-to-any · topologies · realtime",c:"#CF6ED6",
+d:"Two different meanings of 'multi' that increasingly appear together: models that natively span text, image, audio and action, and systems where several specialized agents coordinate on one goal.",
+g:[
+["Multimodal model design","",[
+["Native vs adapter multimodality","trained-in vs bolted-on encoders","idea"],["Vision encoder + projector","the LLaVA pattern","idea"],
+["Any-to-any models","text/image/audio in and out","idea"],["Early vs late fusion","when modalities meet","idea"],
+["Interleaved training data","documents with images inline","idea"],["Audio tokenization","discrete codes for speech & music","idea"],
+["Video as tokens","spatiotemporal patching","idea"],["Cross-modal grounding","pointing at pixels from text","idea"],
+["Realtime speech-to-speech","no ASR→LLM→TTS round trip","idea"],["Vision-language-action","output becomes robot control","idea"]]],
+["Realtime & voice infrastructure","",[
+["LiveKit Agents","open realtime voice agent framework","oss"],["Pipecat","open voice pipeline orchestration","oss"],
+["Realtime APIs","OpenAI/Gemini live audio sessions","com"],["Vapi / Retell / Bland","voice agent platforms","com"],
+["Deepgram / AssemblyAI / Speechmatics","streaming ASR","com"],["Silero VAD / turn detection","knowing when a human stopped talking","oss"],
+["WebRTC / Daily / Agora","the transport layer","com"],["Barge-in & latency budget","under ~500ms or it feels broken","idea"]]],
+["Multi-agent topologies","",[
+["Supervisor / router","one manager, many workers","idea"],["Hierarchical teams","managers of managers","idea"],
+["Swarm / peer handoff","control passes sideways","idea"],["Sequential pipeline","assembly line of specialists","idea"],
+["Parallel fan-out + reduce","map-reduce for reasoning","idea"],["Debate / adversarial","two agents argue, a judge decides","idea"],
+["Blackboard / shared memory","common workspace, many agents","idea"],["Market / auction allocation","agents bid for tasks","idea"],
+["Subagent context isolation","fresh context per specialist","idea"],["When NOT to multi-agent","one good agent usually wins","idea"]]],
+["Coordination problems","",[
+["Error compounding","95% per step ≈ 60% over 10 steps","idea"],["Context sharing vs isolation","the central design tension","idea"],
+["Deadlock & infinite handoff","agents passing the ball forever","idea"],["Cost explosion","n agents × m turns × k tokens","idea"],
+["Consistency & shared state","who owns the truth","idea"],["Attribution","which agent caused the failure","idea"],
+["Emergent behavior","the good and bad surprises","idea"],["Simulation environments","Generative Agents, AgentVerse","oss"]]]
+]},
+
+{n:"20",t:"Ops: MLOps → LLMOps → AgentOps",k:"evals · tracing · registries · guardrails",c:"#E56AB8",
+d:"The discipline that decides whether any of this survives contact with production. The single highest-leverage practice in the entire field lives here: writing evals before you ship.",
+g:[
+["Experiment & model lifecycle","",[
+["MLflow","tracking + registry, the open standard","oss"],["Weights & Biases","experiment tracking most teams use","com"],
+["DVC / Git LFS","data & model versioning","oss"],["ClearML / Neptune / Comet","alternative tracking platforms","com"],
+["Kubeflow / Metaflow / ZenML","ML pipeline orchestration","oss"],["BentoML / Seldon / KServe","model packaging & serving ops","oss"],
+["Model registry & lineage","which weights are in prod, from what data","idea"],["Feature/training-serving skew","the classic silent failure","idea"],
+["Drift detection","Evidently, NannyML, whylogs","oss"],["Shadow deploys & A/B","measure before you switch","idea"]]],
+["LLM observability & tracing","",[
+["LangSmith","tracing & evals from LangChain","com"],["Langfuse","open-source LLM observability","oss"],
+["Arize Phoenix","open tracing + evaluation","oss"],["Braintrust","evals-first development","com"],
+["Helicone / Opik / Traceloop","proxy & OTel-based tracing","oss"],["OpenTelemetry GenAI semconv","the emerging standard","std"],
+["Weave (W&B)","LLM app tracking","com"],["Token & cost accounting","per-user, per-feature unit economics","idea"]]],
+["Evaluation","",[
+["Ragas","RAG-specific metrics","oss"],["DeepEval / promptfoo","unit tests for prompts","oss"],
+["Inspect AI","UK AISI's evaluation framework","oss"],["OpenAI Evals / lm-evaluation-harness","the standard harnesses","oss"],
+["LLM-as-judge","scalable but needs calibration","idea"],["Golden datasets","curated, versioned, from real traffic","idea"],
+["Human preference & Elo","LMArena-style pairwise ranking","idea"],["Regression testing prompts","catch silent model drift","idea"],
+["Agent trajectory evals","grade the path, not just the answer","idea"],["Benchmarks: MMLU-Pro, GPQA, SWE-bench, ARC-AGI, HLE, AIME, Terminal-Bench","the public scoreboard","oss"]]],
+["Guardrails & security","",[
+["NeMo Guardrails / Guardrails AI","programmable output constraints","oss"],["Llama Guard / ShieldGemma","open safety classifiers","oss"],
+["Lakera / Prompt Security / Robust Intelligence","commercial AI firewalls","com"],["OWASP Top 10 for LLMs","the threat checklist","std"],
+["Prompt injection & jailbreak testing","garak, PyRIT, promptmap","oss"],["PII detection & redaction","Presidio","oss"],
+["Rate limiting & abuse detection","the boring essential controls","idea"],["Model supply chain","picklescan, model signing, SBOM","idea"],
+["Secrets & tool-permission scoping","agents need least privilege","idea"],["Red teaming","internal & external, before launch","idea"]]]
+]},
+
+{n:"21",t:"Physical AI: Sensors & Robotics",k:"perception · control · sim2real · vla",c:"#F0668F",
+d:"Where the stack closes the loop with reality. Everything below can be wrong and retried cheaply; here a mistake breaks something. Robotics is now importing the foundation-model playbook — one big pretrained policy instead of hand-built control stacks.",
+g:[
+["Sensing","",[
+["RGB / global shutter cameras","the primary sense","hw"],["Depth: stereo, ToF, structured light","RealSense, Orbbec, Luxonis OAK","hw"],
+["LiDAR","Ouster, Hesai, Velodyne, Livox","hw"],["Radar / mmWave","robust in weather","hw"],
+["IMU & AHRS","accel + gyro, the pose backbone","hw"],["Event cameras","Prophesee, µs latency, sparse","hw"],
+["Tactile sensing","GelSight, DIGIT, magnetic skins","hw"],["Force/torque & joint encoders","proprioception","hw"],
+["GNSS / RTK","centimeter outdoor positioning","hw"],["Ultrasonic & IR proximity","cheap safety layer","hw"],
+["Microphone arrays","beamforming, sound localization","hw"],["Sensor fusion","EKF/UKF, factor graphs, GTSAM","idea"]]],
+["Perception & spatial AI","",[
+["SLAM","ORB-SLAM3, RTAB-Map, Cartographer, Kimera","oss"],["Visual-inertial odometry","VINS-Fusion, OpenVINS","oss"],
+["Occupancy grids & voxel maps","OctoMap, nvblox","oss"],["3D detection & segmentation","PointPillars, CenterPoint, Open3D","oss"],
+["Point clouds","PCL, Open3D, PointNet++","oss"],["3D Gaussian Splatting for robotics","fast dense reconstruction","idea"],
+["Pose estimation","FoundationPose, MediaPipe, OpenPose","oss"],["Visual servoing","close the loop on pixels","idea"],
+["Semantic mapping","objects and affordances, not just geometry","idea"],["Calibration","intrinsics, extrinsics, hand-eye","idea"]]],
+["Control & planning","",[
+["PID / LQR","the honest classical baselines","idea"],["Model predictive control","MPC, the modern workhorse","idea"],
+["Whole-body control","humanoid balance & contact","idea"],["Motion planning","OMPL, RRT*, A*, MoveIt 2","oss"],
+["Nav2","ROS 2 navigation stack","oss"],["Trajectory optimization","CHOMP, TrajOpt, Drake","oss"],
+["Inverse kinematics","Pinocchio, KDL, IKFast","oss"],["Impedance & compliance control","safe contact with the world","idea"],
+["Real-time constraints","determinism, jitter, RT kernels","idea"],["Safety layer","e-stop, ISO 10218 / 13482","std"]]],
+["Robot software & simulation","",[
+["ROS 2 (Jazzy/Kilted)","the robotics middleware standard","oss"],["Isaac Sim / Isaac Lab","NVIDIA's GPU sim & RL training","oss"],
+["MuJoCo / MJX","fast contact physics, now free","oss"],["Genesis","2025 GPU-native universal sim","oss"],
+["Gazebo / Webots / CoppeliaSim","classic robot simulators","oss"],["PyBullet / Brax / Isaac Gym","RL physics engines","oss"],
+["Unity ML-Agents / Unreal","game engines as sim","oss"],["Drake","MIT's model-based design toolbox","oss"],
+["CARLA / AWSIM / MetaDrive","autonomous driving simulators","oss"],["Domain randomization","the sim2real bridge","idea"],
+["Digital twins / Omniverse / OpenUSD","factory-scale simulation","com"],["Foxglove / PlotJuggler / rerun.io","robotics visualization & debugging","oss"]]],
+["Robot foundation models","",[
+["RT-1 / RT-2 / RT-X","Google's vision-language-action lineage","oss"],["OpenVLA","open 7B VLA policy","oss"],
+["π0 / π0.5 (Physical Intelligence)","open generalist manipulation policy","oss"],["GR00T N1 / N1.5","NVIDIA humanoid foundation model","oss"],
+["Octo / CrossFormer","open generalist robot transformers","oss"],["Cosmos","NVIDIA world foundation models","oss"],
+["Genie 3","interactive generated worlds","com"],["LeRobot","Hugging Face's robotics stack + datasets","oss"],
+["Open X-Embodiment","the pooled cross-robot dataset","oss"],["Diffusion Policy / ACT","the standard imitation learning methods","oss"],
+["Teleoperation","ALOHA, GELLO, VR data collection","oss"],["Sim2real gap","still the central problem","idea"]]],
+["Machines & platforms","",[
+["Humanoids","Figure, 1X, Unitree G1/H1, Tesla Optimus, Agility Digit, Apptronik","hw"],
+["Quadrupeds","Boston Dynamics Spot, Unitree Go2/B2, ANYmal","hw"],["Arms","UR, Franka, Kinova, xArm, SO-101/SO-100 (open)","hw"],
+["Mobile & AMR","Fetch, MiR, Amazon Proteus, warehouse fleets","hw"],["Drones","PX4, ArduPilot, Skydio, DJI SDK","oss"],
+["Autonomous vehicles","Waymo, Autoware, Baidu Apollo, comma.ai openpilot","oss"],["Agri & construction","John Deere autonomy, Built Robotics","com"],
+["Surgical & medical","da Vinci, CMR Versius","com"],["Compute modules","Jetson Orin/Thor, Raspberry Pi, RDK X5","hw"],
+["Open hardware","Reachy 2, Koch arm, HuggingBot, Poppy","oss"]]]
+]},
+
+{n:"22",t:"Products, SaaS & Ecosystem",k:"where value gets captured",c:"#FF6472",
+d:"The commercial surface. Worth studying structurally: notice how much of it is a thin layer over the same five model APIs, and how the durable businesses own either a workflow, a data moat, or a distribution channel.",
+g:[
+["Assistants & interfaces","",[
+["Claude / ChatGPT / Gemini / Copilot","the general assistants","com"],["Perplexity / Exa","AI search & retrieval-native answers","com"],
+["NotebookLM","source-grounded research & audio overviews","com"],["Poe / Msty / TypingMind","multi-model front-ends","com"],
+["Character.ai","companionship & roleplay at scale","com"],["Meta AI / Grok in-app","assistants inside social platforms","com"]]],
+["Work & creation","",[
+["Cursor / Copilot / Claude Code","software creation","com"],["Notion AI / Coda / Mem","knowledge work","com"],
+["Canva / Figma AI / Adobe Firefly","design","com"],["Gamma / Tome / Beautiful.ai","presentations","com"],
+["Runway / Descript / CapCut / HeyGen","video production","com"],["ElevenLabs / Suno / Udio","audio & music","com"],
+["Grammarly / Jasper / Copy.ai","writing & marketing","com"],["v0 / Lovable / Bolt / Replit Agent","prompt-to-app builders","com"]]],
+["Vertical AI","where the real revenue is",[
+["Harvey / Legora / Spellbook","legal","com"],["Abridge / Nuance DAX / OpenEvidence","clinical documentation","com"],
+["Sierra / Decagon / Intercom Fin","customer support agents","com"],["Cognition / Factory / Reflection","autonomous engineering","com"],
+["Glean / Hebbia / Rogo","enterprise search & finance research","com"],["Cresta / Clari / Gong","revenue & sales intelligence","com"],
+["EvenUp / Eve / Garden","insurance & claims","com"],["Tennr / Anterior / Cohere Health","healthcare ops","com"],
+["Applied Intuition / Shield AI","defense & autonomy","com"],["Physical Intelligence / Skild","robot foundation model startups","com"]]],
+["Infrastructure business layer","",[
+["Hugging Face","the model & dataset commons","com"],["Databricks / Snowflake","data + AI platforms","com"],
+["Scale / Surge / Mercor","human data supply","com"],["LangChain / LlamaIndex / Weaviate","OSS-core companies","com"],
+["Modal / Baseten / Replicate / Fal","compute abstraction","com"],["Vercel / Netlify / Cloudflare","AI-aware app hosting","com"],
+["Supabase / Neon / PlanetScale","the app database layer","com"],["Stripe / Paddle / Orb","usage-based billing for AI","com"]]],
+["Learning the ecosystem","",[
+["Papers with Code / alphaXiv / Hugging Face Papers","research tracking","oss"],["arXiv cs.LG / cs.CL / cs.RO","the primary source","oss"],
+["Karpathy: nn-zero-to-hero, nanoGPT, llm.c","the best free curriculum","oss"],["fast.ai / d2l.ai","practical deep learning courses","oss"],
+["awesome-* lists on GitHub","ecosystem maps per domain","oss"],["LMArena / OpenRouter rankings","what's actually good right now","oss"],
+["EleutherAI / AI2 / Nous / Prime Intellect","open research collectives","oss"],["r/LocalLLaMA","where local AI actually gets figured out","oss"]]]
+]},
+
+{n:"23",t:"Safety, Interpretability & Governance",k:"alignment · interpretability · regulation",c:"#FF5B57",
+d:"The layer that decides whether the rest of the pyramid is allowed to keep growing. It sits at the top not because it's an afterthought, but because it's the only layer that constrains all the others.",
+g:[
+["Interpretability","opening the box",[
+["Mechanistic interpretability","reverse-engineering circuits","idea"],["Sparse autoencoders","decomposing activations into features","idea"],
+["Feature steering","clamp a concept up or down","idea"],["Attribution & saliency","Grad-CAM, integrated gradients, SHAP, LIME","oss"],
+["Activation patching / causal tracing","find where a behavior lives","idea"],["TransformerLens / nnsight","the standard research libraries","oss"],
+["Neuronpedia","browse discovered features","oss"],["Attention & logit lens","reading intermediate states","idea"],
+["Superposition & polysemanticity","why neurons aren't concepts","idea"],["Chain-of-thought faithfulness","does the reasoning reflect the computation","idea"]]],
+["Alignment & control","",[
+["RLHF / Constitutional AI","the deployed alignment methods","idea"],["Scalable oversight","supervising systems smarter than you","idea"],
+["Weak-to-strong generalization","small supervisor, big model","idea"],["Deceptive alignment & sandbagging","the core theoretical worry","idea"],
+["Sycophancy & reward hacking","measurable, present-day failures","idea"],["Evaluations for dangerous capabilities","CBRN, cyber, autonomy","idea"],
+["Responsible Scaling Policies / ASL","capability-triggered safeguards","std"],["Model welfare & deprecation policy","an open question, taken seriously","idea"],
+["Sabotage & control evaluations","assume misalignment, test containment","idea"],["Constitutional classifiers","filtering at the boundary","idea"]]],
+["Security & robustness","",[
+["Prompt injection","the top agent-era vulnerability","idea"],["Jailbreaks & many-shot attacks","the persistent adversarial surface","idea"],
+["Data poisoning & backdoors","attacks on the training set","idea"],["Model extraction & inversion","stealing weights or training data","idea"],
+["Adversarial examples","the vision-era attack that never left","idea"],["Membership inference","was my data in this model","idea"],
+["Watermarking & provenance","SynthID, C2PA content credentials","std"],["Differential privacy","Opacus, DP-SGD","oss"],
+["Confidential computing","TEEs, NVIDIA confidential GPUs","hw"],["Federated & privacy-preserving ML","train without centralizing","idea"]]],
+["Governance & regulation","",[
+["EU AI Act","risk tiers; GPAI obligations phased 2025-27","std"],["NIST AI RMF + GenAI Profile","the US voluntary framework","std"],
+["ISO/IEC 42001","AI management system certification","std"],["US state laws","Colorado AI Act, California SB 53 & transparency rules","std"],
+["China interim GenAI measures","filing & labeling regime","std"],["UK & international AI Safety Institutes","government evaluation bodies","std"],
+["Model cards & system cards","documented capability and limits","std"],["Datasheets for datasets","provenance documentation","std"],
+["Copyright & training data litigation","the unresolved economic question","idea"],["Compute thresholds & export controls","governing by FLOPs and chips","std"],
+["Third-party audits & red teams","external assurance","idea"],["Incident reporting","AI Incident Database, OECD monitor","oss"]]],
+["The open questions","",[
+["Do scaling laws continue","and what replaces them if not","idea"],["Continual learning","models that update without retraining","idea"],
+["Sample efficiency","humans need far less data","idea"],["Grounding & world models","from correlation to causation","idea"],
+["Hallucination","architectural, not a bug to patch","idea"],["Energy & sustainability limits","the grid as the ceiling","idea"],
+["Labor market effects","measured, contested, ongoing","idea"],["Concentration of compute","who can afford the frontier","idea"]]]
+]}
+];
+const SHORT=["Physics & Materials","Electronics & Logic","Chips & Accelerators","Memory & Datacenter",
+"Kernels & Compilers","Mathematics","Frameworks","Algorithms","Architectures","Learning Paradigms","Training at Scale",
+"Data","Models","Inference & Serving","Local & Edge","App Frameworks","Retrieval & RAG","Agents","Automation Ladder",
+"Multi-Agent Systems","MLOps \u2192 AgentOps","Robotics & Sensors","Products & SaaS","Safety & Governance"];
+const TAGNAME={oss:'Open source',com:'Commercial',hw:'Hardware',std:'Standard',idea:'Concept'};
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let query='', activeTags=new Set();
+
+/* ---------- build the pyramid rail ---------- */
+const pyr=document.getElementById('pyr');
+LAYERS.forEach((L,i)=>{
+  const w=34+(66*(LAYERS.length-1-i)/(LAYERS.length-1));
+  const b=document.createElement('button');
+  b.className='tier'; b.dataset.i=i; b.style.color=L.c; b.title=L.n+' \u2014 '+L.t;
+  b.innerHTML=`<span class="num">${L.n}</span><span class="bar" style="width:${w.toFixed(1)}%;background:${L.c}"></span><span class="nm">${esc(SHORT[i])}</span><span class="hits"></span>`;
+  b.addEventListener('click',()=>document.getElementById('L'+L.n).scrollIntoView({block:'start'}));
+  pyr.appendChild(b);
+});
+const tiers=[...pyr.children];
+
+/* ---------- build the strata log ---------- */
+const log=document.getElementById('log');
+LAYERS.forEach(L=>{
+  const sec=document.createElement('section');
+  sec.className='layer'; sec.id='L'+L.n; sec.dataset.n=L.n;
+  const total=L.g.reduce((a,g)=>a+g[2].length,0);
+  let h=`<div class="lhead"><div class="lnum" style="color:${L.c}">${L.n}</div><div>
+    <h3 class="ltitle">${esc(L.t)}</h3><p class="lkicker">${esc(L.k)}</p></div></div>
+    <p class="ldesc">${esc(L.d)}</p>
+    <p class="lmeta">${L.g.length} groups · ${total} entries</p>`;
+  if(L.ladder){
+    h+='<div class="ladder">'+L.ladder.map(r=>`<div class="rung" style="border-left-color:${L.c}">
+      <div class="lv" style="color:${L.c}">${r[0]}</div><div><h4>${esc(r[1])}</h4>
+      <p>${esc(r[2])}</p><div class="ex">${esc(r[3])}</div></div></div>`).join('')+'</div>';
+  }
+  h+='<div class="groups">'+L.g.map(g=>`<div class="grp" data-g style="border-left-color:${L.c}">
+      <div class="gname">${esc(g[0])}${g[1]?`<span class="gnote">${esc(g[1])}</span>`:''}</div>
+      <div class="items">`+g[2].map(it=>`<span class="it" data-tag="${it[2]}" data-s="${esc((it[0]+' '+it[1]).toLowerCase())}">
+        <span class="tick" style="background:var(--${it[2]})"></span>
+        <span class="nm2">${esc(it[0])}</span><span class="note">${esc(it[1])}</span></span>`).join('')
+    +'</div></div>').join('')+'</div>';
+  sec.innerHTML=h; log.appendChild(sec);
+});
+const sections=[...log.querySelectorAll('.layer')];
+const allItems=[...log.querySelectorAll('.it')];
+document.getElementById('total').textContent=allItems.length;
+
+/* ---------- filter + search ---------- */
+function apply(){
+  const q=query.trim().toLowerCase();
+  let shown=0;
+  sections.forEach((sec,si)=>{
+    let secHits=0;
+    sec.querySelectorAll('[data-g]').forEach(g=>{
+      let gHits=0;
+      g.querySelectorAll('.it').forEach(it=>{
+        const tagOk=activeTags.size===0||activeTags.has(it.dataset.tag);
+        const qOk=!q||it.dataset.s.includes(q);
+        const vis=tagOk&&qOk;
+        it.classList.toggle('hide',!vis);
+        it.classList.toggle('hit',!!q&&vis);
+        if(vis){gHits++;
+          const nm=it.querySelector('.nm2'), raw=nm.dataset.raw||(nm.dataset.raw=nm.textContent);
+          nm.innerHTML = q&&raw.toLowerCase().includes(q)
+            ? esc(raw).replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig'),'<mark>$1</mark>')
+            : esc(raw);
+        }
+      });
+      g.classList.toggle('hide',gHits===0); secHits+=gHits;
+    });
+    const laddered=sec.querySelector('.ladder');
+    const keep=secHits>0||(!q&&activeTags.size===0);
+    sec.classList.toggle('hide',!keep);
+    if(laddered) laddered.style.display=(q||activeTags.size)?'none':'';
+    tiers[si].classList.toggle('dim',!!(q||activeTags.size)&&secHits===0);
+    tiers[si].querySelector('.hits').textContent=q&&secHits?secHits:'';
+    shown+=secHits;
+  });
+  document.getElementById('shown').textContent=shown;
+  document.getElementById('empty').style.display=shown?'none':'block';
+}
+const qEl=document.getElementById('q');
+qEl.addEventListener('input',e=>{query=e.target.value;apply()});
+document.querySelectorAll('.chip[data-tag]').forEach(c=>{
+  c.addEventListener('click',()=>{
+    const t=c.dataset.tag;
+    if(t==='all'){activeTags.clear();}
+    else{activeTags.has(t)?activeTags.delete(t):activeTags.add(t);}
+    document.querySelectorAll('.chip[data-tag]').forEach(x=>
+      x.setAttribute('aria-pressed', x.dataset.tag==='all'? activeTags.size===0 : activeTags.has(x.dataset.tag)));
+    apply();
+  });
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='/'&&document.activeElement!==qEl){e.preventDefault();qEl.focus();}
+  if(e.key==='Escape'){qEl.value='';query='';activeTags.clear();
+    document.querySelectorAll('.chip[data-tag]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.tag==='all'));apply();}
+});
+
+/* ---------- depth gauge / scroll spy ---------- */
+const gauge=document.getElementById('gauge');
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){
+    const i=sections.indexOf(e.target);
+    tiers.forEach((t,j)=>t.classList.toggle('on',j===i));
+    gauge.innerHTML=`DEPTH <b>${LAYERS[i].n}</b> / 23 · <b>${esc(SHORT[i].toUpperCase())}</b>`;
+  }});
+},{rootMargin:'-64px 0px -72% 0px'});
+sections.forEach(s=>io.observe(s));
+apply();
+</script>
+<footer>
+Built as a map, not a syllabus — you are not meant to learn this top to bottom. Pick the layer your work sits in, then read one layer down to understand your constraints and one layer up to understand your users.<br><br>
+Every layer is a full career. Entries reflect the ecosystem as of mid-2026; the fast-moving layers (12, 13, 17) drift in weeks, the slow ones (00, 05, 07) barely move in decades. Where a name is contested or a tool has been renamed, the older name is kept in parentheses. Press <b>/</b> to search, <b>Esc</b> to reset.
+</footer>
+</body></html>

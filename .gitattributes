@@ -1,0 +1,2 @@
+# Use LF for source files across platforms, including atlas scripts and shell helpers.
+* text=auto eol=lf

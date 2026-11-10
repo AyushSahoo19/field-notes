@@ -1,0 +1,5304 @@
+{
+  "weeks": [
+    {
+      "week": 1,
+      "phase": "Programming",
+      "title": "C memory and tooling",
+      "course": "Modern C++ + Beej C",
+      "topics": [
+        "C object lifetime",
+        "pointer arithmetic and aliasing",
+        "malloc realloc free",
+        "dynamic array growth and allocation failure",
+        "GCC warnings GDB and sanitizers"
+      ],
+      "practice": "Implement dynamic-array API; diagnose a use-after-free; validate capacity changes",
+      "project": "PRJ-001",
+      "output": "Sanitizer-clean dynamic array",
+      "mission": "Reproduce Kiwix JS issue",
+      "hours": 21
+    },
+    {
+      "week": 2,
+      "phase": "Programming",
+      "title": "C++ object model",
+      "course": "Modern C++ + MIT 6.006 L1-2",
+      "topics": [
+        "Value versus reference semantics",
+        "classes constructors and destructors",
+        "deep copy and ownership",
+        "Rule of Three",
+        "amortized analysis"
+      ],
+      "practice": "Owning buffer class; copy tests; complexity analysis",
+      "project": "PRJ-003",
+      "output": "C++ owning buffer and tests",
+      "mission": "Investigate Kiwix JS regression test",
+      "hours": 21
+    },
+    {
+      "week": 3,
+      "phase": "Programming",
+      "title": "RAII and move semantics",
+      "course": "Modern C++ + Stanford Algorithms C1",
+      "topics": [
+        "Rule of Five",
+        "copy and move constructors",
+        "exception safety",
+        "unique_ptr and shared_ptr",
+        "merge sort quicksort and inversion count"
+      ],
+      "practice": "Move-aware vector; sorting tests; copy-versus-move benchmark",
+      "project": "PRJ-003",
+      "output": "Move-aware C++ vector",
+      "mission": "Explore fmtlib/fmt issues",
+      "hours": 21
+    },
+    {
+      "week": 4,
+      "phase": "Programming",
+      "title": "Templates STL hashing",
+      "course": "Modern C++ + MIT 6.006 L4-5",
+      "topics": [
+        "Templates and generic code",
+        "iterators and lambda expressions",
+        "hash tables and collision handling",
+        "separate chaining and resizing",
+        "STL algorithm benchmarks"
+      ],
+      "practice": "Templated vector; hash table; map versus unordered_map timing",
+      "project": "PRJ-002",
+      "output": "Reusable hash table library",
+      "mission": "Read fmt contribution tests",
+      "hours": 21
+    },
+    {
+      "week": 5,
+      "phase": "Programming",
+      "title": "Trees heaps files",
+      "course": "Modern C++ + MIT 6.006 L6-8",
+      "topics": [
+        "Binary search trees",
+        "binary heaps and priority queues",
+        "binary-file serialization",
+        "error handling and exceptions",
+        "randomized invariant testing"
+      ],
+      "practice": "Min-heap; BST deletion; binary record persistence",
+      "project": "PRJ-002",
+      "output": "Heap BST and file utility",
+      "mission": "Prepare fmt test/documentation fix",
+      "hours": 21
+    },
+    {
+      "week": 6,
+      "phase": "Programming",
+      "title": "Graph algorithms release",
+      "course": "MIT 6.006 L9-10 + Stanford C2",
+      "topics": [
+        "Graph adjacency lists and matrices",
+        "BFS and DFS",
+        "cycle detection",
+        "topological dependency ordering",
+        "CI and complexity documentation"
+      ],
+      "practice": "Build dependency resolver; publish engineering library",
+      "project": "PRJ-009",
+      "output": "C++ algorithms release",
+      "mission": "Submit or refine focused PR",
+      "hours": 21
+    },
+    {
+      "week": 7,
+      "phase": "Algorithms & Hardware",
+      "title": "Logic gates and shortest paths",
+      "course": "Nand2Tetris P1-2 + MIT 6.006 L11-14",
+      "topics": [
+        "Boolean algebra and NAND",
+        "logic gates and adders",
+        "Hack ALU design",
+        "Dijkstra nonnegative paths",
+        "Bellman-Ford comparison"
+      ],
+      "practice": "Implement logic circuits; shortest paths; truth-table tests",
+      "project": "PRJ-014",
+      "output": "ALU and shortest paths",
+      "mission": "Address C++ PR feedback",
+      "hours": 21
+    },
+    {
+      "week": 8,
+      "phase": "Algorithms & Hardware",
+      "title": "RAM registers and greedy DP",
+      "course": "Nand2Tetris P3 + Stanford C3",
+      "topics": [
+        "Sequential logic flip-flops",
+        "registers RAM chips",
+        "Prim Kruskal MST",
+        "weighted interval scheduling",
+        "knapsack dynamic programming"
+      ],
+      "practice": "Build RAM; MST; knapsack recurrence",
+      "project": "PRJ-014",
+      "output": "RAM simulator and MST library",
+      "mission": "Regression tests for OSS work",
+      "hours": 21
+    },
+    {
+      "week": 9,
+      "phase": "Algorithms & Hardware",
+      "title": "CPU machine language DP",
+      "course": "Nand2Tetris P4-5 + MIT DP",
+      "topics": [
+        "Hack A and C instructions",
+        "assembly encoding",
+        "CPU and program counter",
+        "edit distance dynamic programming",
+        "pseudo-polynomial analysis"
+      ],
+      "practice": "Implement CPU; assembly programs; edit-distance checker",
+      "project": "PRJ-014",
+      "output": "Simulated CPU",
+      "mission": "Investigate C++ integration issue",
+      "hours": 21
+    },
+    {
+      "week": 10,
+      "phase": "Algorithms & Hardware",
+      "title": "Assembler integration",
+      "course": "Nand2Tetris P6 + Stanford C4",
+      "topics": [
+        "Two-pass assembler",
+        "symbols and labels",
+        "binary instruction translation",
+        "Floyd-Warshall all-pairs paths",
+        "TSP heuristic experiment"
+      ],
+      "practice": "Assemble Hack programs; run fixtures; compare graph implementations",
+      "project": "PRJ-014",
+      "output": "Assembler and computer demo",
+      "mission": "Complete source investigation",
+      "hours": 21
+    },
+    {
+      "week": 11,
+      "phase": "OS & Networking",
+      "title": "Processes and Unix shell",
+      "course": "MIT 6.S081 L1-3",
+      "topics": [
+        "OS boundaries and system calls",
+        "fork exec wait",
+        "file descriptors and dup2",
+        "pipes and redirection",
+        "signals and exit codes"
+      ],
+      "practice": "Mini Unix shell with child cleanup and tests",
+      "project": "PRJ-015",
+      "output": "Unix shell v0.1",
+      "mission": "Explore curl networking issues",
+      "hours": 21
+    },
+    {
+      "week": 12,
+      "phase": "OS & Networking",
+      "title": "Virtual memory and traps",
+      "course": "MIT OS L5-10",
+      "topics": [
+        "Page tables and virtual addresses",
+        "system call traps",
+        "access permissions",
+        "page faults and lazy allocation",
+        "copy-on-write semantics"
+      ],
+      "practice": "Page table simulator; COW model; permission tests",
+      "project": "PRJ-015",
+      "output": "Virtual memory simulator",
+      "mission": "Investigate memory correctness issues",
+      "hours": 21
+    },
+    {
+      "week": 13,
+      "phase": "OS & Networking",
+      "title": "Concurrency synchronization",
+      "course": "MIT OS L12-14",
+      "topics": [
+        "Thread lifecycle",
+        "mutex and condition variables",
+        "deadlocks and lock ordering",
+        "producer consumer queues",
+        "thread pool graceful shutdown"
+      ],
+      "practice": "Bounded task queue and thread pool stress tests",
+      "project": "PRJ-016",
+      "output": "C++ thread pool",
+      "mission": "Contribute targeted concurrency tests",
+      "hours": 21
+    },
+    {
+      "week": 14,
+      "phase": "OS & Networking",
+      "title": "Sockets and HTTP",
+      "course": "MIT OS L15-19 + Beej",
+      "topics": [
+        "TCP connection lifecycle",
+        "blocking and nonblocking I/O",
+        "HTTP/1.1 parsing",
+        "concurrent static serving",
+        "timeout and path traversal defense"
+      ],
+      "practice": "TCP server and HTTP static server; load testing",
+      "project": "PRJ-020",
+      "output": "Concurrent HTTP server",
+      "mission": "Inspect curl protocol regression",
+      "hours": 21
+    },
+    {
+      "week": 15,
+      "phase": "Databases",
+      "title": "Relational storage buffer pool",
+      "course": "CMU 15-445 L1-6",
+      "topics": [
+        "Relational model and SQL",
+        "row versus column storage",
+        "heap files and pages",
+        "buffer pool cache",
+        "eviction policy"
+      ],
+      "practice": "Implement paged file and cache; design PostgreSQL schema",
+      "project": "PRJ-023",
+      "output": "Paged store and buffer pool",
+      "mission": "Study DuckDB docs issue",
+      "hours": 21
+    },
+    {
+      "week": 16,
+      "phase": "Databases",
+      "title": "Hash indexes B+ trees",
+      "course": "CMU DB L7-10",
+      "topics": [
+        "Hash indexing",
+        "B+ tree node/leaf structure",
+        "node split and merge",
+        "ordered range scans",
+        "index concurrency"
+      ],
+      "practice": "B+ tree and randomized insertion benchmarking",
+      "project": "PRJ-023",
+      "output": "B+ tree index",
+      "mission": "Improve DuckDB test/doc reproduction",
+      "hours": 21
+    },
+    {
+      "week": 17,
+      "phase": "Databases",
+      "title": "Query execution and plans",
+      "course": "CMU DB L11-16",
+      "topics": [
+        "SELECT grammar tokenizer AST",
+        "relational algebra",
+        "scan filter projection",
+        "hash join and nested loop",
+        "aggregation and planning"
+      ],
+      "practice": "Mini SQL subset executor with SQLite differential tests",
+      "project": "PRJ-024",
+      "output": "Mini SQL executor",
+      "mission": "Reproduce query behavior issue",
+      "hours": 21
+    },
+    {
+      "week": 18,
+      "phase": "Databases",
+      "title": "Transactions and WAL",
+      "course": "CMU DB L17-23",
+      "topics": [
+        "ACID guarantees",
+        "two-phase locking",
+        "MVCC snapshot ideas",
+        "write-ahead log",
+        "crash recovery incomplete records"
+      ],
+      "practice": "Append-only log; simulate power loss and restart",
+      "project": "PRJ-023",
+      "output": "Crash-recoverable database",
+      "mission": "Submit scoped documentation/test contribution",
+      "hours": 21
+    },
+    {
+      "week": 19,
+      "phase": "Distributed Systems",
+      "title": "MapReduce and RPC",
+      "course": "MIT Distributed L1-3",
+      "topics": [
+        "RPC mechanics",
+        "MapReduce design",
+        "coordinator worker partitioning",
+        "Google File System",
+        "failure detection"
+      ],
+      "practice": "Distributed word count with coordinator and workers",
+      "project": "PRJ-030",
+      "output": "Distributed engine v0.1",
+      "mission": "Read gRPC issues and tests",
+      "hours": 21
+    },
+    {
+      "week": 20,
+      "phase": "Distributed Systems",
+      "title": "Replication consistency Raft",
+      "course": "MIT Distributed L4-8",
+      "topics": [
+        "Paxos overview",
+        "Raft leader election",
+        "terms votes heartbeats",
+        "replicated log safety",
+        "linearizability"
+      ],
+      "practice": "Deterministic leader-election model with invariants",
+      "project": "PRJ-031",
+      "output": "Raft election simulator",
+      "mission": "Study etcd Raft architecture",
+      "hours": 21
+    },
+    {
+      "week": 21,
+      "phase": "Distributed Systems",
+      "title": "Durable retries and leases",
+      "course": "MIT Distributed L9-12",
+      "topics": [
+        "ZooKeeper coordination",
+        "distributed transactions",
+        "leases and worker recovery",
+        "idempotency",
+        "at-least-once delivery"
+      ],
+      "practice": "Durable job states; task reassignment; duplicate event tests",
+      "project": "PRJ-030",
+      "output": "Reliable distributed jobs",
+      "mission": "Investigate gRPC retry docs",
+      "hours": 21
+    },
+    {
+      "week": 22,
+      "phase": "Distributed Systems",
+      "title": "Sharding and observability",
+      "course": "MIT Distributed L13-18",
+      "topics": [
+        "Shard distribution",
+        "replication tradeoffs",
+        "backpressure",
+        "queue depth monitoring",
+        "throughput scaling"
+      ],
+      "practice": "Scale workers; inject slow nodes; benchmark and monitor",
+      "project": "PRJ-030",
+      "output": "Distributed task engine v1.0",
+      "mission": "Refine distributed OSS contribution",
+      "hours": 21
+    },
+    {
+      "week": 23,
+      "phase": "AI & Integration",
+      "title": "Neural networks backprop",
+      "course": "Deep Learning Specialization C1",
+      "topics": [
+        "Logistic regression and vectorization",
+        "computational graphs",
+        "forward and backward propagation",
+        "gradient checking",
+        "reproducible seeding"
+      ],
+      "practice": "NumPy two-layer NN and numeric gradient test",
+      "project": "PRJ-037",
+      "output": "NN from scratch",
+      "mission": "Read scikit-learn tests",
+      "hours": 21
+    },
+    {
+      "week": 24,
+      "phase": "AI & Integration",
+      "title": "Optimization regularization",
+      "course": "DLS C2-3",
+      "topics": [
+        "SGD momentum",
+        "Adam update",
+        "initialization and tuning",
+        "L2 regularization dropout",
+        "bias variance and leakage"
+      ],
+      "practice": "Compare optimizers and seeded experiments",
+      "project": "PRJ-037",
+      "output": "ML experiments and report",
+      "mission": "Inspect scikit-learn or PyTorch docs",
+      "hours": 21
+    },
+    {
+      "week": 25,
+      "phase": "AI & Integration",
+      "title": "Convolution attention",
+      "course": "DLS C4-5",
+      "topics": [
+        "CNN layers pooling",
+        "transfer learning",
+        "sequence models",
+        "embeddings and scaled attention",
+        "attention mask and tensor shape"
+      ],
+      "practice": "Train toy CNN; implement attention; evaluate baseline",
+      "project": "PRJ-039",
+      "output": "CNN and attention components",
+      "mission": "Read PyTorch contribution rules",
+      "hours": 21
+    },
+    {
+      "week": 26,
+      "phase": "AI & Integration",
+      "title": "Portfolio flagship integration",
+      "course": "Selected course review",
+      "topics": [
+        "HTTP ingestion",
+        "durable task queue",
+        "distributed workers",
+        "ML inference",
+        "database persistence",
+        "integration and failure testing"
+      ],
+      "practice": "Integrate prior work; document architecture; run demos",
+      "project": "PRJ-050",
+      "output": "AI distributed flagship platform",
+      "mission": "Resolve contribution review feedback",
+      "hours": 21
+    }
+  ],
+  "lessons": [
+    {
+      "id": "L-01-01",
+      "week": 1,
+      "title": "C object lifetime",
+      "goal": "Explain principles, invariants and trade-offs of C object lifetime; demonstrate a working implementation.",
+      "practice": "Implement dynamic-array API",
+      "prerequisite": "Python/Java basics and Git",
+      "course": "Modern C++ + Beej C",
+      "hours": 1
+    },
+    {
+      "id": "L-01-02",
+      "week": 1,
+      "title": "pointer arithmetic and aliasing",
+      "goal": "Explain principles, invariants and trade-offs of pointer arithmetic and aliasing; demonstrate a working implementation.",
+      "practice": "diagnose a use-after-free",
+      "prerequisite": "Python/Java basics and Git",
+      "course": "Modern C++ + Beej C",
+      "hours": 1
+    },
+    {
+      "id": "L-01-03",
+      "week": 1,
+      "title": "malloc realloc free",
+      "goal": "Explain principles, invariants and trade-offs of malloc realloc free; demonstrate a working implementation.",
+      "practice": "validate capacity changes",
+      "prerequisite": "Python/Java basics and Git",
+      "course": "Modern C++ + Beej C",
+      "hours": 1
+    },
+    {
+      "id": "L-01-04",
+      "week": 1,
+      "title": "dynamic array growth and allocation failure",
+      "goal": "Explain principles, invariants and trade-offs of dynamic array growth and allocation failure; demonstrate a working implementation.",
+      "practice": "Implement dynamic-array API",
+      "prerequisite": "Python/Java basics and Git",
+      "course": "Modern C++ + Beej C",
+      "hours": 1
+    },
+    {
+      "id": "L-01-05",
+      "week": 1,
+      "title": "GCC warnings GDB and sanitizers",
+      "goal": "Explain principles, invariants and trade-offs of GCC warnings GDB and sanitizers; demonstrate a working implementation.",
+      "practice": "diagnose a use-after-free",
+      "prerequisite": "Python/Java basics and Git",
+      "course": "Modern C++ + Beej C",
+      "hours": 1
+    },
+    {
+      "id": "L-02-01",
+      "week": 2,
+      "title": "Value versus reference semantics",
+      "goal": "Explain principles, invariants and trade-offs of Value versus reference semantics; demonstrate a working implementation.",
+      "practice": "Owning buffer class",
+      "prerequisite": "C memory and tooling",
+      "course": "Modern C++ + MIT 6.006 L1-2",
+      "hours": 1
+    },
+    {
+      "id": "L-02-02",
+      "week": 2,
+      "title": "classes constructors and destructors",
+      "goal": "Explain principles, invariants and trade-offs of classes constructors and destructors; demonstrate a working implementation.",
+      "practice": "copy tests",
+      "prerequisite": "C memory and tooling",
+      "course": "Modern C++ + MIT 6.006 L1-2",
+      "hours": 1
+    },
+    {
+      "id": "L-02-03",
+      "week": 2,
+      "title": "deep copy and ownership",
+      "goal": "Explain principles, invariants and trade-offs of deep copy and ownership; demonstrate a working implementation.",
+      "practice": "complexity analysis",
+      "prerequisite": "C memory and tooling",
+      "course": "Modern C++ + MIT 6.006 L1-2",
+      "hours": 1
+    },
+    {
+      "id": "L-02-04",
+      "week": 2,
+      "title": "Rule of Three",
+      "goal": "Explain principles, invariants and trade-offs of Rule of Three; demonstrate a working implementation.",
+      "practice": "Owning buffer class",
+      "prerequisite": "C memory and tooling",
+      "course": "Modern C++ + MIT 6.006 L1-2",
+      "hours": 1
+    },
+    {
+      "id": "L-02-05",
+      "week": 2,
+      "title": "amortized analysis",
+      "goal": "Explain principles, invariants and trade-offs of amortized analysis; demonstrate a working implementation.",
+      "practice": "copy tests",
+      "prerequisite": "C memory and tooling",
+      "course": "Modern C++ + MIT 6.006 L1-2",
+      "hours": 1
+    },
+    {
+      "id": "L-03-01",
+      "week": 3,
+      "title": "Rule of Five",
+      "goal": "Explain principles, invariants and trade-offs of Rule of Five; demonstrate a working implementation.",
+      "practice": "Move-aware vector",
+      "prerequisite": "C++ object model",
+      "course": "Modern C++ + Stanford Algorithms C1",
+      "hours": 1
+    },
+    {
+      "id": "L-03-02",
+      "week": 3,
+      "title": "copy and move constructors",
+      "goal": "Explain principles, invariants and trade-offs of copy and move constructors; demonstrate a working implementation.",
+      "practice": "sorting tests",
+      "prerequisite": "C++ object model",
+      "course": "Modern C++ + Stanford Algorithms C1",
+      "hours": 1
+    },
+    {
+      "id": "L-03-03",
+      "week": 3,
+      "title": "exception safety",
+      "goal": "Explain principles, invariants and trade-offs of exception safety; demonstrate a working implementation.",
+      "practice": "copy-versus-move benchmark",
+      "prerequisite": "C++ object model",
+      "course": "Modern C++ + Stanford Algorithms C1",
+      "hours": 1
+    },
+    {
+      "id": "L-03-04",
+      "week": 3,
+      "title": "unique_ptr and shared_ptr",
+      "goal": "Explain principles, invariants and trade-offs of unique_ptr and shared_ptr; demonstrate a working implementation.",
+      "practice": "Move-aware vector",
+      "prerequisite": "C++ object model",
+      "course": "Modern C++ + Stanford Algorithms C1",
+      "hours": 1
+    },
+    {
+      "id": "L-03-05",
+      "week": 3,
+      "title": "merge sort quicksort and inversion count",
+      "goal": "Explain principles, invariants and trade-offs of merge sort quicksort and inversion count; demonstrate a working implementation.",
+      "practice": "sorting tests",
+      "prerequisite": "C++ object model",
+      "course": "Modern C++ + Stanford Algorithms C1",
+      "hours": 1
+    },
+    {
+      "id": "L-04-01",
+      "week": 4,
+      "title": "Templates and generic code",
+      "goal": "Explain principles, invariants and trade-offs of Templates and generic code; demonstrate a working implementation.",
+      "practice": "Templated vector",
+      "prerequisite": "RAII and move semantics",
+      "course": "Modern C++ + MIT 6.006 L4-5",
+      "hours": 1
+    },
+    {
+      "id": "L-04-02",
+      "week": 4,
+      "title": "iterators and lambda expressions",
+      "goal": "Explain principles, invariants and trade-offs of iterators and lambda expressions; demonstrate a working implementation.",
+      "practice": "hash table",
+      "prerequisite": "RAII and move semantics",
+      "course": "Modern C++ + MIT 6.006 L4-5",
+      "hours": 1
+    },
+    {
+      "id": "L-04-03",
+      "week": 4,
+      "title": "hash tables and collision handling",
+      "goal": "Explain principles, invariants and trade-offs of hash tables and collision handling; demonstrate a working implementation.",
+      "practice": "map versus unordered_map timing",
+      "prerequisite": "RAII and move semantics",
+      "course": "Modern C++ + MIT 6.006 L4-5",
+      "hours": 1
+    },
+    {
+      "id": "L-04-04",
+      "week": 4,
+      "title": "separate chaining and resizing",
+      "goal": "Explain principles, invariants and trade-offs of separate chaining and resizing; demonstrate a working implementation.",
+      "practice": "Templated vector",
+      "prerequisite": "RAII and move semantics",
+      "course": "Modern C++ + MIT 6.006 L4-5",
+      "hours": 1
+    },
+    {
+      "id": "L-04-05",
+      "week": 4,
+      "title": "STL algorithm benchmarks",
+      "goal": "Explain principles, invariants and trade-offs of STL algorithm benchmarks; demonstrate a working implementation.",
+      "practice": "hash table",
+      "prerequisite": "RAII and move semantics",
+      "course": "Modern C++ + MIT 6.006 L4-5",
+      "hours": 1
+    },
+    {
+      "id": "L-05-01",
+      "week": 5,
+      "title": "Binary search trees",
+      "goal": "Explain principles, invariants and trade-offs of Binary search trees; demonstrate a working implementation.",
+      "practice": "Min-heap",
+      "prerequisite": "Templates STL hashing",
+      "course": "Modern C++ + MIT 6.006 L6-8",
+      "hours": 1
+    },
+    {
+      "id": "L-05-02",
+      "week": 5,
+      "title": "binary heaps and priority queues",
+      "goal": "Explain principles, invariants and trade-offs of binary heaps and priority queues; demonstrate a working implementation.",
+      "practice": "BST deletion",
+      "prerequisite": "Templates STL hashing",
+      "course": "Modern C++ + MIT 6.006 L6-8",
+      "hours": 1
+    },
+    {
+      "id": "L-05-03",
+      "week": 5,
+      "title": "binary-file serialization",
+      "goal": "Explain principles, invariants and trade-offs of binary-file serialization; demonstrate a working implementation.",
+      "practice": "binary record persistence",
+      "prerequisite": "Templates STL hashing",
+      "course": "Modern C++ + MIT 6.006 L6-8",
+      "hours": 1
+    },
+    {
+      "id": "L-05-04",
+      "week": 5,
+      "title": "error handling and exceptions",
+      "goal": "Explain principles, invariants and trade-offs of error handling and exceptions; demonstrate a working implementation.",
+      "practice": "Min-heap",
+      "prerequisite": "Templates STL hashing",
+      "course": "Modern C++ + MIT 6.006 L6-8",
+      "hours": 1
+    },
+    {
+      "id": "L-05-05",
+      "week": 5,
+      "title": "randomized invariant testing",
+      "goal": "Explain principles, invariants and trade-offs of randomized invariant testing; demonstrate a working implementation.",
+      "practice": "BST deletion",
+      "prerequisite": "Templates STL hashing",
+      "course": "Modern C++ + MIT 6.006 L6-8",
+      "hours": 1
+    },
+    {
+      "id": "L-06-01",
+      "week": 6,
+      "title": "Graph adjacency lists and matrices",
+      "goal": "Explain principles, invariants and trade-offs of Graph adjacency lists and matrices; demonstrate a working implementation.",
+      "practice": "Build dependency resolver",
+      "prerequisite": "Trees heaps files",
+      "course": "MIT 6.006 L9-10 + Stanford C2",
+      "hours": 1
+    },
+    {
+      "id": "L-06-02",
+      "week": 6,
+      "title": "BFS and DFS",
+      "goal": "Explain principles, invariants and trade-offs of BFS and DFS; demonstrate a working implementation.",
+      "practice": "publish engineering library",
+      "prerequisite": "Trees heaps files",
+      "course": "MIT 6.006 L9-10 + Stanford C2",
+      "hours": 1
+    },
+    {
+      "id": "L-06-03",
+      "week": 6,
+      "title": "cycle detection",
+      "goal": "Explain principles, invariants and trade-offs of cycle detection; demonstrate a working implementation.",
+      "practice": "Build dependency resolver",
+      "prerequisite": "Trees heaps files",
+      "course": "MIT 6.006 L9-10 + Stanford C2",
+      "hours": 1
+    },
+    {
+      "id": "L-06-04",
+      "week": 6,
+      "title": "topological dependency ordering",
+      "goal": "Explain principles, invariants and trade-offs of topological dependency ordering; demonstrate a working implementation.",
+      "practice": "publish engineering library",
+      "prerequisite": "Trees heaps files",
+      "course": "MIT 6.006 L9-10 + Stanford C2",
+      "hours": 1
+    },
+    {
+      "id": "L-06-05",
+      "week": 6,
+      "title": "CI and complexity documentation",
+      "goal": "Explain principles, invariants and trade-offs of CI and complexity documentation; demonstrate a working implementation.",
+      "practice": "Build dependency resolver",
+      "prerequisite": "Trees heaps files",
+      "course": "MIT 6.006 L9-10 + Stanford C2",
+      "hours": 1
+    },
+    {
+      "id": "L-07-01",
+      "week": 7,
+      "title": "Boolean algebra and NAND",
+      "goal": "Explain principles, invariants and trade-offs of Boolean algebra and NAND; demonstrate a working implementation.",
+      "practice": "Implement logic circuits",
+      "prerequisite": "Graph algorithms release",
+      "course": "Nand2Tetris P1-2 + MIT 6.006 L11-14",
+      "hours": 1
+    },
+    {
+      "id": "L-07-02",
+      "week": 7,
+      "title": "logic gates and adders",
+      "goal": "Explain principles, invariants and trade-offs of logic gates and adders; demonstrate a working implementation.",
+      "practice": "shortest paths",
+      "prerequisite": "Graph algorithms release",
+      "course": "Nand2Tetris P1-2 + MIT 6.006 L11-14",
+      "hours": 1
+    },
+    {
+      "id": "L-07-03",
+      "week": 7,
+      "title": "Hack ALU design",
+      "goal": "Explain principles, invariants and trade-offs of Hack ALU design; demonstrate a working implementation.",
+      "practice": "truth-table tests",
+      "prerequisite": "Graph algorithms release",
+      "course": "Nand2Tetris P1-2 + MIT 6.006 L11-14",
+      "hours": 1
+    },
+    {
+      "id": "L-07-04",
+      "week": 7,
+      "title": "Dijkstra nonnegative paths",
+      "goal": "Explain principles, invariants and trade-offs of Dijkstra nonnegative paths; demonstrate a working implementation.",
+      "practice": "Implement logic circuits",
+      "prerequisite": "Graph algorithms release",
+      "course": "Nand2Tetris P1-2 + MIT 6.006 L11-14",
+      "hours": 1
+    },
+    {
+      "id": "L-07-05",
+      "week": 7,
+      "title": "Bellman-Ford comparison",
+      "goal": "Explain principles, invariants and trade-offs of Bellman-Ford comparison; demonstrate a working implementation.",
+      "practice": "shortest paths",
+      "prerequisite": "Graph algorithms release",
+      "course": "Nand2Tetris P1-2 + MIT 6.006 L11-14",
+      "hours": 1
+    },
+    {
+      "id": "L-08-01",
+      "week": 8,
+      "title": "Sequential logic flip-flops",
+      "goal": "Explain principles, invariants and trade-offs of Sequential logic flip-flops; demonstrate a working implementation.",
+      "practice": "Build RAM",
+      "prerequisite": "Logic gates and shortest paths",
+      "course": "Nand2Tetris P3 + Stanford C3",
+      "hours": 1
+    },
+    {
+      "id": "L-08-02",
+      "week": 8,
+      "title": "registers RAM chips",
+      "goal": "Explain principles, invariants and trade-offs of registers RAM chips; demonstrate a working implementation.",
+      "practice": "MST",
+      "prerequisite": "Logic gates and shortest paths",
+      "course": "Nand2Tetris P3 + Stanford C3",
+      "hours": 1
+    },
+    {
+      "id": "L-08-03",
+      "week": 8,
+      "title": "Prim Kruskal MST",
+      "goal": "Explain principles, invariants and trade-offs of Prim Kruskal MST; demonstrate a working implementation.",
+      "practice": "knapsack recurrence",
+      "prerequisite": "Logic gates and shortest paths",
+      "course": "Nand2Tetris P3 + Stanford C3",
+      "hours": 1
+    },
+    {
+      "id": "L-08-04",
+      "week": 8,
+      "title": "weighted interval scheduling",
+      "goal": "Explain principles, invariants and trade-offs of weighted interval scheduling; demonstrate a working implementation.",
+      "practice": "Build RAM",
+      "prerequisite": "Logic gates and shortest paths",
+      "course": "Nand2Tetris P3 + Stanford C3",
+      "hours": 1
+    },
+    {
+      "id": "L-08-05",
+      "week": 8,
+      "title": "knapsack dynamic programming",
+      "goal": "Explain principles, invariants and trade-offs of knapsack dynamic programming; demonstrate a working implementation.",
+      "practice": "MST",
+      "prerequisite": "Logic gates and shortest paths",
+      "course": "Nand2Tetris P3 + Stanford C3",
+      "hours": 1
+    },
+    {
+      "id": "L-09-01",
+      "week": 9,
+      "title": "Hack A and C instructions",
+      "goal": "Explain principles, invariants and trade-offs of Hack A and C instructions; demonstrate a working implementation.",
+      "practice": "Implement CPU",
+      "prerequisite": "RAM registers and greedy DP",
+      "course": "Nand2Tetris P4-5 + MIT DP",
+      "hours": 1
+    },
+    {
+      "id": "L-09-02",
+      "week": 9,
+      "title": "assembly encoding",
+      "goal": "Explain principles, invariants and trade-offs of assembly encoding; demonstrate a working implementation.",
+      "practice": "assembly programs",
+      "prerequisite": "RAM registers and greedy DP",
+      "course": "Nand2Tetris P4-5 + MIT DP",
+      "hours": 1
+    },
+    {
+      "id": "L-09-03",
+      "week": 9,
+      "title": "CPU and program counter",
+      "goal": "Explain principles, invariants and trade-offs of CPU and program counter; demonstrate a working implementation.",
+      "practice": "edit-distance checker",
+      "prerequisite": "RAM registers and greedy DP",
+      "course": "Nand2Tetris P4-5 + MIT DP",
+      "hours": 1
+    },
+    {
+      "id": "L-09-04",
+      "week": 9,
+      "title": "edit distance dynamic programming",
+      "goal": "Explain principles, invariants and trade-offs of edit distance dynamic programming; demonstrate a working implementation.",
+      "practice": "Implement CPU",
+      "prerequisite": "RAM registers and greedy DP",
+      "course": "Nand2Tetris P4-5 + MIT DP",
+      "hours": 1
+    },
+    {
+      "id": "L-09-05",
+      "week": 9,
+      "title": "pseudo-polynomial analysis",
+      "goal": "Explain principles, invariants and trade-offs of pseudo-polynomial analysis; demonstrate a working implementation.",
+      "practice": "assembly programs",
+      "prerequisite": "RAM registers and greedy DP",
+      "course": "Nand2Tetris P4-5 + MIT DP",
+      "hours": 1
+    },
+    {
+      "id": "L-10-01",
+      "week": 10,
+      "title": "Two-pass assembler",
+      "goal": "Explain principles, invariants and trade-offs of Two-pass assembler; demonstrate a working implementation.",
+      "practice": "Assemble Hack programs",
+      "prerequisite": "CPU machine language DP",
+      "course": "Nand2Tetris P6 + Stanford C4",
+      "hours": 1
+    },
+    {
+      "id": "L-10-02",
+      "week": 10,
+      "title": "symbols and labels",
+      "goal": "Explain principles, invariants and trade-offs of symbols and labels; demonstrate a working implementation.",
+      "practice": "run fixtures",
+      "prerequisite": "CPU machine language DP",
+      "course": "Nand2Tetris P6 + Stanford C4",
+      "hours": 1
+    },
+    {
+      "id": "L-10-03",
+      "week": 10,
+      "title": "binary instruction translation",
+      "goal": "Explain principles, invariants and trade-offs of binary instruction translation; demonstrate a working implementation.",
+      "practice": "compare graph implementations",
+      "prerequisite": "CPU machine language DP",
+      "course": "Nand2Tetris P6 + Stanford C4",
+      "hours": 1
+    },
+    {
+      "id": "L-10-04",
+      "week": 10,
+      "title": "Floyd-Warshall all-pairs paths",
+      "goal": "Explain principles, invariants and trade-offs of Floyd-Warshall all-pairs paths; demonstrate a working implementation.",
+      "practice": "Assemble Hack programs",
+      "prerequisite": "CPU machine language DP",
+      "course": "Nand2Tetris P6 + Stanford C4",
+      "hours": 1
+    },
+    {
+      "id": "L-10-05",
+      "week": 10,
+      "title": "TSP heuristic experiment",
+      "goal": "Explain principles, invariants and trade-offs of TSP heuristic experiment; demonstrate a working implementation.",
+      "practice": "run fixtures",
+      "prerequisite": "CPU machine language DP",
+      "course": "Nand2Tetris P6 + Stanford C4",
+      "hours": 1
+    },
+    {
+      "id": "L-11-01",
+      "week": 11,
+      "title": "OS boundaries and system calls",
+      "goal": "Explain principles, invariants and trade-offs of OS boundaries and system calls; demonstrate a working implementation.",
+      "practice": "Mini Unix shell with child cleanup and tests",
+      "prerequisite": "Assembler integration",
+      "course": "MIT 6.S081 L1-3",
+      "hours": 1
+    },
+    {
+      "id": "L-11-02",
+      "week": 11,
+      "title": "fork exec wait",
+      "goal": "Explain principles, invariants and trade-offs of fork exec wait; demonstrate a working implementation.",
+      "practice": "Mini Unix shell with child cleanup and tests",
+      "prerequisite": "Assembler integration",
+      "course": "MIT 6.S081 L1-3",
+      "hours": 1
+    },
+    {
+      "id": "L-11-03",
+      "week": 11,
+      "title": "file descriptors and dup2",
+      "goal": "Explain principles, invariants and trade-offs of file descriptors and dup2; demonstrate a working implementation.",
+      "practice": "Mini Unix shell with child cleanup and tests",
+      "prerequisite": "Assembler integration",
+      "course": "MIT 6.S081 L1-3",
+      "hours": 1
+    },
+    {
+      "id": "L-11-04",
+      "week": 11,
+      "title": "pipes and redirection",
+      "goal": "Explain principles, invariants and trade-offs of pipes and redirection; demonstrate a working implementation.",
+      "practice": "Mini Unix shell with child cleanup and tests",
+      "prerequisite": "Assembler integration",
+      "course": "MIT 6.S081 L1-3",
+      "hours": 1
+    },
+    {
+      "id": "L-11-05",
+      "week": 11,
+      "title": "signals and exit codes",
+      "goal": "Explain principles, invariants and trade-offs of signals and exit codes; demonstrate a working implementation.",
+      "practice": "Mini Unix shell with child cleanup and tests",
+      "prerequisite": "Assembler integration",
+      "course": "MIT 6.S081 L1-3",
+      "hours": 1
+    },
+    {
+      "id": "L-12-01",
+      "week": 12,
+      "title": "Page tables and virtual addresses",
+      "goal": "Explain principles, invariants and trade-offs of Page tables and virtual addresses; demonstrate a working implementation.",
+      "practice": "Page table simulator",
+      "prerequisite": "Processes and Unix shell",
+      "course": "MIT OS L5-10",
+      "hours": 1
+    },
+    {
+      "id": "L-12-02",
+      "week": 12,
+      "title": "system call traps",
+      "goal": "Explain principles, invariants and trade-offs of system call traps; demonstrate a working implementation.",
+      "practice": "COW model",
+      "prerequisite": "Processes and Unix shell",
+      "course": "MIT OS L5-10",
+      "hours": 1
+    },
+    {
+      "id": "L-12-03",
+      "week": 12,
+      "title": "access permissions",
+      "goal": "Explain principles, invariants and trade-offs of access permissions; demonstrate a working implementation.",
+      "practice": "permission tests",
+      "prerequisite": "Processes and Unix shell",
+      "course": "MIT OS L5-10",
+      "hours": 1
+    },
+    {
+      "id": "L-12-04",
+      "week": 12,
+      "title": "page faults and lazy allocation",
+      "goal": "Explain principles, invariants and trade-offs of page faults and lazy allocation; demonstrate a working implementation.",
+      "practice": "Page table simulator",
+      "prerequisite": "Processes and Unix shell",
+      "course": "MIT OS L5-10",
+      "hours": 1
+    },
+    {
+      "id": "L-12-05",
+      "week": 12,
+      "title": "copy-on-write semantics",
+      "goal": "Explain principles, invariants and trade-offs of copy-on-write semantics; demonstrate a working implementation.",
+      "practice": "COW model",
+      "prerequisite": "Processes and Unix shell",
+      "course": "MIT OS L5-10",
+      "hours": 1
+    },
+    {
+      "id": "L-13-01",
+      "week": 13,
+      "title": "Thread lifecycle",
+      "goal": "Explain principles, invariants and trade-offs of Thread lifecycle; demonstrate a working implementation.",
+      "practice": "Bounded task queue and thread pool stress tests",
+      "prerequisite": "Virtual memory and traps",
+      "course": "MIT OS L12-14",
+      "hours": 1
+    },
+    {
+      "id": "L-13-02",
+      "week": 13,
+      "title": "mutex and condition variables",
+      "goal": "Explain principles, invariants and trade-offs of mutex and condition variables; demonstrate a working implementation.",
+      "practice": "Bounded task queue and thread pool stress tests",
+      "prerequisite": "Virtual memory and traps",
+      "course": "MIT OS L12-14",
+      "hours": 1
+    },
+    {
+      "id": "L-13-03",
+      "week": 13,
+      "title": "deadlocks and lock ordering",
+      "goal": "Explain principles, invariants and trade-offs of deadlocks and lock ordering; demonstrate a working implementation.",
+      "practice": "Bounded task queue and thread pool stress tests",
+      "prerequisite": "Virtual memory and traps",
+      "course": "MIT OS L12-14",
+      "hours": 1
+    },
+    {
+      "id": "L-13-04",
+      "week": 13,
+      "title": "producer consumer queues",
+      "goal": "Explain principles, invariants and trade-offs of producer consumer queues; demonstrate a working implementation.",
+      "practice": "Bounded task queue and thread pool stress tests",
+      "prerequisite": "Virtual memory and traps",
+      "course": "MIT OS L12-14",
+      "hours": 1
+    },
+    {
+      "id": "L-13-05",
+      "week": 13,
+      "title": "thread pool graceful shutdown",
+      "goal": "Explain principles, invariants and trade-offs of thread pool graceful shutdown; demonstrate a working implementation.",
+      "practice": "Bounded task queue and thread pool stress tests",
+      "prerequisite": "Virtual memory and traps",
+      "course": "MIT OS L12-14",
+      "hours": 1
+    },
+    {
+      "id": "L-14-01",
+      "week": 14,
+      "title": "TCP connection lifecycle",
+      "goal": "Explain principles, invariants and trade-offs of TCP connection lifecycle; demonstrate a working implementation.",
+      "practice": "TCP server and HTTP static server",
+      "prerequisite": "Concurrency synchronization",
+      "course": "MIT OS L15-19 + Beej",
+      "hours": 1
+    },
+    {
+      "id": "L-14-02",
+      "week": 14,
+      "title": "blocking and nonblocking I/O",
+      "goal": "Explain principles, invariants and trade-offs of blocking and nonblocking I/O; demonstrate a working implementation.",
+      "practice": "load testing",
+      "prerequisite": "Concurrency synchronization",
+      "course": "MIT OS L15-19 + Beej",
+      "hours": 1
+    },
+    {
+      "id": "L-14-03",
+      "week": 14,
+      "title": "HTTP/1.1 parsing",
+      "goal": "Explain principles, invariants and trade-offs of HTTP/1.1 parsing; demonstrate a working implementation.",
+      "practice": "TCP server and HTTP static server",
+      "prerequisite": "Concurrency synchronization",
+      "course": "MIT OS L15-19 + Beej",
+      "hours": 1
+    },
+    {
+      "id": "L-14-04",
+      "week": 14,
+      "title": "concurrent static serving",
+      "goal": "Explain principles, invariants and trade-offs of concurrent static serving; demonstrate a working implementation.",
+      "practice": "load testing",
+      "prerequisite": "Concurrency synchronization",
+      "course": "MIT OS L15-19 + Beej",
+      "hours": 1
+    },
+    {
+      "id": "L-14-05",
+      "week": 14,
+      "title": "timeout and path traversal defense",
+      "goal": "Explain principles, invariants and trade-offs of timeout and path traversal defense; demonstrate a working implementation.",
+      "practice": "TCP server and HTTP static server",
+      "prerequisite": "Concurrency synchronization",
+      "course": "MIT OS L15-19 + Beej",
+      "hours": 1
+    },
+    {
+      "id": "L-15-01",
+      "week": 15,
+      "title": "Relational model and SQL",
+      "goal": "Explain principles, invariants and trade-offs of Relational model and SQL; demonstrate a working implementation.",
+      "practice": "Implement paged file and cache",
+      "prerequisite": "Sockets and HTTP",
+      "course": "CMU 15-445 L1-6",
+      "hours": 1
+    },
+    {
+      "id": "L-15-02",
+      "week": 15,
+      "title": "row versus column storage",
+      "goal": "Explain principles, invariants and trade-offs of row versus column storage; demonstrate a working implementation.",
+      "practice": "design PostgreSQL schema",
+      "prerequisite": "Sockets and HTTP",
+      "course": "CMU 15-445 L1-6",
+      "hours": 1
+    },
+    {
+      "id": "L-15-03",
+      "week": 15,
+      "title": "heap files and pages",
+      "goal": "Explain principles, invariants and trade-offs of heap files and pages; demonstrate a working implementation.",
+      "practice": "Implement paged file and cache",
+      "prerequisite": "Sockets and HTTP",
+      "course": "CMU 15-445 L1-6",
+      "hours": 1
+    },
+    {
+      "id": "L-15-04",
+      "week": 15,
+      "title": "buffer pool cache",
+      "goal": "Explain principles, invariants and trade-offs of buffer pool cache; demonstrate a working implementation.",
+      "practice": "design PostgreSQL schema",
+      "prerequisite": "Sockets and HTTP",
+      "course": "CMU 15-445 L1-6",
+      "hours": 1
+    },
+    {
+      "id": "L-15-05",
+      "week": 15,
+      "title": "eviction policy",
+      "goal": "Explain principles, invariants and trade-offs of eviction policy; demonstrate a working implementation.",
+      "practice": "Implement paged file and cache",
+      "prerequisite": "Sockets and HTTP",
+      "course": "CMU 15-445 L1-6",
+      "hours": 1
+    },
+    {
+      "id": "L-16-01",
+      "week": 16,
+      "title": "Hash indexing",
+      "goal": "Explain principles, invariants and trade-offs of Hash indexing; demonstrate a working implementation.",
+      "practice": "B+ tree and randomized insertion benchmarking",
+      "prerequisite": "Relational storage buffer pool",
+      "course": "CMU DB L7-10",
+      "hours": 1
+    },
+    {
+      "id": "L-16-02",
+      "week": 16,
+      "title": "B+ tree node/leaf structure",
+      "goal": "Explain principles, invariants and trade-offs of B+ tree node/leaf structure; demonstrate a working implementation.",
+      "practice": "B+ tree and randomized insertion benchmarking",
+      "prerequisite": "Relational storage buffer pool",
+      "course": "CMU DB L7-10",
+      "hours": 1
+    },
+    {
+      "id": "L-16-03",
+      "week": 16,
+      "title": "node split and merge",
+      "goal": "Explain principles, invariants and trade-offs of node split and merge; demonstrate a working implementation.",
+      "practice": "B+ tree and randomized insertion benchmarking",
+      "prerequisite": "Relational storage buffer pool",
+      "course": "CMU DB L7-10",
+      "hours": 1
+    },
+    {
+      "id": "L-16-04",
+      "week": 16,
+      "title": "ordered range scans",
+      "goal": "Explain principles, invariants and trade-offs of ordered range scans; demonstrate a working implementation.",
+      "practice": "B+ tree and randomized insertion benchmarking",
+      "prerequisite": "Relational storage buffer pool",
+      "course": "CMU DB L7-10",
+      "hours": 1
+    },
+    {
+      "id": "L-16-05",
+      "week": 16,
+      "title": "index concurrency",
+      "goal": "Explain principles, invariants and trade-offs of index concurrency; demonstrate a working implementation.",
+      "practice": "B+ tree and randomized insertion benchmarking",
+      "prerequisite": "Relational storage buffer pool",
+      "course": "CMU DB L7-10",
+      "hours": 1
+    },
+    {
+      "id": "L-17-01",
+      "week": 17,
+      "title": "SELECT grammar tokenizer AST",
+      "goal": "Explain principles, invariants and trade-offs of SELECT grammar tokenizer AST; demonstrate a working implementation.",
+      "practice": "Mini SQL subset executor with SQLite differential tests",
+      "prerequisite": "Hash indexes B+ trees",
+      "course": "CMU DB L11-16",
+      "hours": 1
+    },
+    {
+      "id": "L-17-02",
+      "week": 17,
+      "title": "relational algebra",
+      "goal": "Explain principles, invariants and trade-offs of relational algebra; demonstrate a working implementation.",
+      "practice": "Mini SQL subset executor with SQLite differential tests",
+      "prerequisite": "Hash indexes B+ trees",
+      "course": "CMU DB L11-16",
+      "hours": 1
+    },
+    {
+      "id": "L-17-03",
+      "week": 17,
+      "title": "scan filter projection",
+      "goal": "Explain principles, invariants and trade-offs of scan filter projection; demonstrate a working implementation.",
+      "practice": "Mini SQL subset executor with SQLite differential tests",
+      "prerequisite": "Hash indexes B+ trees",
+      "course": "CMU DB L11-16",
+      "hours": 1
+    },
+    {
+      "id": "L-17-04",
+      "week": 17,
+      "title": "hash join and nested loop",
+      "goal": "Explain principles, invariants and trade-offs of hash join and nested loop; demonstrate a working implementation.",
+      "practice": "Mini SQL subset executor with SQLite differential tests",
+      "prerequisite": "Hash indexes B+ trees",
+      "course": "CMU DB L11-16",
+      "hours": 1
+    },
+    {
+      "id": "L-17-05",
+      "week": 17,
+      "title": "aggregation and planning",
+      "goal": "Explain principles, invariants and trade-offs of aggregation and planning; demonstrate a working implementation.",
+      "practice": "Mini SQL subset executor with SQLite differential tests",
+      "prerequisite": "Hash indexes B+ trees",
+      "course": "CMU DB L11-16",
+      "hours": 1
+    },
+    {
+      "id": "L-18-01",
+      "week": 18,
+      "title": "ACID guarantees",
+      "goal": "Explain principles, invariants and trade-offs of ACID guarantees; demonstrate a working implementation.",
+      "practice": "Append-only log",
+      "prerequisite": "Query execution and plans",
+      "course": "CMU DB L17-23",
+      "hours": 1
+    },
+    {
+      "id": "L-18-02",
+      "week": 18,
+      "title": "two-phase locking",
+      "goal": "Explain principles, invariants and trade-offs of two-phase locking; demonstrate a working implementation.",
+      "practice": "simulate power loss and restart",
+      "prerequisite": "Query execution and plans",
+      "course": "CMU DB L17-23",
+      "hours": 1
+    },
+    {
+      "id": "L-18-03",
+      "week": 18,
+      "title": "MVCC snapshot ideas",
+      "goal": "Explain principles, invariants and trade-offs of MVCC snapshot ideas; demonstrate a working implementation.",
+      "practice": "Append-only log",
+      "prerequisite": "Query execution and plans",
+      "course": "CMU DB L17-23",
+      "hours": 1
+    },
+    {
+      "id": "L-18-04",
+      "week": 18,
+      "title": "write-ahead log",
+      "goal": "Explain principles, invariants and trade-offs of write-ahead log; demonstrate a working implementation.",
+      "practice": "simulate power loss and restart",
+      "prerequisite": "Query execution and plans",
+      "course": "CMU DB L17-23",
+      "hours": 1
+    },
+    {
+      "id": "L-18-05",
+      "week": 18,
+      "title": "crash recovery incomplete records",
+      "goal": "Explain principles, invariants and trade-offs of crash recovery incomplete records; demonstrate a working implementation.",
+      "practice": "Append-only log",
+      "prerequisite": "Query execution and plans",
+      "course": "CMU DB L17-23",
+      "hours": 1
+    },
+    {
+      "id": "L-19-01",
+      "week": 19,
+      "title": "RPC mechanics",
+      "goal": "Explain principles, invariants and trade-offs of RPC mechanics; demonstrate a working implementation.",
+      "practice": "Distributed word count with coordinator and workers",
+      "prerequisite": "Transactions and WAL",
+      "course": "MIT Distributed L1-3",
+      "hours": 1
+    },
+    {
+      "id": "L-19-02",
+      "week": 19,
+      "title": "MapReduce design",
+      "goal": "Explain principles, invariants and trade-offs of MapReduce design; demonstrate a working implementation.",
+      "practice": "Distributed word count with coordinator and workers",
+      "prerequisite": "Transactions and WAL",
+      "course": "MIT Distributed L1-3",
+      "hours": 1
+    },
+    {
+      "id": "L-19-03",
+      "week": 19,
+      "title": "coordinator worker partitioning",
+      "goal": "Explain principles, invariants and trade-offs of coordinator worker partitioning; demonstrate a working implementation.",
+      "practice": "Distributed word count with coordinator and workers",
+      "prerequisite": "Transactions and WAL",
+      "course": "MIT Distributed L1-3",
+      "hours": 1
+    },
+    {
+      "id": "L-19-04",
+      "week": 19,
+      "title": "Google File System",
+      "goal": "Explain principles, invariants and trade-offs of Google File System; demonstrate a working implementation.",
+      "practice": "Distributed word count with coordinator and workers",
+      "prerequisite": "Transactions and WAL",
+      "course": "MIT Distributed L1-3",
+      "hours": 1
+    },
+    {
+      "id": "L-19-05",
+      "week": 19,
+      "title": "failure detection",
+      "goal": "Explain principles, invariants and trade-offs of failure detection; demonstrate a working implementation.",
+      "practice": "Distributed word count with coordinator and workers",
+      "prerequisite": "Transactions and WAL",
+      "course": "MIT Distributed L1-3",
+      "hours": 1
+    },
+    {
+      "id": "L-20-01",
+      "week": 20,
+      "title": "Paxos overview",
+      "goal": "Explain principles, invariants and trade-offs of Paxos overview; demonstrate a working implementation.",
+      "practice": "Deterministic leader-election model with invariants",
+      "prerequisite": "MapReduce and RPC",
+      "course": "MIT Distributed L4-8",
+      "hours": 1
+    },
+    {
+      "id": "L-20-02",
+      "week": 20,
+      "title": "Raft leader election",
+      "goal": "Explain principles, invariants and trade-offs of Raft leader election; demonstrate a working implementation.",
+      "practice": "Deterministic leader-election model with invariants",
+      "prerequisite": "MapReduce and RPC",
+      "course": "MIT Distributed L4-8",
+      "hours": 1
+    },
+    {
+      "id": "L-20-03",
+      "week": 20,
+      "title": "terms votes heartbeats",
+      "goal": "Explain principles, invariants and trade-offs of terms votes heartbeats; demonstrate a working implementation.",
+      "practice": "Deterministic leader-election model with invariants",
+      "prerequisite": "MapReduce and RPC",
+      "course": "MIT Distributed L4-8",
+      "hours": 1
+    },
+    {
+      "id": "L-20-04",
+      "week": 20,
+      "title": "replicated log safety",
+      "goal": "Explain principles, invariants and trade-offs of replicated log safety; demonstrate a working implementation.",
+      "practice": "Deterministic leader-election model with invariants",
+      "prerequisite": "MapReduce and RPC",
+      "course": "MIT Distributed L4-8",
+      "hours": 1
+    },
+    {
+      "id": "L-20-05",
+      "week": 20,
+      "title": "linearizability",
+      "goal": "Explain principles, invariants and trade-offs of linearizability; demonstrate a working implementation.",
+      "practice": "Deterministic leader-election model with invariants",
+      "prerequisite": "MapReduce and RPC",
+      "course": "MIT Distributed L4-8",
+      "hours": 1
+    },
+    {
+      "id": "L-21-01",
+      "week": 21,
+      "title": "ZooKeeper coordination",
+      "goal": "Explain principles, invariants and trade-offs of ZooKeeper coordination; demonstrate a working implementation.",
+      "practice": "Durable job states",
+      "prerequisite": "Replication consistency Raft",
+      "course": "MIT Distributed L9-12",
+      "hours": 1
+    },
+    {
+      "id": "L-21-02",
+      "week": 21,
+      "title": "distributed transactions",
+      "goal": "Explain principles, invariants and trade-offs of distributed transactions; demonstrate a working implementation.",
+      "practice": "task reassignment",
+      "prerequisite": "Replication consistency Raft",
+      "course": "MIT Distributed L9-12",
+      "hours": 1
+    },
+    {
+      "id": "L-21-03",
+      "week": 21,
+      "title": "leases and worker recovery",
+      "goal": "Explain principles, invariants and trade-offs of leases and worker recovery; demonstrate a working implementation.",
+      "practice": "duplicate event tests",
+      "prerequisite": "Replication consistency Raft",
+      "course": "MIT Distributed L9-12",
+      "hours": 1
+    },
+    {
+      "id": "L-21-04",
+      "week": 21,
+      "title": "idempotency",
+      "goal": "Explain principles, invariants and trade-offs of idempotency; demonstrate a working implementation.",
+      "practice": "Durable job states",
+      "prerequisite": "Replication consistency Raft",
+      "course": "MIT Distributed L9-12",
+      "hours": 1
+    },
+    {
+      "id": "L-21-05",
+      "week": 21,
+      "title": "at-least-once delivery",
+      "goal": "Explain principles, invariants and trade-offs of at-least-once delivery; demonstrate a working implementation.",
+      "practice": "task reassignment",
+      "prerequisite": "Replication consistency Raft",
+      "course": "MIT Distributed L9-12",
+      "hours": 1
+    },
+    {
+      "id": "L-22-01",
+      "week": 22,
+      "title": "Shard distribution",
+      "goal": "Explain principles, invariants and trade-offs of Shard distribution; demonstrate a working implementation.",
+      "practice": "Scale workers",
+      "prerequisite": "Durable retries and leases",
+      "course": "MIT Distributed L13-18",
+      "hours": 1
+    },
+    {
+      "id": "L-22-02",
+      "week": 22,
+      "title": "replication tradeoffs",
+      "goal": "Explain principles, invariants and trade-offs of replication tradeoffs; demonstrate a working implementation.",
+      "practice": "inject slow nodes",
+      "prerequisite": "Durable retries and leases",
+      "course": "MIT Distributed L13-18",
+      "hours": 1
+    },
+    {
+      "id": "L-22-03",
+      "week": 22,
+      "title": "backpressure",
+      "goal": "Explain principles, invariants and trade-offs of backpressure; demonstrate a working implementation.",
+      "practice": "benchmark and monitor",
+      "prerequisite": "Durable retries and leases",
+      "course": "MIT Distributed L13-18",
+      "hours": 1
+    },
+    {
+      "id": "L-22-04",
+      "week": 22,
+      "title": "queue depth monitoring",
+      "goal": "Explain principles, invariants and trade-offs of queue depth monitoring; demonstrate a working implementation.",
+      "practice": "Scale workers",
+      "prerequisite": "Durable retries and leases",
+      "course": "MIT Distributed L13-18",
+      "hours": 1
+    },
+    {
+      "id": "L-22-05",
+      "week": 22,
+      "title": "throughput scaling",
+      "goal": "Explain principles, invariants and trade-offs of throughput scaling; demonstrate a working implementation.",
+      "practice": "inject slow nodes",
+      "prerequisite": "Durable retries and leases",
+      "course": "MIT Distributed L13-18",
+      "hours": 1
+    },
+    {
+      "id": "L-23-01",
+      "week": 23,
+      "title": "Logistic regression and vectorization",
+      "goal": "Explain principles, invariants and trade-offs of Logistic regression and vectorization; demonstrate a working implementation.",
+      "practice": "NumPy two-layer NN and numeric gradient test",
+      "prerequisite": "Sharding and observability",
+      "course": "Deep Learning Specialization C1",
+      "hours": 1
+    },
+    {
+      "id": "L-23-02",
+      "week": 23,
+      "title": "computational graphs",
+      "goal": "Explain principles, invariants and trade-offs of computational graphs; demonstrate a working implementation.",
+      "practice": "NumPy two-layer NN and numeric gradient test",
+      "prerequisite": "Sharding and observability",
+      "course": "Deep Learning Specialization C1",
+      "hours": 1
+    },
+    {
+      "id": "L-23-03",
+      "week": 23,
+      "title": "forward and backward propagation",
+      "goal": "Explain principles, invariants and trade-offs of forward and backward propagation; demonstrate a working implementation.",
+      "practice": "NumPy two-layer NN and numeric gradient test",
+      "prerequisite": "Sharding and observability",
+      "course": "Deep Learning Specialization C1",
+      "hours": 1
+    },
+    {
+      "id": "L-23-04",
+      "week": 23,
+      "title": "gradient checking",
+      "goal": "Explain principles, invariants and trade-offs of gradient checking; demonstrate a working implementation.",
+      "practice": "NumPy two-layer NN and numeric gradient test",
+      "prerequisite": "Sharding and observability",
+      "course": "Deep Learning Specialization C1",
+      "hours": 1
+    },
+    {
+      "id": "L-23-05",
+      "week": 23,
+      "title": "reproducible seeding",
+      "goal": "Explain principles, invariants and trade-offs of reproducible seeding; demonstrate a working implementation.",
+      "practice": "NumPy two-layer NN and numeric gradient test",
+      "prerequisite": "Sharding and observability",
+      "course": "Deep Learning Specialization C1",
+      "hours": 1
+    },
+    {
+      "id": "L-24-01",
+      "week": 24,
+      "title": "SGD momentum",
+      "goal": "Explain principles, invariants and trade-offs of SGD momentum; demonstrate a working implementation.",
+      "practice": "Compare optimizers and seeded experiments",
+      "prerequisite": "Neural networks backprop",
+      "course": "DLS C2-3",
+      "hours": 1
+    },
+    {
+      "id": "L-24-02",
+      "week": 24,
+      "title": "Adam update",
+      "goal": "Explain principles, invariants and trade-offs of Adam update; demonstrate a working implementation.",
+      "practice": "Compare optimizers and seeded experiments",
+      "prerequisite": "Neural networks backprop",
+      "course": "DLS C2-3",
+      "hours": 1
+    },
+    {
+      "id": "L-24-03",
+      "week": 24,
+      "title": "initialization and tuning",
+      "goal": "Explain principles, invariants and trade-offs of initialization and tuning; demonstrate a working implementation.",
+      "practice": "Compare optimizers and seeded experiments",
+      "prerequisite": "Neural networks backprop",
+      "course": "DLS C2-3",
+      "hours": 1
+    },
+    {
+      "id": "L-24-04",
+      "week": 24,
+      "title": "L2 regularization dropout",
+      "goal": "Explain principles, invariants and trade-offs of L2 regularization dropout; demonstrate a working implementation.",
+      "practice": "Compare optimizers and seeded experiments",
+      "prerequisite": "Neural networks backprop",
+      "course": "DLS C2-3",
+      "hours": 1
+    },
+    {
+      "id": "L-24-05",
+      "week": 24,
+      "title": "bias variance and leakage",
+      "goal": "Explain principles, invariants and trade-offs of bias variance and leakage; demonstrate a working implementation.",
+      "practice": "Compare optimizers and seeded experiments",
+      "prerequisite": "Neural networks backprop",
+      "course": "DLS C2-3",
+      "hours": 1
+    },
+    {
+      "id": "L-25-01",
+      "week": 25,
+      "title": "CNN layers pooling",
+      "goal": "Explain principles, invariants and trade-offs of CNN layers pooling; demonstrate a working implementation.",
+      "practice": "Train toy CNN",
+      "prerequisite": "Optimization regularization",
+      "course": "DLS C4-5",
+      "hours": 1
+    },
+    {
+      "id": "L-25-02",
+      "week": 25,
+      "title": "transfer learning",
+      "goal": "Explain principles, invariants and trade-offs of transfer learning; demonstrate a working implementation.",
+      "practice": "implement attention",
+      "prerequisite": "Optimization regularization",
+      "course": "DLS C4-5",
+      "hours": 1
+    },
+    {
+      "id": "L-25-03",
+      "week": 25,
+      "title": "sequence models",
+      "goal": "Explain principles, invariants and trade-offs of sequence models; demonstrate a working implementation.",
+      "practice": "evaluate baseline",
+      "prerequisite": "Optimization regularization",
+      "course": "DLS C4-5",
+      "hours": 1
+    },
+    {
+      "id": "L-25-04",
+      "week": 25,
+      "title": "embeddings and scaled attention",
+      "goal": "Explain principles, invariants and trade-offs of embeddings and scaled attention; demonstrate a working implementation.",
+      "practice": "Train toy CNN",
+      "prerequisite": "Optimization regularization",
+      "course": "DLS C4-5",
+      "hours": 1
+    },
+    {
+      "id": "L-25-05",
+      "week": 25,
+      "title": "attention mask and tensor shape",
+      "goal": "Explain principles, invariants and trade-offs of attention mask and tensor shape; demonstrate a working implementation.",
+      "practice": "implement attention",
+      "prerequisite": "Optimization regularization",
+      "course": "DLS C4-5",
+      "hours": 1
+    },
+    {
+      "id": "L-26-01",
+      "week": 26,
+      "title": "HTTP ingestion",
+      "goal": "Explain principles, invariants and trade-offs of HTTP ingestion; demonstrate a working implementation.",
+      "practice": "Integrate prior work",
+      "prerequisite": "Convolution attention",
+      "course": "Selected course review",
+      "hours": 0.83
+    },
+    {
+      "id": "L-26-02",
+      "week": 26,
+      "title": "durable task queue",
+      "goal": "Explain principles, invariants and trade-offs of durable task queue; demonstrate a working implementation.",
+      "practice": "document architecture",
+      "prerequisite": "Convolution attention",
+      "course": "Selected course review",
+      "hours": 0.83
+    },
+    {
+      "id": "L-26-03",
+      "week": 26,
+      "title": "distributed workers",
+      "goal": "Explain principles, invariants and trade-offs of distributed workers; demonstrate a working implementation.",
+      "practice": "run demos",
+      "prerequisite": "Convolution attention",
+      "course": "Selected course review",
+      "hours": 0.83
+    },
+    {
+      "id": "L-26-04",
+      "week": 26,
+      "title": "ML inference",
+      "goal": "Explain principles, invariants and trade-offs of ML inference; demonstrate a working implementation.",
+      "practice": "Integrate prior work",
+      "prerequisite": "Convolution attention",
+      "course": "Selected course review",
+      "hours": 0.83
+    },
+    {
+      "id": "L-26-05",
+      "week": 26,
+      "title": "database persistence",
+      "goal": "Explain principles, invariants and trade-offs of database persistence; demonstrate a working implementation.",
+      "practice": "document architecture",
+      "prerequisite": "Convolution attention",
+      "course": "Selected course review",
+      "hours": 0.83
+    },
+    {
+      "id": "L-26-06",
+      "week": 26,
+      "title": "integration and failure testing",
+      "goal": "Explain principles, invariants and trade-offs of integration and failure testing; demonstrate a working implementation.",
+      "practice": "run demos",
+      "prerequisite": "Convolution attention",
+      "course": "Selected course review",
+      "hours": 0.83
+    }
+  ],
+  "resources": [
+    {
+      "id": "RES-001",
+      "title": "Modern C++: From Intermediate to Advanced",
+      "kind": "Course",
+      "domain": "Programming",
+      "url": "https://www.udemy.com/course/learn-intermediate-modern-c/",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-002",
+      "title": "Stanford Algorithms Specialization",
+      "kind": "Course",
+      "domain": "Algorithms",
+      "url": "https://www.coursera.org/specializations/algorithms",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-003",
+      "title": "MIT 6.006 Introduction to Algorithms",
+      "kind": "Course",
+      "domain": "Algorithms",
+      "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-004",
+      "title": "Nand2Tetris Part I",
+      "kind": "Course",
+      "domain": "Architecture",
+      "url": "https://www.coursera.org/learn/build-a-computer",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-005",
+      "title": "MIT Operating Systems 6.S081",
+      "kind": "Course",
+      "domain": "Operating Systems",
+      "url": "https://pdos.csail.mit.edu/6.S081/",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-006",
+      "title": "CMU 15-445 Databases",
+      "kind": "Course",
+      "domain": "Databases",
+      "url": "https://15445.courses.cs.cmu.edu/",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-007",
+      "title": "MIT 6.824 Distributed Systems",
+      "kind": "Course",
+      "domain": "Distributed Systems",
+      "url": "https://pdos.csail.mit.edu/6.824/",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-008",
+      "title": "Deep Learning Specialization",
+      "kind": "Course",
+      "domain": "AI / ML",
+      "url": "https://www.coursera.org/specializations/deep-learning",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-009",
+      "title": "Beej C Programming",
+      "kind": "Documentation",
+      "domain": "Programming",
+      "url": "https://beej.us/guide/bgc/",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-010",
+      "title": "Beej Networking",
+      "kind": "Documentation",
+      "domain": "Networking",
+      "url": "https://beej.us/guide/bgnet/",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-011",
+      "title": "OSTEP",
+      "kind": "Book",
+      "domain": "Operating Systems",
+      "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-012",
+      "title": "MIT Missing Semester",
+      "kind": "Course",
+      "domain": "Cloud / DevOps",
+      "url": "https://missing.csail.mit.edu/",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-013",
+      "title": "Linux man-pages",
+      "kind": "Documentation",
+      "domain": "Operating Systems",
+      "url": "https://man7.org/linux/man-pages/",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-014",
+      "title": "LearnCpp",
+      "kind": "Documentation",
+      "domain": "Programming",
+      "url": "https://www.learncpp.com/",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-015",
+      "title": "cppreference",
+      "kind": "Documentation",
+      "domain": "Programming",
+      "url": "https://en.cppreference.com/w/",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-016",
+      "title": "Effective Python",
+      "kind": "Book",
+      "domain": "Programming",
+      "url": "",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-017",
+      "title": "Computer Systems: A Programmer’s Perspective",
+      "kind": "Book",
+      "domain": "Architecture",
+      "url": "",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-018",
+      "title": "Designing Data-Intensive Applications",
+      "kind": "Book",
+      "domain": "Distributed Systems",
+      "url": "",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-019",
+      "title": "Kiwix JS",
+      "kind": "Repository",
+      "domain": "Career & Portfolio",
+      "url": "https://github.com/kiwix/kiwix-js",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-020",
+      "title": "pytest",
+      "kind": "Repository",
+      "domain": "Career & Portfolio",
+      "url": "https://github.com/pytest-dev/pytest",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-021",
+      "title": "fmt",
+      "kind": "Repository",
+      "domain": "Programming",
+      "url": "https://github.com/fmtlib/fmt",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-022",
+      "title": "curl",
+      "kind": "Repository",
+      "domain": "Networking",
+      "url": "https://github.com/curl/curl",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-023",
+      "title": "Redis",
+      "kind": "Repository",
+      "domain": "Databases",
+      "url": "https://github.com/redis/redis",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-024",
+      "title": "PyTorch",
+      "kind": "Repository",
+      "domain": "AI / ML",
+      "url": "https://github.com/pytorch/pytorch",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-025",
+      "title": "QuantConnect LEAN",
+      "kind": "Repository",
+      "domain": "Quant / HFT",
+      "url": "https://github.com/QuantConnect/Lean",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-026",
+      "title": "Qiskit",
+      "kind": "Repository",
+      "domain": "Quantum",
+      "url": "https://github.com/Qiskit/qiskit",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-027",
+      "title": "ROS 2",
+      "kind": "Repository",
+      "domain": "Robotics / CV",
+      "url": "https://github.com/ros2/ros2",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-028",
+      "title": "LLVM",
+      "kind": "Repository",
+      "domain": "Architecture",
+      "url": "https://github.com/llvm/llvm-project",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-029",
+      "title": "scikit-learn",
+      "kind": "Repository",
+      "domain": "AI / ML",
+      "url": "https://github.com/scikit-learn/scikit-learn",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-030",
+      "title": "NautilusTrader",
+      "kind": "Repository",
+      "domain": "Quant / HFT",
+      "url": "https://github.com/nautechsystems/nautilus_trader",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-031",
+      "title": "DuckDB",
+      "kind": "Repository",
+      "domain": "Databases",
+      "url": "https://github.com/duckdb/duckdb",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-032",
+      "title": "gRPC",
+      "kind": "Repository",
+      "domain": "Distributed Systems",
+      "url": "https://github.com/grpc/grpc",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-033",
+      "title": "etcd",
+      "kind": "Repository",
+      "domain": "Distributed Systems",
+      "url": "https://github.com/etcd-io/etcd",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-034",
+      "title": "Practical Networking",
+      "kind": "Video",
+      "domain": "Networking",
+      "url": "https://www.youtube.com/playlist?list=PLIFyRwBY_4bRLmKfP1KnZA6rZbRHtxmXi",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-035",
+      "title": "Karpathy micrograd",
+      "kind": "Video",
+      "domain": "AI / ML",
+      "url": "https://www.youtube.com/watch?v=VMj-3S1tku0",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-036",
+      "title": "CMU B+ Trees lecture",
+      "kind": "Video",
+      "domain": "Databases",
+      "url": "https://www.youtube.com/watch?v=u7ii_Lvm9rM",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-037",
+      "title": "MIT Distributed Systems intro",
+      "kind": "Video",
+      "domain": "Distributed Systems",
+      "url": "https://www.youtube.com/watch?v=cQP8WApzIQQ",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-038",
+      "title": "PyTorch for Deep Learning Bootcamp",
+      "kind": "Course",
+      "domain": "AI / ML",
+      "url": "https://www.udemy.com/course/pytorch-for-deep-learning/",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-039",
+      "title": "Quantitative Finance & Algorithmic Trading in Python",
+      "kind": "Course",
+      "domain": "Quant / HFT",
+      "url": "https://www.udemy.com/course/quantitative-finance-algorithmic-trading-in-python/",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-040",
+      "title": "ROS 2 for Beginners",
+      "kind": "Course",
+      "domain": "Robotics / CV",
+      "url": "https://www.udemy.com/course/ros2-for-beginners/",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-041",
+      "title": "Quantum Computing Algorithms and Programming",
+      "kind": "Course",
+      "domain": "Quantum",
+      "url": "https://www.coursera.org/learn/quantum-computing-algorithms-programming",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-042",
+      "title": "Python docs",
+      "kind": "Documentation",
+      "domain": "Programming",
+      "url": "https://docs.python.org/3/",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-043",
+      "title": "pytest docs",
+      "kind": "Documentation",
+      "domain": "Programming",
+      "url": "https://docs.pytest.org/",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-044",
+      "title": "GitHub Actions docs",
+      "kind": "Documentation",
+      "domain": "Cloud / DevOps",
+      "url": "https://docs.github.com/en/actions",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-045",
+      "title": "Docker docs",
+      "kind": "Documentation",
+      "domain": "Cloud / DevOps",
+      "url": "https://docs.docker.com/get-started/",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "RES-046",
+      "title": "Andrej Karpathy makemore",
+      "kind": "Video",
+      "domain": "AI / ML",
+      "url": "https://www.youtube.com/watch?v=PaCmpygFfXo",
+      "detail": "Course / implementation resource or open-source organization"
+    },
+    {
+      "id": "EXT-001",
+      "title": "Harvard CS50x",
+      "kind": "Course",
+      "domain": "Programming",
+      "url": "https://cs50.harvard.edu/x/",
+      "detail": "C memory and general CS refresh"
+    },
+    {
+      "id": "EXT-002",
+      "title": "MIT Nand2Tetris official",
+      "kind": "Documentation",
+      "domain": "Architecture",
+      "url": "https://www.nand2tetris.org/",
+      "detail": "HDL simulator and project templates"
+    },
+    {
+      "id": "EXT-003",
+      "title": "UC Berkeley CS61C",
+      "kind": "Course",
+      "domain": "Architecture",
+      "url": "https://cs61c.org/",
+      "detail": "Machine structures, caches and computer architecture"
+    },
+    {
+      "id": "EXT-004",
+      "title": "CSES Algorithm Set",
+      "kind": "Practice",
+      "domain": "Algorithms",
+      "url": "https://cses.fi/problemset/",
+      "detail": "Implementation drill problem bank"
+    },
+    {
+      "id": "EXT-005",
+      "title": "LeetCode Problem Set",
+      "kind": "Practice",
+      "domain": "Algorithms",
+      "url": "https://leetcode.com/problemset/",
+      "detail": "Interview style DSA problems"
+    },
+    {
+      "id": "EXT-006",
+      "title": "CMU DB Spring 2026",
+      "kind": "Course",
+      "domain": "Databases",
+      "url": "https://15445.courses.cs.cmu.edu/spring2026/schedule.html",
+      "detail": "Lecture-by-lecture course schedule"
+    },
+    {
+      "id": "EXT-007",
+      "title": "MIT OS 2025 schedule",
+      "kind": "Course",
+      "domain": "Operating Systems",
+      "url": "https://pdos.csail.mit.edu/6.S081/2025/schedule.html",
+      "detail": "Version-specific OS lecture schedule"
+    },
+    {
+      "id": "EXT-008",
+      "title": "Practical Networking Playlist",
+      "kind": "YouTube",
+      "domain": "Networking",
+      "url": "https://www.youtube.com/playlist?list=PLIFyRwBY_4bRLmKfP1KnZA6rZbRHtxmXi",
+      "detail": "Subnetting TCP/IP network explanations"
+    },
+    {
+      "id": "EXT-009",
+      "title": "Karpathy Neural Networks Zero to Hero",
+      "kind": "YouTube",
+      "domain": "AI / ML",
+      "url": "https://www.youtube.com/watch?v=VMj-3S1tku0",
+      "detail": "Micrograd and backprop from scratch"
+    },
+    {
+      "id": "EXT-010",
+      "title": "PyTorch Documentation",
+      "kind": "Documentation",
+      "domain": "AI / ML",
+      "url": "https://pytorch.org/docs/stable/index.html",
+      "detail": "Tensors models, optimizers and evaluation"
+    },
+    {
+      "id": "EXT-011",
+      "title": "NumPy Documentation",
+      "kind": "Documentation",
+      "domain": "AI / ML",
+      "url": "https://numpy.org/doc/stable/",
+      "detail": "Scientific and numerical computing"
+    },
+    {
+      "id": "EXT-012",
+      "title": "PostgreSQL Documentation",
+      "kind": "Documentation",
+      "domain": "Databases",
+      "url": "https://www.postgresql.org/docs/",
+      "detail": "SQL indexes and transactions"
+    },
+    {
+      "id": "EXT-013",
+      "title": "Docker Getting Started",
+      "kind": "Documentation",
+      "domain": "Cloud / DevOps",
+      "url": "https://docs.docker.com/get-started/",
+      "detail": "Container and image builds"
+    },
+    {
+      "id": "EXT-014",
+      "title": "Prometheus Documentation",
+      "kind": "Documentation",
+      "domain": "Cloud / DevOps",
+      "url": "https://prometheus.io/docs/introduction/overview/",
+      "detail": "Monitoring and metric capture"
+    },
+    {
+      "id": "EXT-015",
+      "title": "QuantConnect LEAN Documentation",
+      "kind": "Documentation",
+      "domain": "Quant / HFT",
+      "url": "https://www.quantconnect.com/docs/v2/",
+      "detail": "Backtesting data model"
+    },
+    {
+      "id": "EXT-016",
+      "title": "ROS 2 Documentation",
+      "kind": "Documentation",
+      "domain": "Robotics / CV",
+      "url": "https://docs.ros.org/en/rolling/",
+      "detail": "ROS2 middleware and simulation"
+    },
+    {
+      "id": "EXT-017",
+      "title": "IBM Quantum Documentation",
+      "kind": "Documentation",
+      "domain": "Quantum",
+      "url": "https://docs.quantum.ibm.com/",
+      "detail": "Quantum gates and SDKs"
+    },
+    {
+      "id": "READ-001",
+      "title": "MapReduce: Simplified Data Processing on Large Clusters",
+      "kind": "Paper",
+      "domain": "Distributed Systems",
+      "url": "https://research.google/pubs/mapreduce-simplified-data-processing-on-large-clusters/",
+      "detail": "Map/shuffle/reduce; worker faults"
+    },
+    {
+      "id": "READ-002",
+      "title": "The Google File System",
+      "kind": "Paper",
+      "domain": "Distributed Systems",
+      "url": "https://research.google.com/archive/gfs.html",
+      "detail": "Replicated chunks, master and crash recovery"
+    },
+    {
+      "id": "READ-003",
+      "title": "In Search of an Understandable Consensus Algorithm",
+      "kind": "Paper",
+      "domain": "Distributed Systems",
+      "url": "https://raft.github.io/raft.pdf",
+      "detail": "Raft election and log replication"
+    },
+    {
+      "id": "READ-004",
+      "title": "Spanner: Google's Globally-Distributed Database",
+      "kind": "Paper",
+      "domain": "Distributed Systems",
+      "url": "https://research.google/pubs/spanner-googles-globally-distributed-database-2/",
+      "detail": "TrueTime external consistency"
+    },
+    {
+      "id": "READ-005",
+      "title": "The Chubby Lock Service",
+      "kind": "Paper",
+      "domain": "Distributed Systems",
+      "url": "https://research.google.com/archive/chubby-osdi06.pdf",
+      "detail": "Locks, leader election and shared metadata"
+    },
+    {
+      "id": "READ-006",
+      "title": "Attention Is All You Need",
+      "kind": "Paper",
+      "domain": "AI / ML",
+      "url": "https://arxiv.org/abs/1706.03762",
+      "detail": "Self attention and transformer"
+    },
+    {
+      "id": "READ-007",
+      "title": "Adam: A Method for Stochastic Optimization",
+      "kind": "Paper",
+      "domain": "AI / ML",
+      "url": "https://arxiv.org/abs/1412.6980",
+      "detail": "Adaptive gradient optimizer"
+    },
+    {
+      "id": "READ-008",
+      "title": "Operating Systems: Three Easy Pieces",
+      "kind": "Book",
+      "domain": "Operating Systems",
+      "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/",
+      "detail": "OS memory, CPU, concurrency"
+    },
+    {
+      "id": "READ-009",
+      "title": "Designing Data-Intensive Applications",
+      "kind": "Book",
+      "domain": "Distributed Systems",
+      "url": "",
+      "detail": "Storage and distributed design"
+    },
+    {
+      "id": "READ-010",
+      "title": "Computer Systems: A Programmer's Perspective",
+      "kind": "Book",
+      "domain": "Architecture",
+      "url": "",
+      "detail": "CPU execution, linking and caches"
+    },
+    {
+      "id": "READ-011",
+      "title": "Effective Python",
+      "kind": "Book",
+      "domain": "Programming",
+      "url": "",
+      "detail": "Python design practices"
+    },
+    {
+      "id": "READ-012",
+      "title": "The Linux Programming Interface",
+      "kind": "Book",
+      "domain": "Operating Systems",
+      "url": "",
+      "detail": "System call practices"
+    },
+    {
+      "id": "READ-013",
+      "title": "A Tour of C++",
+      "kind": "Book",
+      "domain": "Programming",
+      "url": "",
+      "detail": "C++ language idioms"
+    },
+    {
+      "id": "READ-014",
+      "title": "CMU B+ Trees — Lecture",
+      "kind": "Video",
+      "domain": "Databases",
+      "url": "https://www.youtube.com/watch?v=u7ii_Lvm9rM",
+      "detail": "Index structures"
+    },
+    {
+      "id": "READ-015",
+      "title": "MIT RPC and Threads — Lecture",
+      "kind": "Video",
+      "domain": "Distributed Systems",
+      "url": "https://www.youtube.com/watch?v=gA4YXUJX7t8",
+      "detail": "RPC and concurrency"
+    },
+    {
+      "id": "READ-016",
+      "title": "Karpathy — Building micrograd",
+      "kind": "Video",
+      "domain": "AI / ML",
+      "url": "https://www.youtube.com/watch?v=VMj-3S1tku0",
+      "detail": "Automatic differentiation"
+    }
+  ],
+  "projects": [
+    {
+      "id": "PRJ-001",
+      "title": "Dynamic Array Library",
+      "domain": "Programming",
+      "level": "Foundation",
+      "week": 1,
+      "problem": "Dynamic array data structure with geometric growth",
+      "architecture": "C API; allocator; resize; bounds; sanitizers",
+      "stack": "C / GCC / ASAN",
+      "criteria": "Insert/remove correctness, allocation failure, no leaks",
+      "output": "Sanitizer-clean tests"
+    },
+    {
+      "id": "PRJ-002",
+      "title": "Generic Data Structures Library",
+      "domain": "Programming",
+      "level": "Intermediate",
+      "week": 4,
+      "problem": "Build stack, queue, hash table, linked list library",
+      "architecture": "Library API; type/memory model; CLI; testing",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Reusable tested APIs"
+    },
+    {
+      "id": "PRJ-003",
+      "title": "Custom Vector and Smart Pointer",
+      "domain": "Programming",
+      "level": "Intermediate",
+      "week": 2,
+      "problem": "Generic C++ vector with safe ownership and move semantics",
+      "architecture": "Templates; Rule of Five; iterators; exception safety",
+      "stack": "C++17 / CMake",
+      "criteria": "Move/copy tests, no leaks, exception guarantee",
+      "output": "Copy/move invariant tests"
+    },
+    {
+      "id": "PRJ-004",
+      "title": "CLI Task Manager",
+      "domain": "Programming",
+      "level": "Foundation",
+      "week": 7,
+      "problem": "Persistent terminal task CRUD",
+      "architecture": "Library API; type/memory model; CLI; testing",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Documented tested CLI"
+    },
+    {
+      "id": "PRJ-005",
+      "title": "Streaming Log Analyzer",
+      "domain": "Programming",
+      "level": "Intermediate",
+      "week": 7,
+      "problem": "Stream huge logs with bounded memory",
+      "architecture": "Library API; type/memory model; CLI; testing",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Correct operational metrics"
+    },
+    {
+      "id": "PRJ-006",
+      "title": "Asynchronous Web Crawler",
+      "domain": "Programming",
+      "level": "Intermediate",
+      "week": 7,
+      "problem": "Respectful concurrent website crawler",
+      "architecture": "Library API; type/memory model; CLI; testing",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Rate limiting and retry tests"
+    },
+    {
+      "id": "PRJ-007",
+      "title": "Python Developer CLI Package",
+      "domain": "Programming",
+      "level": "Intermediate",
+      "week": 7,
+      "problem": "Installable typed tested Python CLI",
+      "architecture": "Library API; type/memory model; CLI; testing",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Release-ready package"
+    },
+    {
+      "id": "PRJ-008",
+      "title": "Custom Memory Allocator",
+      "domain": "Programming",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Simplified malloc/free with fragmentation policy",
+      "architecture": "Library API; type/memory model; CLI; testing",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Allocation invariants and benchmarks"
+    },
+    {
+      "id": "PRJ-009",
+      "title": "Algorithms From Scratch Library",
+      "domain": "Algorithms",
+      "level": "Foundation",
+      "week": 6,
+      "problem": "Sorting/searching/graph algorithms",
+      "architecture": "Input model; efficient data structure; correctness checks; benchmark",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Complexity notes and oracle tests"
+    },
+    {
+      "id": "PRJ-010",
+      "title": "Autocomplete Search Engine",
+      "domain": "Algorithms",
+      "level": "Intermediate",
+      "week": 7,
+      "problem": "Trie prefix index with ranking",
+      "architecture": "Input model; efficient data structure; correctness checks; benchmark",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Query correctness and latency"
+    },
+    {
+      "id": "PRJ-011",
+      "title": "Task Dependency Scheduler",
+      "domain": "Algorithms",
+      "level": "Intermediate",
+      "week": 7,
+      "problem": "DAG scheduling with cycle detection",
+      "architecture": "Input model; efficient data structure; correctness checks; benchmark",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Valid ordering and cycle checks"
+    },
+    {
+      "id": "PRJ-012",
+      "title": "Route Optimization Engine",
+      "domain": "Algorithms",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Weighted shortest path comparisons",
+      "architecture": "Input model; efficient data structure; correctness checks; benchmark",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Reference-checked graph outputs"
+    },
+    {
+      "id": "PRJ-013",
+      "title": "CPU Cache Performance Benchmark",
+      "domain": "Architecture",
+      "level": "Intermediate",
+      "week": 7,
+      "problem": "Benchmark stride and layout effect",
+      "architecture": "Instruction/data representation; simulator; trace; validation",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Reproducible memory timings"
+    },
+    {
+      "id": "PRJ-014",
+      "title": "RISC-V Instruction Set Emulator",
+      "domain": "Architecture",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Build/execute subset of RISC-V instructions",
+      "architecture": "Registers; decoder; memory; program counter",
+      "stack": "C++ / Python",
+      "criteria": "Instruction fixture and machine-state equality tests",
+      "output": "Validated instruction tests"
+    },
+    {
+      "id": "PRJ-015",
+      "title": "Mini Unix Shell",
+      "domain": "Operating Systems",
+      "level": "Intermediate",
+      "week": 11,
+      "problem": "Mini Unix shell implementing real process execution",
+      "architecture": "fork/exec/wait, parsing, pipelines and signals",
+      "stack": "C / POSIX",
+      "criteria": "Exit codes; fd cleanup; pipe/redirection correctness",
+      "output": "Process and error handling tests"
+    },
+    {
+      "id": "PRJ-016",
+      "title": "Multithreaded Task Executor",
+      "domain": "Operating Systems",
+      "level": "Intermediate",
+      "week": 13,
+      "problem": "Thread pool with safe shutdown",
+      "architecture": "Process/thread lifecycle; system calls; fault handling",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Stress tested concurrency"
+    },
+    {
+      "id": "PRJ-017",
+      "title": "Process Supervisor",
+      "domain": "Operating Systems",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Monitor and restart child processes",
+      "architecture": "Process/thread lifecycle; system calls; fault handling",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Failure recovery tests"
+    },
+    {
+      "id": "PRJ-018",
+      "title": "User-Space File System",
+      "domain": "Operating Systems",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Basic filesystem using FUSE",
+      "architecture": "Process/thread lifecycle; system calls; fault handling",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Mount/read/write durability tests"
+    },
+    {
+      "id": "PRJ-019",
+      "title": "TCP Chat Server",
+      "domain": "Networking",
+      "level": "Intermediate",
+      "week": 7,
+      "problem": "Multi-client TCP messaging",
+      "architecture": "Client/server; framing/protocol; concurrency; retries",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Concurrent client tests"
+    },
+    {
+      "id": "PRJ-020",
+      "title": "Multithreaded HTTP Server",
+      "domain": "Networking",
+      "level": "Advanced",
+      "week": 14,
+      "problem": "Multithreaded HTTP/1.1 static-file web server",
+      "architecture": "Sockets; parser; thread pool; filesystem sandbox",
+      "stack": "C++ / Linux",
+      "criteria": "Concurrent tests, error handling, path traversal defense",
+      "output": "Protocol and load tests"
+    },
+    {
+      "id": "PRJ-021",
+      "title": "DNS Resolver From Scratch",
+      "domain": "Networking",
+      "level": "Intermediate",
+      "week": 7,
+      "problem": "Encode/query/decode DNS via UDP",
+      "architecture": "Client/server; framing/protocol; concurrency; retries",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Malformed packet bounds checks"
+    },
+    {
+      "id": "PRJ-022",
+      "title": "Network Traffic Analyzer",
+      "domain": "Networking",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Analyze captures and TCP/IP statistics",
+      "architecture": "Client/server; framing/protocol; concurrency; retries",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Validated capture outputs"
+    },
+    {
+      "id": "PRJ-023",
+      "title": "Persistent Key-Value Database",
+      "domain": "Databases",
+      "level": "Intermediate",
+      "week": 15,
+      "problem": "Append-only durable key-value database",
+      "architecture": "WAL; buffer cache; B+ index; replay; compaction",
+      "stack": "C++ / Files",
+      "criteria": "Kill/restart, partial-record, durability and query tests",
+      "output": "Crash simulation tests"
+    },
+    {
+      "id": "PRJ-024",
+      "title": "Mini SQL Query Engine",
+      "domain": "Databases",
+      "level": "Advanced",
+      "week": 17,
+      "problem": "Restricted SQL grammar and query execution engine",
+      "architecture": "Tokenizer; AST; select/filter/join operators",
+      "stack": "Python/C++",
+      "criteria": "Differential SQLite result tests",
+      "output": "Reference SQLite differential tests"
+    },
+    {
+      "id": "PRJ-025",
+      "title": "Database Index Benchmark",
+      "domain": "Databases",
+      "level": "Intermediate",
+      "week": 7,
+      "problem": "Compare indexed and nonindexed query plans",
+      "architecture": "Storage pages; indexes; SQL/recovery; correctness suite",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Reproducible execution plans"
+    },
+    {
+      "id": "PRJ-026",
+      "title": "Redis-Style In-Memory Cache",
+      "domain": "Databases",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Networked TTL cache and eviction",
+      "architecture": "Storage pages; indexes; SQL/recovery; correctness suite",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Concurrent access and expiry"
+    },
+    {
+      "id": "PRJ-027",
+      "title": "Production REST API",
+      "domain": "Backend",
+      "level": "Intermediate",
+      "week": 7,
+      "problem": "Validated auth API with PostgreSQL",
+      "architecture": "API schema; persistence; auth; service tests",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Integration, security and CI checks"
+    },
+    {
+      "id": "PRJ-028",
+      "title": "Background Job Processing Engine",
+      "domain": "Backend",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Persistent jobs with retries and idempotency",
+      "architecture": "API schema; persistence; auth; service tests",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "No silent task loss tests"
+    },
+    {
+      "id": "PRJ-029",
+      "title": "API Gateway and Rate Limiter",
+      "domain": "Backend",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Reverse proxy with routing and limits",
+      "architecture": "API schema; persistence; auth; service tests",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Failure and throttle tests"
+    },
+    {
+      "id": "PRJ-030",
+      "title": "Distributed Task Scheduler",
+      "domain": "Distributed Systems",
+      "level": "Advanced",
+      "week": 19,
+      "problem": "Coordinator-worker durable job processing system",
+      "architecture": "Workers; RPC; leases; retries; metrics",
+      "stack": "Python / gRPC / SQL",
+      "criteria": "Worker termination, reassignment, duplicate-effect checks",
+      "output": "Worker termination recovery"
+    },
+    {
+      "id": "PRJ-031",
+      "title": "Replicated Key-Value Store",
+      "domain": "Distributed Systems",
+      "level": "Advanced",
+      "week": 20,
+      "problem": "Multi-node replicated key-value state",
+      "architecture": "Coordinator; workers; messages; fault recovery",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Consistency and failure tests"
+    },
+    {
+      "id": "PRJ-032",
+      "title": "Mini MapReduce Engine",
+      "domain": "Distributed Systems",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Partition/map/reduce across worker processes",
+      "architecture": "Coordinator; workers; messages; fault recovery",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Correctness under partition failures"
+    },
+    {
+      "id": "PRJ-033",
+      "title": "Service Observability Platform",
+      "domain": "Cloud / DevOps",
+      "level": "Intermediate",
+      "week": 7,
+      "problem": "Logging metrics traces for services",
+      "architecture": "Docker; CI pipeline; metrics; health checks",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Inspectable failures and dashboards"
+    },
+    {
+      "id": "PRJ-034",
+      "title": "Containerized CI/CD Pipeline",
+      "domain": "Cloud / DevOps",
+      "level": "Intermediate",
+      "week": 7,
+      "problem": "Docker and GitHub Actions deployment workflow",
+      "architecture": "Docker; CI pipeline; metrics; health checks",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Reproducible deployment"
+    },
+    {
+      "id": "PRJ-035",
+      "title": "C++ Performance Engineering Lab",
+      "domain": "Performance",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Profile cache, allocator, and contention costs",
+      "architecture": "Profiler; baseline; optimized experiment; comparison",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Measured performance report"
+    },
+    {
+      "id": "PRJ-036",
+      "title": "Concurrent Queue Implementation",
+      "domain": "Performance",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Bounded concurrent queue with atomics",
+      "architecture": "Profiler; baseline; optimized experiment; comparison",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Stress testing and correctness"
+    },
+    {
+      "id": "PRJ-037",
+      "title": "Neural Network From Scratch",
+      "domain": "AI / ML",
+      "level": "Intermediate",
+      "week": 23,
+      "problem": "Neural network using only NumPy",
+      "architecture": "Layers; gradient flow; optimizer; evaluation",
+      "stack": "Python / NumPy",
+      "criteria": "Numerical gradient checks and convergence",
+      "output": "Gradient checks"
+    },
+    {
+      "id": "PRJ-038",
+      "title": "Vector Search Engine",
+      "domain": "AI / ML",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Nearest neighbor embedding index",
+      "architecture": "Training/evaluation pipeline; inference API; metrics",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Retrieval quality and latency"
+    },
+    {
+      "id": "PRJ-039",
+      "title": "Transformer Components From Scratch",
+      "domain": "AI / ML",
+      "level": "Advanced",
+      "week": 25,
+      "problem": "Scaled attention and transformer components",
+      "architecture": "QKV projections; masking; layer norm; tests",
+      "stack": "PyTorch",
+      "criteria": "Correct shapes and gradients",
+      "output": "Shape, mask and gradient tests"
+    },
+    {
+      "id": "PRJ-040",
+      "title": "RAG Evaluation Platform",
+      "domain": "AI / ML",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Evaluate retrieval/answer pipeline",
+      "architecture": "Training/evaluation pipeline; inference API; metrics",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Labeled metrics and reproducible runs"
+    },
+    {
+      "id": "PRJ-041",
+      "title": "LLM Inference Benchmark",
+      "domain": "AI / ML",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Compare model serving configurations",
+      "architecture": "Training/evaluation pipeline; inference API; metrics",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Latency throughput memory report"
+    },
+    {
+      "id": "PRJ-042",
+      "title": "Market Data Engineering Pipeline",
+      "domain": "Quant / HFT",
+      "level": "Intermediate",
+      "week": 7,
+      "problem": "Ingest/validate market timeseries",
+      "architecture": "Market events; state machine; risk checks; backtest",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Data quality and lineage report"
+    },
+    {
+      "id": "PRJ-043",
+      "title": "Limit Order Book and Matching Engine",
+      "domain": "Quant / HFT",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Deterministic price-time priority order matching engine",
+      "architecture": "Bid/ask books; partial fills; cancel and replay",
+      "stack": "C++20",
+      "criteria": "Matching invariants and event replay",
+      "output": "Deterministic replay invariants"
+    },
+    {
+      "id": "PRJ-044",
+      "title": "Event-Driven Backtesting Engine",
+      "domain": "Quant / HFT",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Event-driven strategy evaluation with no look-ahead bias",
+      "architecture": "Market events; order execution; portfolio ledger; risk",
+      "stack": "Python",
+      "criteria": "Deterministic replay, data leakage and fee tests",
+      "output": "No look-ahead leakage tests"
+    },
+    {
+      "id": "PRJ-045",
+      "title": "Portfolio Risk Analytics Engine",
+      "domain": "Quant / HFT",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Exposure drawdown and stress scenarios",
+      "architecture": "Market events; state machine; risk checks; backtest",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Numerical risk validation"
+    },
+    {
+      "id": "PRJ-046",
+      "title": "Robotics Sensor Fusion Engine",
+      "domain": "Robotics / CV",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Combine noisy signals with state estimator",
+      "architecture": "Sensor/scene data; model; simulation; evaluation",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Evaluation versus raw sensor baseline"
+    },
+    {
+      "id": "PRJ-047",
+      "title": "ROS 2 Autonomous Robot Simulator",
+      "domain": "Robotics / CV",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Simulated waypoint navigation",
+      "architecture": "Sensor/scene data; model; simulation; evaluation",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Repeatable navigation tests"
+    },
+    {
+      "id": "PRJ-048",
+      "title": "Industrial Computer Vision Defect Detector",
+      "domain": "Robotics / CV",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Detect defects with labeled dataset",
+      "architecture": "Sensor/scene data; model; simulation; evaluation",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Precision/recall and deployment limitations"
+    },
+    {
+      "id": "PRJ-049",
+      "title": "Quantum Circuit Simulator",
+      "domain": "Quantum",
+      "level": "Advanced",
+      "week": 7,
+      "problem": "Complex-valued state-vector circuit simulator",
+      "architecture": "State vectors; gate matrices; sampling; validation",
+      "stack": "C++ / Python as appropriate",
+      "criteria": "Correct outputs, error handling, reproducible tests and documented measurements",
+      "output": "Known circuit probability checks"
+    },
+    {
+      "id": "PRJ-050",
+      "title": "Integrated Flagship Engineering Platform",
+      "domain": "Knowledge Systems",
+      "level": "Advanced",
+      "week": 26,
+      "problem": "End-to-end AI analytics and distributed serving platform",
+      "architecture": "HTTP API → durable queue → workers → ML → database",
+      "stack": "Python/C++/Docker",
+      "criteria": "Integration demo, load/failure tests, observability",
+      "output": "Integrated tests and demo"
+    }
+  ],
+  "subjects": [
+    {
+      "id": "TOP-001",
+      "title": "Memory Management",
+      "domain": "Programming",
+      "concepts": [
+        "Pointers",
+        "Stack vs heap",
+        "RAII",
+        "Copy vs move",
+        "Undefined behavior"
+      ]
+    },
+    {
+      "id": "TOP-002",
+      "title": "Modern C++",
+      "domain": "Programming",
+      "concepts": [
+        "Templates",
+        "STL",
+        "Smart pointers",
+        "Exception safety",
+        "CMake"
+      ]
+    },
+    {
+      "id": "TOP-003",
+      "title": "Advanced Python",
+      "domain": "Programming",
+      "concepts": [
+        "Generators",
+        "Asyncio",
+        "Typing",
+        "pytest",
+        "Packaging"
+      ]
+    },
+    {
+      "id": "TOP-004",
+      "title": "Graph Algorithms",
+      "domain": "Algorithms",
+      "concepts": [
+        "BFS",
+        "DFS",
+        "Dijkstra",
+        "Bellman-Ford",
+        "Minimum spanning tree"
+      ]
+    },
+    {
+      "id": "TOP-005",
+      "title": "Dynamic Programming",
+      "domain": "Algorithms",
+      "concepts": [
+        "Recurrence",
+        "Memoization",
+        "Tabulation",
+        "Optimal substructure"
+      ]
+    },
+    {
+      "id": "TOP-006",
+      "title": "CPU and Assembly",
+      "domain": "Architecture",
+      "concepts": [
+        "NAND",
+        "ALU",
+        "Registers",
+        "Hack assembler",
+        "Cache locality"
+      ]
+    },
+    {
+      "id": "TOP-007",
+      "title": "Processes and Virtual Memory",
+      "domain": "Operating Systems",
+      "concepts": [
+        "fork and exec",
+        "Page tables",
+        "Traps",
+        "Copy-on-write",
+        "Scheduling"
+      ]
+    },
+    {
+      "id": "TOP-008",
+      "title": "Concurrency",
+      "domain": "Operating Systems",
+      "concepts": [
+        "Threads",
+        "Mutex",
+        "Semaphore",
+        "Deadlocks",
+        "Race conditions"
+      ]
+    },
+    {
+      "id": "TOP-009",
+      "title": "Network Protocols",
+      "domain": "Networking",
+      "concepts": [
+        "TCP sockets",
+        "UDP",
+        "HTTP",
+        "DNS",
+        "Nonblocking I/O"
+      ]
+    },
+    {
+      "id": "TOP-010",
+      "title": "Database Internals",
+      "domain": "Databases",
+      "concepts": [
+        "Page layout",
+        "Buffer pool",
+        "B+ tree",
+        "WAL",
+        "Recovery"
+      ]
+    },
+    {
+      "id": "TOP-011",
+      "title": "Query Processing",
+      "domain": "Databases",
+      "concepts": [
+        "SQL",
+        "Joins",
+        "Relational algebra",
+        "Query plans"
+      ]
+    },
+    {
+      "id": "TOP-012",
+      "title": "Backend Reliability",
+      "domain": "Backend",
+      "concepts": [
+        "Authentication",
+        "Idempotency",
+        "Retries",
+        "Job state machine"
+      ]
+    },
+    {
+      "id": "TOP-013",
+      "title": "Distributed Coordination",
+      "domain": "Distributed Systems",
+      "concepts": [
+        "RPC",
+        "Raft",
+        "Leader election",
+        "Linearizability",
+        "Consistency"
+      ]
+    },
+    {
+      "id": "TOP-014",
+      "title": "Distributed Execution",
+      "domain": "Distributed Systems",
+      "concepts": [
+        "MapReduce",
+        "Workers",
+        "Leases",
+        "Fault recovery"
+      ]
+    },
+    {
+      "id": "TOP-015",
+      "title": "Deployment and Observability",
+      "domain": "Cloud / DevOps",
+      "concepts": [
+        "Docker",
+        "GitHub Actions",
+        "Metrics",
+        "Tracing"
+      ]
+    },
+    {
+      "id": "TOP-016",
+      "title": "Profiling",
+      "domain": "Performance",
+      "concepts": [
+        "Benchmarking",
+        "Flamegraphs",
+        "Cache misses",
+        "Contention"
+      ]
+    },
+    {
+      "id": "TOP-017",
+      "title": "Neural Networks",
+      "domain": "AI / ML",
+      "concepts": [
+        "Backpropagation",
+        "Autograd",
+        "SGD",
+        "Adam",
+        "Regularization"
+      ]
+    },
+    {
+      "id": "TOP-018",
+      "title": "Language and Retrieval",
+      "domain": "AI / ML",
+      "concepts": [
+        "Attention",
+        "Transformers",
+        "Embeddings",
+        "Vector search",
+        "RAG evaluation"
+      ]
+    },
+    {
+      "id": "TOP-019",
+      "title": "Trading Systems",
+      "domain": "Quant / HFT",
+      "concepts": [
+        "Price-time priority",
+        "Order book",
+        "Market microstructure",
+        "Event-driven backtest",
+        "Risk limits"
+      ]
+    },
+    {
+      "id": "TOP-020",
+      "title": "Robotics Systems",
+      "domain": "Robotics / CV",
+      "concepts": [
+        "ROS2",
+        "Localization",
+        "Kalman filtering",
+        "Gazebo"
+      ]
+    },
+    {
+      "id": "TOP-021",
+      "title": "Quantum Circuit Algorithms",
+      "domain": "Quantum",
+      "concepts": [
+        "Qubits",
+        "Gates",
+        "State vector",
+        "Grover",
+        "QFT"
+      ]
+    },
+    {
+      "id": "TOP-022",
+      "title": "Open-source Contribution",
+      "domain": "Career & Portfolio",
+      "concepts": [
+        "Issue reproduction",
+        "Regression test",
+        "PR review",
+        "Technical writing"
+      ]
+    },
+    {
+      "id": "TOP-023",
+      "title": "Knowledge Ontology",
+      "domain": "Knowledge Systems",
+      "concepts": [
+        "Typed relations",
+        "Provenance",
+        "Atomic notes",
+        "MOC",
+        "Metadata schema"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "id": "CON-001-01",
+      "title": "Pointers",
+      "topic": "Memory Management",
+      "domain": "Programming",
+      "week": 1
+    },
+    {
+      "id": "CON-001-02",
+      "title": "Stack vs heap",
+      "topic": "Memory Management",
+      "domain": "Programming",
+      "week": 1
+    },
+    {
+      "id": "CON-001-03",
+      "title": "RAII",
+      "topic": "Memory Management",
+      "domain": "Programming",
+      "week": 1
+    },
+    {
+      "id": "CON-001-04",
+      "title": "Copy vs move",
+      "topic": "Memory Management",
+      "domain": "Programming",
+      "week": 1
+    },
+    {
+      "id": "CON-001-05",
+      "title": "Undefined behavior",
+      "topic": "Memory Management",
+      "domain": "Programming",
+      "week": 1
+    },
+    {
+      "id": "CON-002-01",
+      "title": "Templates",
+      "topic": "Modern C++",
+      "domain": "Programming",
+      "week": 2
+    },
+    {
+      "id": "CON-002-02",
+      "title": "STL",
+      "topic": "Modern C++",
+      "domain": "Programming",
+      "week": 2
+    },
+    {
+      "id": "CON-002-03",
+      "title": "Smart pointers",
+      "topic": "Modern C++",
+      "domain": "Programming",
+      "week": 2
+    },
+    {
+      "id": "CON-002-04",
+      "title": "Exception safety",
+      "topic": "Modern C++",
+      "domain": "Programming",
+      "week": 2
+    },
+    {
+      "id": "CON-002-05",
+      "title": "CMake",
+      "topic": "Modern C++",
+      "domain": "Programming",
+      "week": 2
+    },
+    {
+      "id": "CON-003-01",
+      "title": "Generators",
+      "topic": "Advanced Python",
+      "domain": "Programming",
+      "week": 3
+    },
+    {
+      "id": "CON-003-02",
+      "title": "Asyncio",
+      "topic": "Advanced Python",
+      "domain": "Programming",
+      "week": 3
+    },
+    {
+      "id": "CON-003-03",
+      "title": "Typing",
+      "topic": "Advanced Python",
+      "domain": "Programming",
+      "week": 3
+    },
+    {
+      "id": "CON-003-04",
+      "title": "pytest",
+      "topic": "Advanced Python",
+      "domain": "Programming",
+      "week": 3
+    },
+    {
+      "id": "CON-003-05",
+      "title": "Packaging",
+      "topic": "Advanced Python",
+      "domain": "Programming",
+      "week": 3
+    },
+    {
+      "id": "CON-004-01",
+      "title": "BFS",
+      "topic": "Graph Algorithms",
+      "domain": "Algorithms",
+      "week": 4
+    },
+    {
+      "id": "CON-004-02",
+      "title": "DFS",
+      "topic": "Graph Algorithms",
+      "domain": "Algorithms",
+      "week": 4
+    },
+    {
+      "id": "CON-004-03",
+      "title": "Dijkstra",
+      "topic": "Graph Algorithms",
+      "domain": "Algorithms",
+      "week": 4
+    },
+    {
+      "id": "CON-004-04",
+      "title": "Bellman-Ford",
+      "topic": "Graph Algorithms",
+      "domain": "Algorithms",
+      "week": 4
+    },
+    {
+      "id": "CON-004-05",
+      "title": "Minimum spanning tree",
+      "topic": "Graph Algorithms",
+      "domain": "Algorithms",
+      "week": 4
+    },
+    {
+      "id": "CON-005-01",
+      "title": "Recurrence",
+      "topic": "Dynamic Programming",
+      "domain": "Algorithms",
+      "week": 5
+    },
+    {
+      "id": "CON-005-02",
+      "title": "Memoization",
+      "topic": "Dynamic Programming",
+      "domain": "Algorithms",
+      "week": 5
+    },
+    {
+      "id": "CON-005-03",
+      "title": "Tabulation",
+      "topic": "Dynamic Programming",
+      "domain": "Algorithms",
+      "week": 5
+    },
+    {
+      "id": "CON-005-04",
+      "title": "Optimal substructure",
+      "topic": "Dynamic Programming",
+      "domain": "Algorithms",
+      "week": 5
+    },
+    {
+      "id": "CON-006-01",
+      "title": "NAND",
+      "topic": "CPU and Assembly",
+      "domain": "Architecture",
+      "week": 6
+    },
+    {
+      "id": "CON-006-02",
+      "title": "ALU",
+      "topic": "CPU and Assembly",
+      "domain": "Architecture",
+      "week": 6
+    },
+    {
+      "id": "CON-006-03",
+      "title": "Registers",
+      "topic": "CPU and Assembly",
+      "domain": "Architecture",
+      "week": 6
+    },
+    {
+      "id": "CON-006-04",
+      "title": "Hack assembler",
+      "topic": "CPU and Assembly",
+      "domain": "Architecture",
+      "week": 6
+    },
+    {
+      "id": "CON-006-05",
+      "title": "Cache locality",
+      "topic": "CPU and Assembly",
+      "domain": "Architecture",
+      "week": 6
+    },
+    {
+      "id": "CON-007-01",
+      "title": "fork and exec",
+      "topic": "Processes and Virtual Memory",
+      "domain": "Operating Systems",
+      "week": 7
+    },
+    {
+      "id": "CON-007-02",
+      "title": "Page tables",
+      "topic": "Processes and Virtual Memory",
+      "domain": "Operating Systems",
+      "week": 7
+    },
+    {
+      "id": "CON-007-03",
+      "title": "Traps",
+      "topic": "Processes and Virtual Memory",
+      "domain": "Operating Systems",
+      "week": 7
+    },
+    {
+      "id": "CON-007-04",
+      "title": "Copy-on-write",
+      "topic": "Processes and Virtual Memory",
+      "domain": "Operating Systems",
+      "week": 7
+    },
+    {
+      "id": "CON-007-05",
+      "title": "Scheduling",
+      "topic": "Processes and Virtual Memory",
+      "domain": "Operating Systems",
+      "week": 7
+    },
+    {
+      "id": "CON-008-01",
+      "title": "Threads",
+      "topic": "Concurrency",
+      "domain": "Operating Systems",
+      "week": 8
+    },
+    {
+      "id": "CON-008-02",
+      "title": "Mutex",
+      "topic": "Concurrency",
+      "domain": "Operating Systems",
+      "week": 8
+    },
+    {
+      "id": "CON-008-03",
+      "title": "Semaphore",
+      "topic": "Concurrency",
+      "domain": "Operating Systems",
+      "week": 8
+    },
+    {
+      "id": "CON-008-04",
+      "title": "Deadlocks",
+      "topic": "Concurrency",
+      "domain": "Operating Systems",
+      "week": 8
+    },
+    {
+      "id": "CON-008-05",
+      "title": "Race conditions",
+      "topic": "Concurrency",
+      "domain": "Operating Systems",
+      "week": 8
+    },
+    {
+      "id": "CON-009-01",
+      "title": "TCP sockets",
+      "topic": "Network Protocols",
+      "domain": "Networking",
+      "week": 9
+    },
+    {
+      "id": "CON-009-02",
+      "title": "UDP",
+      "topic": "Network Protocols",
+      "domain": "Networking",
+      "week": 9
+    },
+    {
+      "id": "CON-009-03",
+      "title": "HTTP",
+      "topic": "Network Protocols",
+      "domain": "Networking",
+      "week": 9
+    },
+    {
+      "id": "CON-009-04",
+      "title": "DNS",
+      "topic": "Network Protocols",
+      "domain": "Networking",
+      "week": 9
+    },
+    {
+      "id": "CON-009-05",
+      "title": "Nonblocking I/O",
+      "topic": "Network Protocols",
+      "domain": "Networking",
+      "week": 9
+    },
+    {
+      "id": "CON-010-01",
+      "title": "Page layout",
+      "topic": "Database Internals",
+      "domain": "Databases",
+      "week": 10
+    },
+    {
+      "id": "CON-010-02",
+      "title": "Buffer pool",
+      "topic": "Database Internals",
+      "domain": "Databases",
+      "week": 10
+    },
+    {
+      "id": "CON-010-03",
+      "title": "B+ tree",
+      "topic": "Database Internals",
+      "domain": "Databases",
+      "week": 10
+    },
+    {
+      "id": "CON-010-04",
+      "title": "WAL",
+      "topic": "Database Internals",
+      "domain": "Databases",
+      "week": 10
+    },
+    {
+      "id": "CON-010-05",
+      "title": "Recovery",
+      "topic": "Database Internals",
+      "domain": "Databases",
+      "week": 10
+    },
+    {
+      "id": "CON-011-01",
+      "title": "SQL",
+      "topic": "Query Processing",
+      "domain": "Databases",
+      "week": 11
+    },
+    {
+      "id": "CON-011-02",
+      "title": "Joins",
+      "topic": "Query Processing",
+      "domain": "Databases",
+      "week": 11
+    },
+    {
+      "id": "CON-011-03",
+      "title": "Relational algebra",
+      "topic": "Query Processing",
+      "domain": "Databases",
+      "week": 11
+    },
+    {
+      "id": "CON-011-04",
+      "title": "Query plans",
+      "topic": "Query Processing",
+      "domain": "Databases",
+      "week": 11
+    },
+    {
+      "id": "CON-012-01",
+      "title": "Authentication",
+      "topic": "Backend Reliability",
+      "domain": "Backend",
+      "week": 12
+    },
+    {
+      "id": "CON-012-02",
+      "title": "Idempotency",
+      "topic": "Backend Reliability",
+      "domain": "Backend",
+      "week": 12
+    },
+    {
+      "id": "CON-012-03",
+      "title": "Retries",
+      "topic": "Backend Reliability",
+      "domain": "Backend",
+      "week": 12
+    },
+    {
+      "id": "CON-012-04",
+      "title": "Job state machine",
+      "topic": "Backend Reliability",
+      "domain": "Backend",
+      "week": 12
+    },
+    {
+      "id": "CON-013-01",
+      "title": "RPC",
+      "topic": "Distributed Coordination",
+      "domain": "Distributed Systems",
+      "week": 13
+    },
+    {
+      "id": "CON-013-02",
+      "title": "Raft",
+      "topic": "Distributed Coordination",
+      "domain": "Distributed Systems",
+      "week": 13
+    },
+    {
+      "id": "CON-013-03",
+      "title": "Leader election",
+      "topic": "Distributed Coordination",
+      "domain": "Distributed Systems",
+      "week": 13
+    },
+    {
+      "id": "CON-013-04",
+      "title": "Linearizability",
+      "topic": "Distributed Coordination",
+      "domain": "Distributed Systems",
+      "week": 13
+    },
+    {
+      "id": "CON-013-05",
+      "title": "Consistency",
+      "topic": "Distributed Coordination",
+      "domain": "Distributed Systems",
+      "week": 13
+    },
+    {
+      "id": "CON-014-01",
+      "title": "MapReduce",
+      "topic": "Distributed Execution",
+      "domain": "Distributed Systems",
+      "week": 14
+    },
+    {
+      "id": "CON-014-02",
+      "title": "Workers",
+      "topic": "Distributed Execution",
+      "domain": "Distributed Systems",
+      "week": 14
+    },
+    {
+      "id": "CON-014-03",
+      "title": "Leases",
+      "topic": "Distributed Execution",
+      "domain": "Distributed Systems",
+      "week": 14
+    },
+    {
+      "id": "CON-014-04",
+      "title": "Fault recovery",
+      "topic": "Distributed Execution",
+      "domain": "Distributed Systems",
+      "week": 14
+    },
+    {
+      "id": "CON-015-01",
+      "title": "Docker",
+      "topic": "Deployment and Observability",
+      "domain": "Cloud / DevOps",
+      "week": 15
+    },
+    {
+      "id": "CON-015-02",
+      "title": "GitHub Actions",
+      "topic": "Deployment and Observability",
+      "domain": "Cloud / DevOps",
+      "week": 15
+    },
+    {
+      "id": "CON-015-03",
+      "title": "Metrics",
+      "topic": "Deployment and Observability",
+      "domain": "Cloud / DevOps",
+      "week": 15
+    },
+    {
+      "id": "CON-015-04",
+      "title": "Tracing",
+      "topic": "Deployment and Observability",
+      "domain": "Cloud / DevOps",
+      "week": 15
+    },
+    {
+      "id": "CON-016-01",
+      "title": "Benchmarking",
+      "topic": "Profiling",
+      "domain": "Performance",
+      "week": 16
+    },
+    {
+      "id": "CON-016-02",
+      "title": "Flamegraphs",
+      "topic": "Profiling",
+      "domain": "Performance",
+      "week": 16
+    },
+    {
+      "id": "CON-016-03",
+      "title": "Cache misses",
+      "topic": "Profiling",
+      "domain": "Performance",
+      "week": 16
+    },
+    {
+      "id": "CON-016-04",
+      "title": "Contention",
+      "topic": "Profiling",
+      "domain": "Performance",
+      "week": 16
+    },
+    {
+      "id": "CON-017-01",
+      "title": "Backpropagation",
+      "topic": "Neural Networks",
+      "domain": "AI / ML",
+      "week": 17
+    },
+    {
+      "id": "CON-017-02",
+      "title": "Autograd",
+      "topic": "Neural Networks",
+      "domain": "AI / ML",
+      "week": 17
+    },
+    {
+      "id": "CON-017-03",
+      "title": "SGD",
+      "topic": "Neural Networks",
+      "domain": "AI / ML",
+      "week": 17
+    },
+    {
+      "id": "CON-017-04",
+      "title": "Adam",
+      "topic": "Neural Networks",
+      "domain": "AI / ML",
+      "week": 17
+    },
+    {
+      "id": "CON-017-05",
+      "title": "Regularization",
+      "topic": "Neural Networks",
+      "domain": "AI / ML",
+      "week": 17
+    },
+    {
+      "id": "CON-018-01",
+      "title": "Attention",
+      "topic": "Language and Retrieval",
+      "domain": "AI / ML",
+      "week": 18
+    },
+    {
+      "id": "CON-018-02",
+      "title": "Transformers",
+      "topic": "Language and Retrieval",
+      "domain": "AI / ML",
+      "week": 18
+    },
+    {
+      "id": "CON-018-03",
+      "title": "Embeddings",
+      "topic": "Language and Retrieval",
+      "domain": "AI / ML",
+      "week": 18
+    },
+    {
+      "id": "CON-018-04",
+      "title": "Vector search",
+      "topic": "Language and Retrieval",
+      "domain": "AI / ML",
+      "week": 18
+    },
+    {
+      "id": "CON-018-05",
+      "title": "RAG evaluation",
+      "topic": "Language and Retrieval",
+      "domain": "AI / ML",
+      "week": 18
+    },
+    {
+      "id": "CON-019-01",
+      "title": "Price-time priority",
+      "topic": "Trading Systems",
+      "domain": "Quant / HFT",
+      "week": 19
+    },
+    {
+      "id": "CON-019-02",
+      "title": "Order book",
+      "topic": "Trading Systems",
+      "domain": "Quant / HFT",
+      "week": 19
+    },
+    {
+      "id": "CON-019-03",
+      "title": "Market microstructure",
+      "topic": "Trading Systems",
+      "domain": "Quant / HFT",
+      "week": 19
+    },
+    {
+      "id": "CON-019-04",
+      "title": "Event-driven backtest",
+      "topic": "Trading Systems",
+      "domain": "Quant / HFT",
+      "week": 19
+    },
+    {
+      "id": "CON-019-05",
+      "title": "Risk limits",
+      "topic": "Trading Systems",
+      "domain": "Quant / HFT",
+      "week": 19
+    },
+    {
+      "id": "CON-020-01",
+      "title": "ROS2",
+      "topic": "Robotics Systems",
+      "domain": "Robotics / CV",
+      "week": 20
+    },
+    {
+      "id": "CON-020-02",
+      "title": "Localization",
+      "topic": "Robotics Systems",
+      "domain": "Robotics / CV",
+      "week": 20
+    },
+    {
+      "id": "CON-020-03",
+      "title": "Kalman filtering",
+      "topic": "Robotics Systems",
+      "domain": "Robotics / CV",
+      "week": 20
+    },
+    {
+      "id": "CON-020-04",
+      "title": "Gazebo",
+      "topic": "Robotics Systems",
+      "domain": "Robotics / CV",
+      "week": 20
+    },
+    {
+      "id": "CON-021-01",
+      "title": "Qubits",
+      "topic": "Quantum Circuit Algorithms",
+      "domain": "Quantum",
+      "week": 21
+    },
+    {
+      "id": "CON-021-02",
+      "title": "Gates",
+      "topic": "Quantum Circuit Algorithms",
+      "domain": "Quantum",
+      "week": 21
+    },
+    {
+      "id": "CON-021-03",
+      "title": "State vector",
+      "topic": "Quantum Circuit Algorithms",
+      "domain": "Quantum",
+      "week": 21
+    },
+    {
+      "id": "CON-021-04",
+      "title": "Grover",
+      "topic": "Quantum Circuit Algorithms",
+      "domain": "Quantum",
+      "week": 21
+    },
+    {
+      "id": "CON-021-05",
+      "title": "QFT",
+      "topic": "Quantum Circuit Algorithms",
+      "domain": "Quantum",
+      "week": 21
+    },
+    {
+      "id": "CON-022-01",
+      "title": "Issue reproduction",
+      "topic": "Open-source Contribution",
+      "domain": "Career & Portfolio",
+      "week": 22
+    },
+    {
+      "id": "CON-022-02",
+      "title": "Regression test",
+      "topic": "Open-source Contribution",
+      "domain": "Career & Portfolio",
+      "week": 22
+    },
+    {
+      "id": "CON-022-03",
+      "title": "PR review",
+      "topic": "Open-source Contribution",
+      "domain": "Career & Portfolio",
+      "week": 22
+    },
+    {
+      "id": "CON-022-04",
+      "title": "Technical writing",
+      "topic": "Open-source Contribution",
+      "domain": "Career & Portfolio",
+      "week": 22
+    },
+    {
+      "id": "CON-023-01",
+      "title": "Typed relations",
+      "topic": "Knowledge Ontology",
+      "domain": "Knowledge Systems",
+      "week": 23
+    },
+    {
+      "id": "CON-023-02",
+      "title": "Provenance",
+      "topic": "Knowledge Ontology",
+      "domain": "Knowledge Systems",
+      "week": 23
+    },
+    {
+      "id": "CON-023-03",
+      "title": "Atomic notes",
+      "topic": "Knowledge Ontology",
+      "domain": "Knowledge Systems",
+      "week": 23
+    },
+    {
+      "id": "CON-023-04",
+      "title": "MOC",
+      "topic": "Knowledge Ontology",
+      "domain": "Knowledge Systems",
+      "week": 23
+    },
+    {
+      "id": "CON-023-05",
+      "title": "Metadata schema",
+      "topic": "Knowledge Ontology",
+      "domain": "Knowledge Systems",
+      "week": 23
+    }
+  ],
+  "oss": [
+    {
+      "week": 1,
+      "repo": "kiwix/kiwix-js",
+      "mission": "Reproduce Kiwix JS issue",
+      "url": "https://github.com/kiwix/kiwix-js",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 2,
+      "repo": "kiwix/kiwix-js",
+      "mission": "Investigate Kiwix JS regression test",
+      "url": "https://github.com/kiwix/kiwix-js",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 3,
+      "repo": "fmtlib/fmt",
+      "mission": "Explore fmtlib/fmt issues",
+      "url": "https://github.com/fmtlib/fmt",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 4,
+      "repo": "fmtlib/fmt",
+      "mission": "Read fmt contribution tests",
+      "url": "https://github.com/fmtlib/fmt",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 5,
+      "repo": "fmtlib/fmt",
+      "mission": "Prepare fmt test/documentation fix",
+      "url": "https://github.com/fmtlib/fmt",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 6,
+      "repo": "fmtlib/fmt",
+      "mission": "Submit or refine focused PR",
+      "url": "https://github.com/fmtlib/fmt",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 7,
+      "repo": "fmtlib/fmt",
+      "mission": "Address C++ PR feedback",
+      "url": "https://github.com/fmtlib/fmt",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 8,
+      "repo": "fmtlib/fmt",
+      "mission": "Regression tests for OSS work",
+      "url": "https://github.com/fmtlib/fmt",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 9,
+      "repo": "fmtlib/fmt",
+      "mission": "Investigate C++ integration issue",
+      "url": "https://github.com/fmtlib/fmt",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 10,
+      "repo": "fmtlib/fmt",
+      "mission": "Complete source investigation",
+      "url": "https://github.com/fmtlib/fmt",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 11,
+      "repo": "curl/curl",
+      "mission": "Explore curl networking issues",
+      "url": "https://github.com/curl/curl",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 12,
+      "repo": "curl/curl",
+      "mission": "Investigate memory correctness issues",
+      "url": "https://github.com/curl/curl",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 13,
+      "repo": "curl/curl",
+      "mission": "Contribute targeted concurrency tests",
+      "url": "https://github.com/curl/curl",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 14,
+      "repo": "curl/curl",
+      "mission": "Inspect curl protocol regression",
+      "url": "https://github.com/curl/curl",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 15,
+      "repo": "duckdb/duckdb",
+      "mission": "Study DuckDB docs issue",
+      "url": "https://github.com/duckdb/duckdb",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 16,
+      "repo": "duckdb/duckdb",
+      "mission": "Improve DuckDB test/doc reproduction",
+      "url": "https://github.com/duckdb/duckdb",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 17,
+      "repo": "duckdb/duckdb",
+      "mission": "Reproduce query behavior issue",
+      "url": "https://github.com/duckdb/duckdb",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 18,
+      "repo": "duckdb/duckdb",
+      "mission": "Submit scoped documentation/test contribution",
+      "url": "https://github.com/duckdb/duckdb",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 19,
+      "repo": "grpc/grpc",
+      "mission": "Read gRPC issues and tests",
+      "url": "https://github.com/grpc/grpc",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 20,
+      "repo": "etcd-io/etcd",
+      "mission": "Study etcd Raft architecture",
+      "url": "https://github.com/etcd-io/etcd",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 21,
+      "repo": "grpc/grpc",
+      "mission": "Investigate gRPC retry docs",
+      "url": "https://github.com/grpc/grpc",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 22,
+      "repo": "grpc/grpc",
+      "mission": "Refine distributed OSS contribution",
+      "url": "https://github.com/grpc/grpc",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 23,
+      "repo": "scikit-learn/scikit-learn",
+      "mission": "Read scikit-learn tests",
+      "url": "https://github.com/scikit-learn/scikit-learn",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 24,
+      "repo": "scikit-learn/scikit-learn",
+      "mission": "Inspect scikit-learn or PyTorch docs",
+      "url": "https://github.com/scikit-learn/scikit-learn",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 25,
+      "repo": "pytorch/pytorch",
+      "mission": "Read PyTorch contribution rules",
+      "url": "https://github.com/pytorch/pytorch",
+      "validation": "Reproduction, tests, contribution guidelines"
+    },
+    {
+      "week": 26,
+      "repo": "pytorch/pytorch",
+      "mission": "Resolve contribution review feedback",
+      "url": "https://github.com/pytorch/pytorch",
+      "validation": "Reproduction, tests, contribution guidelines"
+    }
+  ],
+  "milestones": [
+    {
+      "title": "C++ engineering library",
+      "week": 6,
+      "project": "PRJ-003",
+      "evidence": "Class ownership, container tests, sanitizers, CI"
+    },
+    {
+      "title": "Algorithms and architecture",
+      "week": 10,
+      "project": "PRJ-014",
+      "evidence": "Logic gates, ALU, CPU and assembler validated"
+    },
+    {
+      "title": "Concurrent HTTP server",
+      "week": 14,
+      "project": "PRJ-020",
+      "evidence": "Protocol correctness and load testing"
+    },
+    {
+      "title": "Persistent database",
+      "week": 18,
+      "project": "PRJ-023",
+      "evidence": "B+ tree and write-ahead logging recover after crash"
+    },
+    {
+      "title": "Distributed job engine",
+      "week": 22,
+      "project": "PRJ-030",
+      "evidence": "Worker termination, retries, metrics and scaling"
+    },
+    {
+      "title": "ML engineering lab",
+      "week": 25,
+      "project": "PRJ-037",
+      "evidence": "Neural network gradient checks and evaluation report"
+    },
+    {
+      "title": "Integrated flagship",
+      "week": 26,
+      "project": "PRJ-050",
+      "evidence": "Full API→queue→workers→ML→storage demonstration"
+    },
+    {
+      "title": "First upstream reproduction",
+      "week": 2,
+      "project": "PRJ-001",
+      "evidence": "Bug reproduced or test investigated with evidence"
+    },
+    {
+      "title": "Graph and DSA foundations",
+      "week": 6,
+      "project": "PRJ-009",
+      "evidence": "Correct graph algorithms with complexity notes"
+    },
+    {
+      "title": "OS and shell checkpoint",
+      "week": 12,
+      "project": "PRJ-015",
+      "evidence": "System calls, signals and page-table understanding"
+    },
+    {
+      "title": "SQL subset query engine",
+      "week": 17,
+      "project": "PRJ-024",
+      "evidence": "Select/filter/join tested against SQLite"
+    },
+    {
+      "title": "Distributed reliability review",
+      "week": 21,
+      "project": "PRJ-030",
+      "evidence": "Correct idempotency and lease models"
+    },
+    {
+      "title": "Portfolio technical publication",
+      "week": 26,
+      "project": "PRJ-050",
+      "evidence": "README, architecture, benchmarks and source URL"
+    }
+  ],
+  "quant": {
+    "phases": [
+      {
+        "title": "Phase 0 — Quant Orientation & Research Environment",
+        "tempo": "1–2 weeks",
+        "topics": [
+          "Hedge funds, systematic funds, proprietary trading, market makers, HFT, banks",
+          "Roles: Quant Researcher, Quant Trader, Quant Developer, Execution Quant, PM, Research Engineer",
+          "Research horizons: ultra-high, high, mid and low frequency",
+          "Alpha, execution, risk, capital allocation, P&L attribution",
+          "Linux shell, Git/GitHub, Python environments, Jupyter, VS Code",
+          "Reproducibility: lock files, seeds, data versioning, experiment metadata",
+          "Repo hygiene: README, tests, docs, notebooks vs production code"
+        ]
+      },
+      {
+        "title": "Phase 1 — Mathematical Language & Pre-Calculus",
+        "tempo": "2–4 weeks",
+        "topics": [
+          "Functions, domain/range, compositions, inverse functions",
+          "Equations, inequalities, systems",
+          "Sequences, series, sigma/product notation",
+          "Exponents, logarithms, asymptotic growth",
+          "Complex numbers, trigonometry",
+          "Proof language: implication, contradiction, induction, quantifiers"
+        ]
+      },
+      {
+        "title": "Phase 2 — Calculus, Linear Algebra & Optimization",
+        "tempo": "6–10 weeks",
+        "topics": [
+          "Limits, continuity, derivatives",
+          "Partial derivatives, gradients, Jacobians, Hessians",
+          "Chain rule and Taylor approximation",
+          "Integration; multiple integrals",
+          "Lagrange multipliers",
+          "Vectors, norms, inner products",
+          "Matrices, rank, inverse, determinant",
+          "Linear systems and projections",
+          "Eigenvalues/eigenvectors",
+          "Positive definite matrices",
+          "SVD, QR, PCA"
+        ]
+      },
+      {
+        "title": "Phase 3 — Probability Theory",
+        "tempo": "8–12 weeks • highest priority",
+        "topics": [
+          "Sample spaces, events, axioms, counting",
+          "Conditional probability, independence, Bayes",
+          "Discrete/continuous random variables",
+          "PMF, PDF, CDF, transformations",
+          "Expectation, LOTUS, variance, covariance, correlation",
+          "Joint/marginal/conditional distributions",
+          "Conditional expectation",
+          "MGF and characteristic-function intuition",
+          "Bernoulli, Binomial, Geometric, Poisson",
+          "Uniform, Exponential, Normal, Lognormal, Gamma, Beta, Student-t, Chi-square",
+          "LLN and CLT",
+          "Order statistics and extreme-value intuition"
+        ]
+      },
+      {
+        "title": "Phase 4 — Mathematical Statistics & Statistical Inference",
+        "tempo": "10–14 weeks • MSc core",
+        "topics": [
+          "Sampling distributions",
+          "Point estimation, MOM, MLE",
+          "Bias, consistency, efficiency",
+          "Sufficiency and factorization",
+          "Confidence intervals",
+          "Hypothesis testing, likelihood ratio tests",
+          "Type I/II errors and power",
+          "Bayesian inference",
+          "Decision theory and loss",
+          "Bootstrap/resampling",
+          "Nonparametrics",
+          "Asymptotics",
+          "High-dimensional statistics",
+          "Multiple testing/FDR"
+        ]
+      },
+      {
+        "title": "Phase 5 — Python for Quant Research",
+        "tempo": "6–8 weeks + continuous",
+        "topics": [
+          "Core syntax, functions, data structures, modules",
+          "Iterators/generators, decorators, context managers",
+          "Dataclasses, typing, exceptions, testing, packaging",
+          "NumPy: arrays, broadcasting, vectorization, linear algebra",
+          "Pandas/Polars: joins, groupby, windows, time indexes",
+          "SciPy: optimization, distributions, numerical integration",
+          "Statsmodels, scikit-learn, Matplotlib/Plotly"
+        ]
+      },
+      {
+        "title": "Phase 6 — C++ & Core Computer Science",
+        "tempo": "10–16 weeks + continuous",
+        "topics": [
+          "Types, references, pointers",
+          "RAII and ownership",
+          "STL containers/algorithms",
+          "Templates",
+          "Move semantics",
+          "Smart pointers",
+          "Testing/benchmarking",
+          "DSA and complexity",
+          "Processes, threads, virtual memory",
+          "CPU cache and memory hierarchy",
+          "Concurrency, atomics, locks",
+          "TCP/UDP and sockets",
+          "Profiling and latency"
+        ]
+      },
+      {
+        "title": "Phase 7 — Data Engineering & Research Computing",
+        "tempo": "4–8 weeks",
+        "topics": [
+          "SQL joins, aggregations, window functions, indexes",
+          "PostgreSQL, DuckDB, Parquet, Arrow",
+          "ETL/ELT and schema validation",
+          "Time-series storage",
+          "Missing/stale data, splits/dividends, timezones",
+          "Experiment caching, Docker and CI basics"
+        ]
+      },
+      {
+        "title": "Phase 8 — Regression, Econometrics & Causal Thinking",
+        "tempo": "6–10 weeks",
+        "topics": [
+          "OLS derivation and geometry",
+          "Assumptions and residual diagnostics",
+          "Heteroskedasticity/autocorrelation/multicollinearity",
+          "Ridge, Lasso, Elastic Net",
+          "Logistic regression and GLMs",
+          "Instrumental variables and panel-data intuition",
+          "Confounding, DAGs and treatment-effect intuition"
+        ]
+      },
+      {
+        "title": "Phase 9 — Time Series & Financial Econometrics",
+        "tempo": "10–14 weeks • critical",
+        "topics": [
+          "Trend, seasonality, dependence",
+          "Stationarity/unit roots, ACF/PACF",
+          "AR, MA, ARMA, ARIMA/SARIMA",
+          "ARCH/GARCH and volatility",
+          "VAR/VECM",
+          "Cointegration and error correction",
+          "State-space models and Kalman filter",
+          "Regime switching/HMM",
+          "Spectral basics, long memory, structural breaks",
+          "Rolling/expanding/walk-forward forecast evaluation"
+        ]
+      },
+      {
+        "title": "Phase 10 — Financial Markets & Instruments",
+        "tempo": "6–8 weeks",
+        "topics": [
+          "Equities, ETFs, indices, corporate actions",
+          "Futures: contract specs, basis, margin, rolls",
+          "Options: calls/puts, payoff, implied volatility, Greeks",
+          "Fixed income: yield, duration, convexity, term structure",
+          "FX, commodities, cross-asset relationships",
+          "Market participants, exchanges and clearing",
+          "Returns/log returns, volatility, leverage, shorting"
+        ]
+      },
+      {
+        "title": "Phase 11 — Systematic Trading & Alpha Research",
+        "tempo": "8–12 weeks",
+        "topics": [
+          "Momentum: cross-sectional and time-series",
+          "Mean reversion and pairs",
+          "Statistical arbitrage and spread modeling",
+          "Factor models: value, momentum, quality, size, low volatility",
+          "Trend following, carry, volatility",
+          "Cross-asset and alternative-data signals",
+          "Signal decay, turnover, capacity, crowding",
+          "Research hypothesis → economic story → statistical evidence"
+        ]
+      },
+      {
+        "title": "Phase 12 — Backtesting, Validation & Research Methodology",
+        "tempo": "8–12 weeks • critical",
+        "topics": [
+          "Vectorized vs event-driven backtesting",
+          "Look-ahead bias and temporal leakage",
+          "Survivorship and selection bias",
+          "Multiple testing/data snooping",
+          "Rolling/expanding/walk-forward validation",
+          "Purging/embargo concepts",
+          "Fees, spread, borrow, slippage",
+          "Turnover, capacity and market impact",
+          "Statistical vs economic significance",
+          "Parameter, subperiod, regime and universe robustness",
+          "Research reproducibility"
+        ]
+      },
+      {
+        "title": "Phase 13 — Machine Learning for Quant Research",
+        "tempo": "10–14 weeks",
+        "topics": [
+          "Bias/variance and regularization",
+          "Linear/logistic models",
+          "Trees, random forests, gradient boosting, XGBoost/LightGBM",
+          "Feature engineering, selection and importance",
+          "PCA and clustering",
+          "Calibration and probabilistic forecasts",
+          "Temporal validation and distribution shift",
+          "Ensembling",
+          "Neural networks and representation learning",
+          "Transformers/NLP for filings, calls, news and alternative text",
+          "RL only after supervised/statistical foundations"
+        ]
+      },
+      {
+        "title": "Phase 14 — Portfolio Construction, Factor Models & Risk",
+        "tempo": "8–12 weeks",
+        "topics": [
+          "Mean-variance optimization",
+          "Covariance estimation and shrinkage",
+          "Minimum variance and tangency portfolio",
+          "Risk parity/equal risk contribution",
+          "Factor exposures and neutralization",
+          "Constraints and transaction-aware optimization",
+          "VaR, Expected Shortfall/CVaR",
+          "Drawdown, tail risk and stress tests",
+          "Kelly criterion, risk budgeting and position sizing"
+        ]
+      },
+      {
+        "title": "Phase 15 — Market Microstructure, Execution & HFT Foundations",
+        "tempo": "10–14 weeks",
+        "topics": [
+          "Limit order books: bids, asks, depth and queues",
+          "Market/limit/cancel orders and matching",
+          "Price-time priority",
+          "Bid-ask spread and adverse selection",
+          "Liquidity and order flow",
+          "Market impact: temporary/permanent",
+          "TWAP, VWAP, implementation shortfall",
+          "Inventory risk and market making",
+          "Latency, feed handling and co-location concepts"
+        ]
+      },
+      {
+        "title": "Phase 16 — Stochastic Processes & Advanced Quant Mathematics",
+        "tempo": "10–16 weeks",
+        "topics": [
+          "Random walks and Markov chains",
+          "Poisson/point processes",
+          "Brownian motion and martingales",
+          "Stopping times",
+          "Itô integral and Itô lemma",
+          "SDEs and geometric Brownian motion",
+          "Change-of-measure intuition",
+          "Stochastic control",
+          "Monte Carlo variance reduction",
+          "Numerical methods for SDEs"
+        ]
+      },
+      {
+        "title": "Phase 17 — Research Communication & Scientific Practice",
+        "tempo": "continuous",
+        "topics": [
+          "Write hypotheses before experiments",
+          "Keep research logs and negative results",
+          "Use uncertainty-aware tables/plots",
+          "Maintain a reproducibility checklist",
+          "Research memo: question → data → method → evidence → limitations → decision",
+          "Explain each project in 2-, 10- and 30-minute formats"
+        ]
+      },
+      {
+        "title": "Phase 18 — Quant Interview Preparation",
+        "tempo": "start 6–9 months before applications",
+        "topics": [
+          "Mental math and estimation",
+          "Probability puzzles, Bayes, expectation, combinatorics",
+          "Statistics: MLE, tests, regression, distributions",
+          "DSA and algorithmic complexity",
+          "Python numerical/data coding",
+          "C++/systems for developer/HFT roles",
+          "Trading games and expected-value decisions",
+          "Research cases: design/critique/defend an experiment"
+        ]
+      }
+    ],
+    "projects": [
+      [
+        {
+          "text": "01",
+          "url": ""
+        },
+        {
+          "text": "quant-math-foundations",
+          "url": ""
+        },
+        {
+          "text": "Linear algebra, calculus, optimization implementations",
+          "url": ""
+        },
+        {
+          "text": "Mathematical fluency",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "02",
+          "url": ""
+        },
+        {
+          "text": "probability-lab",
+          "url": ""
+        },
+        {
+          "text": "Distributions, Bayes, random walks, Monte Carlo",
+          "url": ""
+        },
+        {
+          "text": "Probability intuition",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "03",
+          "url": ""
+        },
+        {
+          "text": "statistical-inference-lab",
+          "url": ""
+        },
+        {
+          "text": "MLE, bootstrap, tests, confidence, FDR",
+          "url": ""
+        },
+        {
+          "text": "Research statistics",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "04",
+          "url": ""
+        },
+        {
+          "text": "quant-data-platform",
+          "url": ""
+        },
+        {
+          "text": "Market-data ETL, validation, Parquet/DuckDB",
+          "url": ""
+        },
+        {
+          "text": "Data engineering",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "05",
+          "url": ""
+        },
+        {
+          "text": "time-series-lab",
+          "url": ""
+        },
+        {
+          "text": "ARIMA/GARCH/VAR/cointegration/Kalman/regimes",
+          "url": ""
+        },
+        {
+          "text": "Econometrics",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "06",
+          "url": ""
+        },
+        {
+          "text": "stat-arb-research",
+          "url": ""
+        },
+        {
+          "text": "Universe → cointegration → spread → costs → OOS",
+          "url": ""
+        },
+        {
+          "text": "End-to-end QR",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "07",
+          "url": ""
+        },
+        {
+          "text": "event-driven-backtester",
+          "url": ""
+        },
+        {
+          "text": "Market/Signal/Order/Fill events and accounting",
+          "url": ""
+        },
+        {
+          "text": "Trading architecture",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "08",
+          "url": ""
+        },
+        {
+          "text": "ml-alpha-lab",
+          "url": ""
+        },
+        {
+          "text": "Features, temporal CV, models, robustness",
+          "url": ""
+        },
+        {
+          "text": "ML research",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "09",
+          "url": ""
+        },
+        {
+          "text": "portfolio-risk-engine",
+          "url": ""
+        },
+        {
+          "text": "MVO, shrinkage, factors, CVaR, constraints",
+          "url": ""
+        },
+        {
+          "text": "Portfolio math",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "10",
+          "url": ""
+        },
+        {
+          "text": "limit-order-book-sim",
+          "url": ""
+        },
+        {
+          "text": "Matching engine, queues, fills, market maker",
+          "url": ""
+        },
+        {
+          "text": "Microstructure + C++",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "11",
+          "url": ""
+        },
+        {
+          "text": "cpp-backtest-engine",
+          "url": ""
+        },
+        {
+          "text": "High-performance simulator, benchmarks, concurrency",
+          "url": ""
+        },
+        {
+          "text": "Systems performance",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "12",
+          "url": ""
+        },
+        {
+          "text": "OpenQuantLab",
+          "url": ""
+        },
+        {
+          "text": "Integrated data, research, backtest, portfolio, risk, execution",
+          "url": ""
+        },
+        {
+          "text": "Flagship ownership",
+          "url": ""
+        }
+      ]
+    ],
+    "books": [
+      [
+        {
+          "text": "Proofs",
+          "url": ""
+        },
+        {
+          "text": "Book of Proof — Hammack",
+          "url": ""
+        },
+        {
+          "text": "How to Prove It — Velleman",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Linear Algebra",
+          "url": ""
+        },
+        {
+          "text": "Introduction to Linear Algebra — Strang",
+          "url": ""
+        },
+        {
+          "text": "Matrix Computations — Golub & Van Loan",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Probability",
+          "url": ""
+        },
+        {
+          "text": "Introduction to Probability — Blitzstein & Hwang",
+          "url": ""
+        },
+        {
+          "text": "Probability with Martingales — Williams",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Statistics",
+          "url": ""
+        },
+        {
+          "text": "Statistical Inference — Casella & Berger",
+          "url": ""
+        },
+        {
+          "text": "All of Statistics — Wasserman; van der Vaart",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Bayesian",
+          "url": ""
+        },
+        {
+          "text": "Bayesian Data Analysis — Gelman et al.",
+          "url": ""
+        },
+        {
+          "text": "Specialized Bayesian references by topic",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Regression / ML",
+          "url": ""
+        },
+        {
+          "text": "ISLR",
+          "url": ""
+        },
+        {
+          "text": "ESL",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Time Series",
+          "url": ""
+        },
+        {
+          "text": "Forecasting: Principles & Practice",
+          "url": ""
+        },
+        {
+          "text": "Hamilton; Tsay",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Markets",
+          "url": ""
+        },
+        {
+          "text": "Hull",
+          "url": ""
+        },
+        {
+          "text": "Natenberg",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Portfolio",
+          "url": ""
+        },
+        {
+          "text": "Active Portfolio Management — Grinold & Kahn",
+          "url": ""
+        },
+        {
+          "text": "Expected Returns — Ilmanen",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Microstructure",
+          "url": ""
+        },
+        {
+          "text": "Trading and Exchanges — Harris",
+          "url": ""
+        },
+        {
+          "text": "Cartea et al.; O’Hara",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Quant Research",
+          "url": ""
+        },
+        {
+          "text": "Inside the Black Box — Narang",
+          "url": ""
+        },
+        {
+          "text": "Advances in Financial Machine Learning — López de Prado",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Optimization",
+          "url": ""
+        },
+        {
+          "text": "Convex Optimization — Boyd & Vandenberghe",
+          "url": ""
+        },
+        {
+          "text": "Numerical Optimization — Nocedal & Wright",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Stochastic Calculus",
+          "url": ""
+        },
+        {
+          "text": "Shreve I & II",
+          "url": ""
+        },
+        {
+          "text": "Øksendal",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Python",
+          "url": ""
+        },
+        {
+          "text": "Python for Data Analysis",
+          "url": ""
+        },
+        {
+          "text": "Fluent Python",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "C++",
+          "url": ""
+        },
+        {
+          "text": "Effective Modern C++",
+          "url": ""
+        },
+        {
+          "text": "C++ Concurrency in Action",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Systems",
+          "url": ""
+        },
+        {
+          "text": "CSAPP",
+          "url": ""
+        },
+        {
+          "text": "OSTEP; Systems Performance",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Interview",
+          "url": ""
+        },
+        {
+          "text": "Heard on the Street",
+          "url": ""
+        },
+        {
+          "text": "Practical Guide to Quant Finance Interviews — Zhou",
+          "url": ""
+        }
+      ]
+    ],
+    "repos": [
+      [
+        {
+          "text": "QuantConnect / LEAN",
+          "url": "https://github.com/QuantConnect/Lean"
+        },
+        {
+          "text": "Professional-caliber event-driven research, backtesting and live trading engine.",
+          "url": ""
+        },
+        {
+          "text": "Docs → tests → indicators/data models → bug fixes. LEAN’s official tutorial repo explicitly welcomes contributions and asks for accompanying tests.",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "vectorbt",
+          "url": "https://github.com/polakowo/vectorbt"
+        },
+        {
+          "text": "Fast NumPy/pandas-style vectorized research and parameter exploration.",
+          "url": ""
+        },
+        {
+          "text": "Docs/examples → issue reproduction → tests → analytical utilities.",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Microsoft Qlib",
+          "url": "https://github.com/microsoft/qlib"
+        },
+        {
+          "text": "AI-oriented quantitative investment research platform.",
+          "url": ""
+        },
+        {
+          "text": "Datasets/examples → model integrations → experiment/reproducibility tooling.",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "FinRL / AI4Finance",
+          "url": "https://github.com/AI4Finance-Foundation/FinRL"
+        },
+        {
+          "text": "Financial RL research and education; the current project points production users toward newer FinRL-X / FinRL-Trading tooling.",
+          "url": ""
+        },
+        {
+          "text": "Tutorial fixes → environments → benchmarks → reproducible experiments.",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "ABIDES",
+          "url": "https://github.com/abides-sim/abides"
+        },
+        {
+          "text": "Agent-based discrete-event market simulation.",
+          "url": ""
+        },
+        {
+          "text": "Simulation configs → agents → experiments → docs.",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "NautilusTrader",
+          "url": "https://github.com/nautechsystems/nautilus_trader"
+        },
+        {
+          "text": "High-performance event-driven trading platform; excellent architecture study.",
+          "url": ""
+        },
+        {
+          "text": "Read contribution guide and begin with docs/tests/issues suitable for newcomers.",
+          "url": ""
+        }
+      ]
+    ],
+    "interviews": [
+      [
+        {
+          "text": "Probability",
+          "url": ""
+        },
+        {
+          "text": "10–20 problems",
+          "url": ""
+        },
+        {
+          "text": "Explain from first principles rather than memorized tricks.",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Mental math",
+          "url": ""
+        },
+        {
+          "text": "10–15 min/day",
+          "url": ""
+        },
+        {
+          "text": "Fast arithmetic, fractions, percentages and estimation.",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Statistics",
+          "url": ""
+        },
+        {
+          "text": "3–5 derivations/questions",
+          "url": ""
+        },
+        {
+          "text": "MLE, expectation, tests, regression and inference.",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "DSA",
+          "url": ""
+        },
+        {
+          "text": "4–6 medium problems",
+          "url": ""
+        },
+        {
+          "text": "Arrays, maps, heaps, trees, graphs, DP and complexity.",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Python",
+          "url": ""
+        },
+        {
+          "text": "2 timed data tasks",
+          "url": ""
+        },
+        {
+          "text": "Clean, vectorized, correct numerical code.",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "C++",
+          "url": ""
+        },
+        {
+          "text": "2 systems/coding tasks",
+          "url": ""
+        },
+        {
+          "text": "Ownership, STL, complexity and concurrency basics.",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Research case",
+          "url": ""
+        },
+        {
+          "text": "1 per week",
+          "url": ""
+        },
+        {
+          "text": "Design, critique and defend a quantitative experiment.",
+          "url": ""
+        }
+      ],
+      [
+        {
+          "text": "Trading game",
+          "url": ""
+        },
+        {
+          "text": "1–2 sessions",
+          "url": ""
+        },
+        {
+          "text": "Expected value, calibration, risk and Bayesian updating.",
+          "url": ""
+        }
+      ]
+    ],
+    "reading": [
+      {
+        "title": "Asset Pricing & Factors",
+        "topics": [
+          "Fama & French — Common risk factors in stock/bond returns",
+          "Jegadeesh & Titman — Returns to buying winners and selling losers",
+          "Carhart — Persistence in mutual fund performance",
+          "Asness, Moskowitz & Pedersen — Value and momentum everywhere"
+        ]
+      },
+      {
+        "title": "Trend & Momentum",
+        "topics": [
+          "Moskowitz, Ooi & Pedersen — Time Series Momentum",
+          "Hurst, Ooi & Pedersen — A Century of Evidence on Trend-Following"
+        ]
+      },
+      {
+        "title": "Portfolio & Risk",
+        "topics": [
+          "Markowitz — Portfolio Selection",
+          "Ledoit & Wolf — covariance shrinkage literature",
+          "Kelly — optimal growth / information-rate literature"
+        ]
+      },
+      {
+        "title": "Microstructure & Execution",
+        "topics": [
+          "Avellaneda & Stoikov — high-frequency market making",
+          "Almgren & Chriss — optimal execution",
+          "Kyle — continuous auctions and insider trading"
+        ]
+      },
+      {
+        "title": "Backtest Overfitting",
+        "topics": [
+          "Bailey et al. — Probability of Backtest Overfitting",
+          "Bailey & López de Prado — Deflated Sharpe Ratio",
+          "White — Reality Check for Data Snooping"
+        ]
+      },
+      {
+        "title": "Machine Learning / Finance",
+        "topics": [
+          "Gu, Kelly & Xiu — Empirical Asset Pricing via Machine Learning",
+          "Sirignano & Cont — Universal features of price formation",
+          "FinRL papers for RL environments and benchmarking"
+        ]
+      }
+    ]
+  }
+}

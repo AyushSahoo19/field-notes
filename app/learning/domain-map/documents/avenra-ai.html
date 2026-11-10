@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avenra AI · Crucible — Jamshedpur</title>
+<meta name="description" content="A builder community in Jamshedpur working at the chokepoints — the layers of technology everything else depends on, and that India currently imports.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#0A0D0F; --panel:#11161A; --panel2:#161D22;
+  --line:#212B31; --line2:#334149;
+  --ink:#E2E8EB; --mute:#7C8B94; --dim:#55636A;
+
+  /* incandescence — depth is heat. the deeper the layer, the hotter. */
+  --h8:#48555C; --h7:#63564A; --h6:#7A4A2C; --h5:#8E2C15; --h4:#A93A11;
+  --h3:#C4500E; --h2:#D4600C; --h1:#E5943A; --h0:#F3DCA8;
+  --t-cold:#48555C; --t-550:#8E2C15; --t-950:#D4600C; --t-1300:#F3DCA8;
+  --arc:#8FD0E6;
+
+  --display:'Archivo',system-ui,sans-serif;
+  --body:'Instrument Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --pad:clamp(20px,5vw,64px); --maxw:1240px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:56px}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--arc);outline-offset:3px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+
+/* rail */
+.rail{position:sticky;top:0;z-index:60;background:rgba(10,13,15,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.rail-in{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);height:46px;display:flex;align-items:center;gap:18px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.rail-mark{color:var(--ink);letter-spacing:.24em;font-weight:500}
+.rail .sep{color:var(--line2)}
+.rail-nav{margin-left:auto;display:flex;gap:16px;overflow-x:auto;scrollbar-width:none}
+.rail-nav::-webkit-scrollbar{display:none}
+.rail-nav a{transition:color .18s;white-space:nowrap}
+.rail-nav a:hover{color:var(--ink)}
+@media(max-width:1080px){.rail-hide{display:none}}
+@media(max-width:720px){.rail-in{gap:8px}.rail-nav{min-width:0;gap:11px}.rail-nav a{padding:5px 2px}.rail-nav a:focus-visible{outline-offset:-2px}}
+
+/* bands */
+.band{padding-top:clamp(58px,8vw,108px);padding-bottom:clamp(58px,8vw,108px);border-top:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);display:flex;align-items:baseline;gap:12px;margin-bottom:24px}
+.eyebrow b{color:var(--t-950);font-weight:500}
+.eyebrow .rule{flex:1;height:1px;background:var(--line);transform:translateY(-3px)}
+h2.head{font-family:var(--display);font-weight:800;letter-spacing:-.025em;line-height:1.02;font-size:clamp(29px,4.2vw,50px);text-transform:uppercase}
+.lede{color:var(--mute);font-size:clamp(15px,1.2vw,17px);max-width:70ch;margin-top:18px}
+.sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:38px 0 14px;display:flex;align-items:baseline;gap:12px}
+.sub .rule{flex:1;height:1px;background:var(--line);transform:translateY(-3px)}
+
+/* hero */
+.hero{padding-top:clamp(50px,7vw,92px);padding-bottom:clamp(38px,5vw,66px)}
+.hero h1{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(44px,10vw,136px);line-height:.88;letter-spacing:-.045em}
+.hero h1 .lo{color:var(--dim)}
+@media(max-width:480px){.wrap{overflow-wrap:anywhere}.hero h1{font-size:clamp(28px,9.7vw,43px)}.rail-in>span{white-space:nowrap}}
+.hero-sub{margin-top:32px;display:grid;grid-template-columns:1fr minmax(270px,40%);gap:clamp(24px,4vw,54px);align-items:start}
+.hero-sub p{color:var(--mute);font-size:clamp(15px,1.25vw,17px)}
+.hero-sub strong{color:var(--ink);font-weight:500}
+.hero-meta{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--dim);line-height:2.1}
+.hero-meta span{color:var(--ink)}
+@media(max-width:800px){.hero-sub{grid-template-columns:1fr}}
+.scale{margin-top:clamp(34px,4.5vw,56px)}
+.scale-bar{height:12px;width:100%;border:1px solid var(--line);background:linear-gradient(90deg,var(--t-cold) 0%,var(--t-550) 34%,var(--t-950) 68%,var(--t-1300) 100%);transform-origin:left center}
+.scale-ticks{display:grid;grid-template-columns:repeat(4,1fr);margin-top:10px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.scale-ticks div{border-left:1px solid var(--line);padding-left:9px}
+.scale-ticks div:first-child{border-left:none;padding-left:0}
+.scale-ticks b{display:block;font-weight:500;color:var(--mute)}
+.scale-cap{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-top:15px}
+
+/* stats + twocol */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:42px}
+.stat{background:var(--panel);padding:24px 22px}
+.stat dt{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:11px}
+.stat dd{font-family:var(--display);font-weight:600;font-size:clamp(20px,2.2vw,26px);letter-spacing:-.02em;line-height:1.15}
+.stat p{color:var(--mute);font-size:13.5px;margin-top:9px;line-height:1.55}
+@media(max-width:760px){.stats{grid-template-columns:1fr}}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,54px);margin-top:36px}
+.twocol p{color:var(--mute);font-size:15.5px}
+.twocol p + p{margin-top:15px}
+.twocol strong{color:var(--ink);font-weight:500}
+@media(max-width:800px){.twocol{grid-template-columns:1fr}}
+
+/* note */
+.note{margin-top:34px;border:1px solid var(--line);border-left:2px solid var(--t-950);background:var(--panel);padding:22px 24px}
+.note h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--t-950);font-weight:500;margin-bottom:11px}
+.note p{color:var(--mute);font-size:14.5px;max-width:80ch}
+.note p + p{margin-top:11px}
+.note strong{color:var(--ink);font-weight:500}
+
+/* atlas */
+.atlas{margin-top:38px;border:1px solid var(--line)}
+.atlas-hd,.atlas-row{display:grid;grid-template-columns:72px 1fr 112px 92px 118px;align-items:center;gap:16px;padding:0 18px}
+.atlas-hd{height:36px;background:var(--panel2);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.atlas-item{border-bottom:1px solid var(--line)}
+.atlas-item:last-child{border-bottom:none}
+.atlas-row{width:100%;background:transparent;border:none;color:inherit;text-align:left;min-height:60px;cursor:pointer;font:inherit;transition:background .18s}
+.atlas-row:hover,.atlas-item[data-open="true"] .atlas-row{background:var(--panel)}
+.a-code{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.06em}
+.a-name{font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:-.01em}
+.a-name em{display:block;font-style:normal;font-family:var(--body);font-weight:400;font-size:12.5px;color:var(--dim);margin-top:3px}
+.a-tier{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);display:flex;align-items:center;gap:8px}
+.dot{width:7px;height:7px;border-radius:50%;flex:none}
+.t0 .dot{background:var(--t-1300)}.t1 .dot{background:var(--t-950)}.t2 .dot{background:var(--t-550)}
+.a-cap{font-family:var(--mono);font-size:11.5px;color:var(--mute)}
+.a-tests{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--dim);text-align:right}
+.atlas-body{display:none;padding:2px 18px 24px 90px;border-top:1px dashed var(--line)}
+.atlas-item[data-open="true"] .atlas-body{display:block}
+.atlas-body p{color:var(--mute);font-size:14.5px;max-width:76ch;margin-top:15px}
+.atlas-body b{color:var(--ink);font-weight:500}
+.atlas-body .out{margin-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--t-950);border-left:2px solid var(--t-950);padding-left:12px}
+@media(max-width:900px){.atlas-hd{display:none}.atlas-row{grid-template-columns:1fr;gap:10px;padding:18px;min-height:0}.a-tests{text-align:left}.atlas-body{padding:2px 18px 22px}}
+
+/* ---- layer stack ---- */
+.stack{margin-top:38px;border:1px solid var(--line)}
+.layer{display:grid;grid-template-columns:6px 78px 1fr;border-bottom:1px solid var(--line);transition:background .18s}
+.layer:last-child{border-bottom:none}
+.layer:hover{background:var(--panel)}
+.layer .heat{width:6px}
+.layer .lcode{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.1em;padding:20px 0 0 16px}
+.layer .lin{padding:18px 20px 20px 4px}
+.layer h4{font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:15.5px;letter-spacing:.01em}
+.layer p{color:var(--mute);font-size:13.5px;margin-top:6px;max-width:78ch}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.chip{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line2);padding:3px 8px}
+.chip.cp{color:var(--t-950);border-color:rgba(212,96,12,.4)}
+@media(max-width:640px){.layer{grid-template-columns:6px 1fr}.layer .lcode{padding:16px 0 0 14px}.layer .lin{padding:6px 16px 18px 14px}}
+
+/* ---- teardown occupancy ---- */
+.tear{margin-top:36px;border:1px solid var(--line)}
+.tear-hd{display:grid;grid-template-columns:1fr 250px;gap:20px;padding:0 20px;height:36px;align-items:center;background:var(--panel2);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.tear-row{display:grid;grid-template-columns:1fr 250px;gap:20px;padding:18px 20px;border-bottom:1px solid var(--line);align-items:center}
+.tear-row:last-child{border-bottom:none}
+.tear-n{font-family:var(--display);font-weight:600;font-size:15.5px}
+.tear-n em{display:block;font-style:normal;font-family:var(--body);font-weight:400;font-size:13px;color:var(--mute);margin-top:4px;max-width:60ch}
+.occ{display:flex;gap:3px;align-items:flex-end;height:26px}
+.occ i{flex:1;height:100%;background:var(--line);position:relative}
+.occ i[data-own="1"]{background:var(--own)}
+.occ-key{display:flex;gap:3px;margin-top:8px}
+.occ-key span{flex:1;font-family:var(--mono);font-size:8.5px;color:var(--dim);text-align:center}
+@media(max-width:760px){.tear-hd{display:none}.tear-row{grid-template-columns:1fr;gap:14px}}
+
+/* ---- project board ---- */
+.board{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(310px,100%),1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:34px}
+.proj{background:var(--panel);padding:22px 20px 20px;display:flex;flex-direction:column}
+.proj-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.proj-id{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--dim)}
+.pill{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:3px 7px;border:1px solid var(--line2);color:var(--dim)}
+.pill.live{color:var(--t-1300);border-color:rgba(243,220,168,.35)}
+.pill.q2{color:var(--t-950);border-color:rgba(212,96,12,.4)}
+.proj h4{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:19px;letter-spacing:-.02em;margin:12px 0 3px}
+.proj .tag{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--t-950)}
+.proj p{color:var(--mute);font-size:13.5px;margin-top:12px;flex:1}
+.proj .stackline{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10px;color:var(--dim);line-height:1.9}
+.proj .stackline b{color:var(--mute);font-weight:400}
+
+/* ---- mill ---- */
+.engines{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:34px}
+.eng{background:var(--panel);padding:22px 18px;display:flex;flex-direction:column}
+.eng .n{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--dim)}
+.eng h4{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:17px;margin:10px 0 8px;letter-spacing:-.01em}
+.eng p{color:var(--mute);font-size:13px;flex:1}
+.eng .lvl{margin-top:14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--t-950)}
+.eng.human{background:var(--panel2)}
+.eng.human .lvl{color:var(--t-1300)}
+@media(max-width:1000px){.engines{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.engines{grid-template-columns:1fr}}
+.ceil{margin-top:32px;border:1px solid var(--line);font-family:var(--mono);font-size:12px}
+.ceil-r{display:grid;grid-template-columns:1fr 78px 1fr;gap:16px;padding:12px 18px;border-bottom:1px solid var(--line);align-items:center}
+.ceil-r:last-child{border-bottom:none}
+.ceil-r.hd{background:var(--panel2);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.ceil-f{color:var(--ink)}
+.ceil-l{color:var(--t-950);letter-spacing:.1em}
+.ceil-l.low{color:var(--t-550)}
+.ceil-w{color:var(--mute);font-family:var(--body);font-size:13.5px}
+@media(max-width:700px){.ceil-r{grid-template-columns:1fr 60px;gap:10px}.ceil-w{grid-column:1/-1;color:var(--dim)}}
+
+/* ---- forge stages ---- */
+.stages{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:34px}
+.stg{background:var(--panel);padding:0 0 22px}
+.stg .bar{height:4px}
+.stg .in{padding:20px 18px 0}
+.stg .n{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--dim)}
+.stg h4{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:17px;margin:9px 0 4px;letter-spacing:-.01em}
+.stg .wk{font-family:var(--mono);font-size:10px;color:var(--mute)}
+.stg p{color:var(--mute);font-size:13px;margin-top:12px}
+@media(max-width:1000px){.stages{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.stages{grid-template-columns:1fr}}
+.regime{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:32px}
+.reg{background:var(--panel);padding:20px 22px}
+.reg b{font-family:var(--display);font-weight:600;font-size:15px;display:block;margin-bottom:7px}
+.reg p{color:var(--mute);font-size:13.5px}
+@media(max-width:700px){.regime{grid-template-columns:1fr}}
+
+/* ---- toolchain ---- */
+.tools{margin-top:34px;border:1px solid var(--line)}
+.tgrp{display:grid;grid-template-columns:190px 1fr;gap:22px;padding:20px;border-bottom:1px solid var(--line)}
+.tgrp:last-child{border-bottom:none}
+.tgrp h4{font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:14px;letter-spacing:.02em}
+.tgrp h4 em{display:block;font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--dim);margin-top:5px;font-weight:400}
+.tlist{display:flex;flex-wrap:wrap;gap:6px}
+.t{font-family:var(--mono);font-size:11px;color:var(--mute);border:1px solid var(--line);padding:4px 9px;transition:border-color .18s,color .18s}
+.t:hover{border-color:var(--line2);color:var(--ink)}
+@media(max-width:700px){.tgrp{grid-template-columns:1fr;gap:12px}}
+
+/* ---- booklets ---- */
+.notes{margin-top:34px;border:1px solid var(--line)}
+.nrow{display:grid;grid-template-columns:66px 1fr 210px;gap:20px;padding:16px 20px;border-bottom:1px solid var(--line);align-items:baseline;transition:background .18s}
+.nrow:last-child{border-bottom:none}
+.nrow:hover{background:var(--panel)}
+.nrow .nn{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.1em}
+.nrow .nt{font-family:var(--display);font-weight:600;font-size:15.5px}
+.nrow .nd{color:var(--mute);font-size:13px;margin-top:4px}
+.nrow .nw{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:right}
+@media(max-width:820px){.nrow{grid-template-columns:56px 1fr}.nrow .nw{grid-column:2;text-align:left}}
+
+/* ---- tracks / loop / ladder / seq / code (from v1) ---- */
+.tracks{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:38px}
+.track{background:var(--panel);padding:28px 24px 30px;display:flex;flex-direction:column;min-height:270px}
+.track .id{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--dim)}
+.track h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:22px;letter-spacing:-.02em;margin:13px 0 4px}
+.track .what{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--t-950)}
+.track p{color:var(--mute);font-size:14px;margin-top:15px}
+.track .deliver{margin-top:auto;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--dim)}
+.track .deliver b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:6px;font-weight:400}
+.track .deliver span{color:var(--ink)}
+.track-hero{background:var(--panel2);position:relative}
+.track-hero::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--t-550),var(--t-950),var(--t-1300))}
+
+.loop{margin-top:38px;border:1px solid var(--line)}
+.loop-row{display:grid;grid-template-columns:108px 172px 1fr;gap:20px;padding:19px 22px;border-bottom:1px solid var(--line);align-items:baseline}
+.loop-row:last-child{border-bottom:none}
+.loop-row.deep{background:var(--panel)}
+.loop-t{font-family:var(--mono);font-size:12px;color:var(--dim)}
+.loop-n{font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:15px;letter-spacing:.02em}
+.loop-d{color:var(--mute);font-size:14.5px}
+@media(max-width:760px){.loop-row{grid-template-columns:1fr;gap:6px}}
+
+.ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:38px}
+.rung{background:var(--panel);padding:0 0 24px}
+.rung .heat{height:5px}
+.rung .in{padding:22px 20px 0}
+.rung .lvl{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--dim)}
+.rung h4{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:19px;letter-spacing:-.02em;margin:9px 0 2px}
+.rung .temp{font-family:var(--mono);font-size:11px;color:var(--mute)}
+.rung p{color:var(--mute);font-size:13.5px;margin-top:14px}
+@media(max-width:860px){.ladder{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.ladder{grid-template-columns:1fr}}
+
+.seq{margin-top:38px;border:1px solid var(--line)}
+.seq-row{display:grid;grid-template-columns:126px 1fr 1fr;gap:26px;padding:24px 22px;border-bottom:1px solid var(--line)}
+.seq-row:last-child{border-bottom:none}
+.seq-q{font-family:var(--display);font-weight:800;font-size:25px;letter-spacing:-.02em;text-transform:uppercase}
+.seq-q em{display:block;font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--dim);font-weight:400;margin-top:6px}
+.seq-h{font-family:var(--display);font-weight:600;font-size:16.5px;text-transform:uppercase;letter-spacing:-.01em}
+.seq-b{color:var(--mute);font-size:14px;margin-top:9px}
+.seq-side{font-family:var(--mono);font-size:11.5px;color:var(--dim);line-height:1.95}
+.seq-side span{color:var(--mute)}
+@media(max-width:800px){.seq-row{grid-template-columns:1fr;gap:14px}}
+
+.code{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:38px}
+.rule{background:var(--panel);padding:20px 22px;display:flex;gap:15px;align-items:baseline}
+.rule .n{font-family:var(--mono);font-size:11px;color:var(--dim);flex:none;width:20px}
+.rule b{font-family:var(--display);font-weight:600;font-size:15px;display:block;margin-bottom:5px}
+.rule p{color:var(--mute);font-size:13px}
+@media(max-width:760px){.code{grid-template-columns:1fr}}
+.phrases{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.phrase{font-family:var(--display);font-weight:600;font-size:clamp(15px,1.6vw,18px);border:1px solid var(--line2);padding:11px 18px;color:var(--ink)}
+
+/* join + footer */
+.join{border-top:1px solid var(--line);padding-top:clamp(58px,8vw,100px);padding-bottom:clamp(52px,7vw,86px)}
+.join h2{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(30px,5vw,60px);line-height:.98;letter-spacing:-.035em}
+.join p{color:var(--mute);max-width:60ch;margin-top:20px;font-size:16px}
+.join-grid{display:grid;grid-template-columns:1fr minmax(250px,34%);gap:clamp(24px,4vw,54px);align-items:end;margin-top:38px}
+.req{border:1px solid var(--line);background:var(--panel);padding:22px}
+.req b{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:13px;font-weight:400}
+.req ul{list-style:none;font-size:14px;color:var(--mute)}
+.req li{padding:7px 0 7px 20px;position:relative;border-bottom:1px solid var(--line)}
+.req li:last-child{border-bottom:none}
+.req li::before{content:"—";position:absolute;left:0;color:var(--t-950)}
+@media(max-width:800px){.join-grid{grid-template-columns:1fr}}
+footer{border-top:1px solid var(--line);padding:24px 0 38px}
+.foot{display:flex;flex-wrap:wrap;gap:14px 24px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.foot .r{margin-left:auto}
+
+/* motion */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
+.reveal.on{opacity:1;transform:none}
+@keyframes heat{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.scale-bar{animation:heat 1.5s cubic-bezier(.16,.84,.34,1) .25s both}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+/* ---- added rev 1.2 ---- */
+.index{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:32px}
+.ix{background:var(--panel);padding:15px 14px}
+.ix b{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.02em;display:block}
+.ix span{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);display:block;margin-top:5px}
+@media(max-width:820px){.index{grid-template-columns:repeat(3,1fr)}}
+
+.corr{margin-top:34px;border:1px solid var(--line)}
+.corr-r{display:grid;grid-template-columns:190px 1fr 96px;gap:16px;align-items:center;padding:13px 20px;border-bottom:1px solid var(--line)}
+.corr-r:last-child{border-bottom:none}
+.corr-n{font-family:var(--display);font-weight:600;font-size:14.5px}
+.corr-n em{display:block;font-style:normal;font-family:var(--body);font-weight:400;font-size:12.5px;color:var(--dim);margin-top:2px}
+.corr-bar{height:6px;background:var(--line)}
+.corr-bar i{display:block;height:100%;background:var(--h2)}
+.corr-d{font-family:var(--mono);font-size:11.5px;color:var(--mute);text-align:right}
+@media(max-width:640px){.corr-r{grid-template-columns:1fr 74px;gap:8px}.corr-bar{grid-column:1/-1}}
+
+.lmeta{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);align-items:center}
+.lmeta em{font-style:normal;color:var(--mute)}
+.depth{display:inline-flex;gap:3px;vertical-align:middle;margin-left:6px}
+.depth i{width:13px;height:5px;background:var(--line2)}
+.depth i.on{background:var(--h2)}
+
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:32px}
+.step{background:var(--panel);padding:20px 18px}
+.step .n{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--t-950)}
+.step h5{font-family:var(--display);font-weight:600;font-size:15px;text-transform:uppercase;margin:9px 0 7px}
+.step p{color:var(--mute);font-size:13px}
+@media(max-width:1000px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+
+.flow{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:34px}
+.fl{background:var(--panel);padding:18px 14px}
+.fl .n{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--dim)}
+.fl h5{font-family:var(--display);font-weight:600;font-size:13.5px;text-transform:uppercase;margin:8px 0 6px;letter-spacing:.01em}
+.fl p{color:var(--mute);font-size:12px}
+.fl.gain{background:var(--panel2)}
+.fl.gain h5{color:var(--t-1300)}
+@media(max-width:1100px){.flow{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:700px){.flow{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:460px){.flow{grid-template-columns:1fr}}
+
+.fid{margin-top:34px;border:1px solid var(--line)}
+.fid-r{display:grid;grid-template-columns:6px 64px 1fr 184px;border-bottom:1px solid var(--line);align-items:stretch}
+.fid-r:last-child{border-bottom:none}
+.fid-r .hb{width:6px}
+.fid-r .fc{font-family:var(--mono);font-size:11px;color:var(--dim);padding:18px 0 0 14px}
+.fid-r .fi{padding:16px 18px 18px 2px}
+.fid-r h5{font-family:var(--display);font-weight:600;font-size:15px;text-transform:uppercase}
+.fid-r p{color:var(--mute);font-size:13px;margin-top:5px}
+.fid-r .fw{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);padding:19px 18px 0 0;text-align:right}
+@media(max-width:760px){.fid-r{grid-template-columns:6px 1fr}.fid-r .fc{padding:14px 0 0 14px}.fid-r .fw{grid-column:2;text-align:left;padding:0 18px 16px 2px}}
+
+.sens{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:32px}
+.sn{background:var(--panel);padding:18px 16px}
+.sn b{font-family:var(--display);font-weight:600;font-size:14.5px;display:block}
+.sn .g{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--t-950);margin-top:6px;display:block}
+.sn p{color:var(--mute);font-size:12.5px;margin-top:9px}
+@media(max-width:900px){.sens{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.sens{grid-template-columns:1fr}}
+
+.skills{margin-top:32px;border:1px solid var(--line);overflow-x:auto}
+.sk-r{display:grid;grid-template-columns:186px repeat(4,1fr);gap:1px;background:var(--line);min-width:820px}
+.sk-c{background:var(--panel);padding:14px 15px;font-size:12.5px;color:var(--mute);line-height:1.55}
+.sk-r.hd .sk-c{background:var(--panel2);font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.sk-c.dom{font-family:var(--display);font-weight:600;font-size:13.5px;color:var(--ink);text-transform:uppercase;letter-spacing:.01em}
+
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.lg{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);padding:6px 11px}
+.lg b{color:var(--ink);font-weight:500}
+
+.kill{margin-top:32px;border:1px solid var(--line);background:var(--panel);padding:22px 24px;font-family:var(--mono);font-size:12.5px;color:var(--mute);line-height:1.95}
+.kill h5{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--t-950);margin-bottom:14px}
+.kill span{color:var(--dim)}
+.kill b{color:var(--ink);font-weight:400}
+
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-in">
+    <span class="rail-mark">CRUCIBLE</span>
+    <span class="sep">/</span><span>REV 1.2</span>
+    <span class="sep rail-hide">/</span><span class="rail-hide">JAMSHEDPUR</span>
+    <nav class="rail-nav" aria-label="Crucible sections">
+      <a href="#site">Site</a><a href="#atlas">Atlas</a><a href="#stack">Stack</a>
+      <a href="#teardown">Teardowns</a><a href="#tracks">Tracks</a><a href="#projects">Projects</a>
+      <a href="#mirror">Mirror</a><a href="#mill">Mill</a><a href="#forge">Forge</a><a href="#tools">Toolchain</a>
+      <a href="#notes">Notes</a><a href="#loop">Loop</a><a href="#join">Join</a>
+    </nav>
+  </div>
+</div>
+
+<header class="wrap hero">
+  <h1>We build at<br>the <span class="lo">chokepoints</span></h1>
+  <div class="hero-sub">
+    <p>India has world-class application capability and almost no foundation capability. We write software on other people's runtimes, running on other people's silicon, measured with other people's instruments. <strong>The work with real leverage is one or two layers below where everyone else is standing.</strong></p>
+    <div class="hero-meta">
+      Saturdays <span>· 3 hours · free</span><br>
+      Sundays <span>· 6:00 AM · Jubilee Park</span><br>
+      Layers <span>· nine, matter to interface</span><br>
+      Status <span>· forming</span>
+    </div>
+  </div>
+  <div class="scale">
+    <div class="scale-bar"></div>
+    <div class="scale-ticks">
+      <div><b>L0</b>Cold</div><div><b>L1</b>550 °C · dull red</div>
+      <div><b>L2</b>950 °C · orange</div><div><b>L3</b>1300 °C · white heat</div>
+    </div>
+    <p class="scale-cap">Progression measured on the incandescence scale — the colour steel actually glows at temperature</p>
+  </div>
+
+  <div class="index reveal">
+    <div class="ix"><b>9</b><span>Layers</span></div>
+    <div class="ix"><b>10</b><span>Chokepoints</span></div>
+    <div class="ix"><b>5+1</b><span>Tracks</span></div>
+    <div class="ix"><b>18</b><span>Projects</span></div>
+    <div class="ix"><b>120+</b><span>Open tools</span></div>
+    <div class="ix"><b>12</b><span>Booklets</span></div>
+  </div>
+</header>
+
+<section class="wrap band" id="site">
+  <div class="eyebrow"><b>01</b> Site <span class="rule"></span> Why here</div>
+  <h2 class="head">An unlikely place,<br>for a specific reason</h2>
+  <p class="lede">Chokepoint technology is overwhelmingly physical. Jamshedpur is one of very few Indian cities where heavy industry, engineering talent and low cost of living overlap in the same square kilometre. Don't build a worse Bangalore — build the thing that is only possible here.</p>
+  <dl class="stats reveal">
+    <div class="stat"><dt>Industrial base</dt><dd>Adityapur</dd><p>One of eastern India's largest MSME clusters. Auto ancillaries, precision machining, foundries, tooling — real machines with real defects and real measurement problems.</p></div>
+    <div class="stat"><dt>Talent base</dt><dd>NIT · XLRI</dd><p>Metallurgy, mechanical, electrical and electronics next door to a top business school. Rare to have a factory belt and industrial economics in the same city.</p></div>
+    <div class="stat"><dt>Corridor</dt><dd>440 km east</dd><p>Odisha now hosts heterogeneous-integration packaging and silicon carbide capacity. Assam hosts assembly and test. This is a corridor, not a set of islands.</p></div>
+  </dl>
+  <div class="twocol">
+    <div>
+      <p><strong>The "India needs a fab" era is closing.</strong> Assembly and test plants are operating, and the country's first logic fab is heading toward trial production at mature nodes. The bottleneck moved downstream.</p>
+      <p>Even when the fab runs, it runs on imported equipment, imported specialty chemicals, imported electronic-grade gases and imported materials.</p>
+    </div>
+    <div>
+      <p>So the right agenda isn't "learn about fabs." It's <strong>design and IP, metrology and inspection, advanced packaging, and materials</strong>.</p>
+      <p>Two of those four are where a Jamshedpur community beats a Bangalore one outright — because both are built on measurement, materials and precision engineering this city already does every day.</p>
+    </div>
+  </div>
+
+  <div class="sub">Reach <span class="rule"></span> What a day trip gets you</div>
+  <div class="corr reveal">
+    <div class="corr-r"><div class="corr-n">Adityapur<em>MSME cluster — machining, foundries, tooling</em></div><div class="corr-bar"><i style="width:2%"></i></div><div class="corr-d">8 km</div></div>
+    <div class="corr-r"><div class="corr-n">Tata Steel works<em>Process control, metallurgy, heavy automation</em></div><div class="corr-bar"><i style="width:1%"></i></div><div class="corr-d">5 km</div></div>
+    <div class="corr-r"><div class="corr-n">Ranchi<em>BIT Mesra, IIM — second chapter candidate</em></div><div class="corr-bar"><i style="width:29%"></i></div><div class="corr-d">130 km</div></div>
+    <div class="corr-r"><div class="corr-n">Kolkata<em>IIT Kharagpur en route, IACS, nearest metro</em></div><div class="corr-bar"><i style="width:62%"></i></div><div class="corr-d">280 km</div></div>
+    <div class="corr-r"><div class="corr-n">Bhubaneswar / Berhampur<em>Heterogeneous packaging · silicon carbide</em></div><div class="corr-bar"><i style="width:100%"></i></div><div class="corr-d">440 km</div></div>
+  </div>
+  <p class="lede" style="margin-top:20px">Every one of those is reachable and back inside a weekend. A community that never leaves its own city stays a meetup; one that runs a quarterly expedition into the corridor becomes a node in it.</p>
+</section>
+
+<section class="wrap band" id="atlas">
+  <div class="eyebrow"><b>02</b> Atlas <span class="rule"></span> Ten domains</div>
+  <h2 class="head">The chokepoint atlas</h2>
+  <p class="lede">A chokepoint technology is foundational, bottlenecked, concentrated in few hands, import-dependent for India, skill-compounding, and uncrowded. Anything passing four of those six is work worth doing here. Tiered by what it costs to start.</p>
+
+  <div class="atlas reveal">
+    <div class="atlas-hd"><span>Code</span><span>Domain</span><span>Tier</span><span>Capital</span><span style="text-align:right">Tests</span></div>
+
+    <div class="atlas-item" data-open="false"><button class="atlas-row" aria-expanded="false">
+      <span class="a-code">CP-01</span><span class="a-name">Open Silicon<em>RTL to manufacturable layout, independently</em></span>
+      <span class="a-tier t0"><i class="dot"></i>Tier 0</span><span class="a-cap">₹0</span><span class="a-tests">5 / 6</span></button>
+      <div class="atlas-body"><p>India holds a very large share of the world's chip design workforce, but the overwhelming majority is service work inside multinational captives — verification and physical design on someone else's architecture, no IP ownership. <b>Almost nobody in India takes a design end-to-end and owns it.</b></p>
+      <p>Verilog and SystemVerilog, RISC-V cores, open EDA flows, open PDKs, low-cost multi-project shuttle runs.</p>
+      <div class="out">12-month goal — one design taped out. One chip in one hand beats a hundred meetups.</div></div></div>
+
+    <div class="atlas-item" data-open="false"><button class="atlas-row" aria-expanded="false">
+      <span class="a-code">CP-02</span><span class="a-name">AI Compilers &amp; Kernels<em>The layer between a model and its silicon</em></span>
+      <span class="a-tier t0"><i class="dot"></i>Tier 0</span><span class="a-cap">₹0</span><span class="a-tests">5 / 6</span></button>
+      <div class="atlas-body"><p>Millions of Indians use ML frameworks. A vanishingly small number can write a fused kernel, extend a compiler dialect, or reason about memory hierarchy. <b>The highest-paid, most globally scarce software skill that needs zero capital to learn.</b></p>
+      <p>Every industrial vision project eventually hits the wall of "this must run on a ₹15,000 edge box on a shop floor in 30 milliseconds." That wall is a compiler problem.</p>
+      <div class="out">Entry artifact — a custom kernel measurably faster than the framework default</div></div></div>
+
+    <div class="atlas-item" data-open="false"><button class="atlas-row" aria-expanded="false">
+      <span class="a-code">CP-03</span><span class="a-name">Formal Methods<em>Proving systems correct instead of testing and hoping</em></span>
+      <span class="a-tier t0"><i class="dot"></i>Tier 0</span><span class="a-cap">₹0</span><span class="a-tests">5 / 6</span></button>
+      <div class="atlas-body"><p>Verification consumes the majority of effort in any serious chip or safety-critical project. In India it's treated as labour arbitrage rather than an intellectual discipline, so depth is rare and expensive.</p>
+      <p><b>The cheapest chokepoint in existence</b> — a laptop and a very specific kind of patience. Also the technical prerequisite for trusting any system that runs without supervision.</p>
+      <div class="out">Entry artifact — a machine-checked proof of a non-trivial property</div></div></div>
+
+    <div class="atlas-item" data-open="false"><button class="atlas-row" aria-expanded="false">
+      <span class="a-code">CP-04</span><span class="a-name">Computational Materials<em>Simulating matter, not licensing the ability to</em></span>
+      <span class="a-tier t0"><i class="dot"></i>Tier 0</span><span class="a-cap">₹0</span><span class="a-tests">5 / 6</span></button>
+      <div class="atlas-body"><p>One of the world's largest producers of steel, aluminium and cement is almost entirely a licence-buyer of simulation software. We don't build solvers.</p>
+      <p>Density functional theory, molecular dynamics, finite elements, phase-field methods, materials informatics. <b>Local fit is extremely high</b> — a steel plant next door and a metallurgy department at NIT make alloy design legible here in a way they are nowhere else in India.</p>
+      <div class="out">Entry artifact — a validated simulation of a real alloy or process</div></div></div>
+
+    <div class="atlas-item" data-open="false"><button class="atlas-row" aria-expanded="false">
+      <span class="a-code">CP-05</span><span class="a-name">Metrology &amp; Instrumentation<em>You cannot make what you cannot measure</em></span>
+      <span class="a-tier t1"><i class="dot"></i>Tier 1</span><span class="a-cap">₹1–5L</span><span class="a-tests">6 / 6</span></button>
+      <div class="atlas-body"><p>Spectrometers, interferometers, profilometers, electron microscopes, coordinate measuring machines — almost entirely imported. Every Indian lab, every fab, every QA line depends on a supply chain the country has no position in. <b>Arguably India's most systemically important and least discussed technology gap.</b></p>
+      <p>This is the signature domain. It is the exact bridge between what Jamshedpur already does — visual inspection and dimensional QA on steel — and what the semiconductor industry needs: wafer and package inspection, defect classification, in-line metrology. Nobody else in India stands on both sides of that bridge.</p>
+      <div class="out">Entry artifact — a working instrument with a calibration record</div></div></div>
+
+    <div class="atlas-item" data-open="false"><button class="atlas-row" aria-expanded="false">
+      <span class="a-code">CP-06</span><span class="a-name">Power Electronics &amp; SiC<em>The conversion layer under everything electric</em></span>
+      <span class="a-tier t1"><i class="dot"></i>Tier 1</span><span class="a-cap">₹1–3L</span><span class="a-tests">5 / 6</span></button>
+      <div class="atlas-body"><p>India imports the large majority of its power modules, and wide-bandgap capability is barely nascent. Meanwhile every growth story in the country — electric vehicles, solar, grid storage, data centres, rail, industrial drives — is gated on power electronics.</p>
+      <p><b>A steel plant is a power electronics museum.</b> Rolling mill drives, arc furnace supplies, motor systems — with real failure data attached.</p>
+      <div class="out">Entry artifact — a converter running under load</div></div></div>
+
+    <div class="atlas-item" data-open="false"><button class="atlas-row" aria-expanded="false">
+      <span class="a-code">CP-07</span><span class="a-name">Photonics<em>Light as a computing and sensing medium</em></span>
+      <span class="a-tier t1"><i class="dot"></i>Tier 1</span><span class="a-cap">₹2–5L</span><span class="a-tests">5 / 6</span></button>
+      <div class="atlas-body"><p>Near-total import dependence in India. Globally, optical interconnect is becoming the hard scaling wall for AI datacentres — electrical input and output are running out of headroom, and co-packaged optics is the frontier.</p>
+      <p>Intimidating, but a usable optics bench costs a few lakh and the simulation half is free.</p>
+      <div class="out">Entry artifact — a functioning optical measurement setup</div></div></div>
+
+    <div class="atlas-item" data-open="false"><button class="atlas-row" aria-expanded="false">
+      <span class="a-code">CP-08</span><span class="a-name">Embedded Control<em>Making physical things behave, on a deadline</em></span>
+      <span class="a-tier t1"><i class="dot"></i>Tier 1</span><span class="a-cap">₹50k–2L</span><span class="a-tests">5 / 6</span></button>
+      <div class="atlas-body"><p>India has an enormous embedded workforce and shallow control-theoretic depth. Most Indian embedded work is driver plumbing, not control design, and capability in certifiable hard-real-time systems is rare.</p>
+      <p>Process control is the daily work of a steel plant. <b>There is no better classroom.</b></p>
+      <div class="out">Entry artifact — a controlled physical system with a stability proof</div></div></div>
+
+    <div class="atlas-item" data-open="false"><button class="atlas-row" aria-expanded="false">
+      <span class="a-code">CP-09</span><span class="a-name">Advanced Packaging<em>Chiplets, interposers, heterogeneous integration</em></span>
+      <span class="a-tier t2"><i class="dot"></i>Tier 2</span><span class="a-cap">Partner</span><span class="a-tests">6 / 6</span></button>
+      <div class="atlas-body"><p>Advanced packaging capacity is the global constraint on AI hardware supply. Simultaneously, virtually all of India's approved semiconductor capacity is assembly, test and packaging rather than front-end fabrication. <b>This is where Indian jobs, revenue and strategic position actually are — and almost no Indian curriculum teaches it.</b></p>
+      <p>The Odisha heterogeneous-packaging project is 440 km away. Begin the relationship early. A two-year courtship, not a cold email.</p>
+      <div class="out">Year 3 — a characterised package with a thermal model validated on hardware</div></div></div>
+
+    <div class="atlas-item" data-open="false"><button class="atlas-row" aria-expanded="false">
+      <span class="a-code">CP-10</span><span class="a-name">Cryogenics &amp; Vacuum<em>The invisible substrate of frontier physics</em></span>
+      <span class="a-tier t2"><i class="dot"></i>Tier 2</span><span class="a-cap">Partner</span><span class="a-tests">5 / 6</span></button>
+      <div class="atlas-body"><p>India has close to no commercial supply chain here. Yet quantum computing, superconductivity, space systems, fusion research, electron microscopy, MRI and semiconductor fabrication all sit on top of cryogenics and vacuum technology. People in India who can design a working vacuum chamber number in the low hundreds.</p>
+      <p><b>Hardest to start, most defensible if you do.</b></p>
+      <div class="out">Year 3 — a vacuum system built and pumped down</div></div></div>
+  </div>
+
+  <div class="note reveal"><h4>Sequencing rule</h4>
+    <p>Open CP-02 and CP-01 in Quarter 2. Open CP-03 or CP-04 in Quarter 3 <strong>only if the first two are alive</strong>. Open CP-05 in Quarter 4 as the first capital expenditure. Everything else in Tier 1 is Year 2. Tier 2 is Year 3.</p>
+    <p>A cell exists only when <strong>three people commit to it for a quarter</strong>. No equipment is bought before a zero-cost cell has run two quarters.</p></div>
+</section>
+
+<section class="wrap band" id="stack">
+  <div class="eyebrow"><b>03</b> Stack <span class="rule"></span> Nine layers</div>
+  <h2 class="head">Depth is heat</h2>
+  <p class="lede">Every industrial product — a robot arm, an inspection system, an EV drivetrain, a factory — is assembled from the same nine layers. Read bottom-up: the deeper the layer, the fewer people can work there, and the hotter it burns on this page. "One layer down" is not a slogan; it's a direction on this diagram.</p>
+
+  <div class="stack reveal">
+    <div class="layer"><span class="heat" style="background:var(--h8)"></span><span class="lcode">L8</span><div class="lin">
+      <h4>Interface &amp; Decision</h4>
+      <p>Dashboards, work orders, scheduling, ops workflow, business logic. Where value gets captured and where almost every software career happens.</p>
+      <div class="chips"><span class="chip">Grafana</span><span class="chip">Metabase</span><span class="chip">Node-RED</span><span class="chip">ERP / MES</span><span class="chip">Web</span></div>
+      <div class="lmeta"><span>Roles <em>Product, ops, full-stack</em></span><span>Indian depth <span class="depth"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span><span><em>Crowded. Every bootcamp ends here.</em></span></div></div></div>
+
+    <div class="layer"><span class="heat" style="background:var(--h7)"></span><span class="lcode">L7</span><div class="lin">
+      <h4>Intelligence</h4>
+      <p>Machine learning, deep learning, computer vision, forecasting, anomaly detection, optimisation, agents. Shallower than it looks — this layer is a consumer of everything below it.</p>
+      <div class="chips"><span class="chip">PyTorch</span><span class="chip">OpenCV</span><span class="chip">Anomalib</span><span class="chip">ONNX</span><span class="chip">LangGraph</span><span class="chip cp">CP-02</span><span class="chip cp">CP-03</span></div>
+      <div class="lmeta"><span>Roles <em>ML / CV engineer, data scientist</em></span><span>Indian depth <span class="depth"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></span><span><em>Deep in users, thin in builders.</em></span></div></div></div>
+
+    <div class="layer"><span class="heat" style="background:var(--h6)"></span><span class="lcode">L6</span><div class="lin">
+      <h4>Data &amp; Edge</h4>
+      <p>Historians, time-series stores, streaming, edge compute, digital twins. Where industrial data goes to be lost, in most factories.</p>
+      <div class="chips"><span class="chip">InfluxDB</span><span class="chip">TimescaleDB</span><span class="chip">Kafka</span><span class="chip">Telegraf</span><span class="chip">Jetson / x86 edge</span></div>
+      <div class="lmeta"><span>Roles <em>Data / platform engineer, SRE</em></span><span>Indian depth <span class="depth"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></span><span><em>Strong in web, weak in plant.</em></span></div></div></div>
+
+    <div class="layer"><span class="heat" style="background:var(--h5)"></span><span class="lcode">L5</span><div class="lin">
+      <h4>Communication</h4>
+      <p>Fieldbus and industrial networking. The layer that decides whether the other eight can talk to each other — and the one nobody teaches.</p>
+      <div class="chips"><span class="chip">Modbus</span><span class="chip">OPC-UA</span><span class="chip">MQTT</span><span class="chip">PROFINET</span><span class="chip">EtherCAT</span><span class="chip">CAN</span><span class="chip">TSN</span><span class="chip">LoRa</span><span class="chip">5G</span></div>
+      <div class="lmeta"><span>Roles <em>Automation / network engineer</em></span><span>Indian depth <span class="depth"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></span><span><em>Almost no formal training exists.</em></span></div></div></div>
+
+    <div class="layer"><span class="heat" style="background:var(--h4)"></span><span class="lcode">L4</span><div class="lin">
+      <h4>Embedded &amp; Control</h4>
+      <p>Microcontrollers, RTOS, PLCs, drives, control loops, state estimation, interlocks and functional safety. Industry 4.0 is, precisely, the integration of L4 through L8.</p>
+      <div class="chips"><span class="chip">FreeRTOS</span><span class="chip">Zephyr</span><span class="chip">OpenPLC</span><span class="chip">IEC 61131-3</span><span class="chip">ROS 2</span><span class="chip cp">CP-08</span><span class="chip cp">CP-03</span></div>
+      <div class="lmeta"><span>Roles <em>Embedded, PLC, controls engineer</em></span><span>Indian depth <span class="depth"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></span><span><em>Large workforce, shallow theory.</em></span></div></div></div>
+
+    <div class="layer"><span class="heat" style="background:var(--h3)"></span><span class="lcode">L3</span><div class="lin">
+      <h4>Mechanical &amp; Mechatronic</h4>
+      <p>Structures, kinematics, precision motion, bearings, fluid power, thermal design, tolerancing. Robotics lives here and reaches upward — a robot is L1 through L7 in one enclosure. This is also where the 3D digital twin is authored.</p>
+      <div class="chips"><span class="chip">FreeCAD</span><span class="chip">OpenUSD</span><span class="chip">Blender</span><span class="chip">Gazebo</span><span class="chip">MuJoCo</span><span class="chip">OpenFOAM</span><span class="chip">GD&amp;T</span><span class="chip cp">CP-04</span></div>
+      <div class="lmeta"><span>Roles <em>Mechanical, mechatronics, robotics</em></span><span>Indian depth <span class="depth"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></span><span><em>Design skill common, precision rare.</em></span></div></div></div>
+
+    <div class="layer"><span class="heat" style="background:var(--h2)"></span><span class="lcode">L2</span><div class="lin">
+      <h4>Circuit &amp; Power</h4>
+      <p>PCB, analog front ends, converters and inverters, gate drivers, magnetics, EMC. Every sensor reading and every motor turn passes through here.</p>
+      <div class="chips"><span class="chip">KiCad</span><span class="chip">ngspice</span><span class="chip">FEMM</span><span class="chip">SiC / GaN</span><span class="chip cp">CP-06</span></div>
+      <div class="lmeta"><span>Roles <em>Hardware, power electronics engineer</em></span><span>Indian depth <span class="depth"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></span><span><em>Mostly reference-design reuse.</em></span></div></div></div>
+
+    <div class="layer"><span class="heat" style="background:var(--h1)"></span><span class="lcode">L1</span><div class="lin">
+      <h4>Device</h4>
+      <p>Semiconductors, sensors, actuators, optics, power devices, packaging. The layer India is now building capacity in — and almost entirely in assembly, test and packaging rather than fabrication.</p>
+      <div class="chips"><span class="chip">OpenLane</span><span class="chip">Sky130</span><span class="chip">Verilator</span><span class="chip">Meep</span><span class="chip cp">CP-01</span><span class="chip cp">CP-05</span><span class="chip cp">CP-07</span><span class="chip cp">CP-09</span></div>
+      <div class="lmeta"><span>Roles <em>VLSI, device, optics engineer</em></span><span>Indian depth <span class="depth"><i class="on"></i><i></i><i></i><i></i><i></i></span></span><span><em>Huge headcount, almost all service work.</em></span></div></div></div>
+
+    <div class="layer"><span class="heat" style="background:var(--h0)"></span><span class="lcode">L0</span><div class="lin">
+      <h4>Matter</h4>
+      <p>Alloys, substrates, chemistry, gases, coatings, crystal growth. The hottest layer, in every sense. Jamshedpur is one of the few Indian cities where an ordinary Tuesday involves it.</p>
+      <div class="chips"><span class="chip">Quantum ESPRESSO</span><span class="chip">LAMMPS</span><span class="chip">pymatgen</span><span class="chip">ASE</span><span class="chip cp">CP-04</span><span class="chip cp">CP-10</span></div>
+      <div class="lmeta"><span>Roles <em>Metallurgist, materials scientist</em></span><span>Indian depth <span class="depth"><i class="on"></i><i></i><i></i><i></i><i></i></span></span><span><em>Strong academia, thin industry link.</em></span></div></div></div>
+  </div>
+
+  <div class="note reveal"><h4>How to use this</h4>
+    <p><strong>Robotics</strong> spans L1–L7 in a single enclosure. <strong>IoT</strong> is L1, L5 and L6 with a thin L7. <strong>Industry 4.0</strong> is the integration of L4 through L8 — which is why it so often stalls at L5, the layer nobody owns. <strong>Mechatronics</strong> is L2–L4 taught as one subject.</p>
+    <p>Every project on this page is tagged with the layers it touches. If your work only ever touches L7 and L8, that is worth knowing about yourself.</p></div>
+</section>
+
+<section class="wrap band" id="teardown">
+  <div class="eyebrow"><b>04</b> Teardowns <span class="rule"></span> Layer occupancy</div>
+  <h2 class="head">Count the layers<br>a company owns</h2>
+  <p class="lede">The Frontier track's core method. Take any company, mark which of the nine layers it actually builds versus buys, and its defensibility becomes visible in one glance. The pattern is consistent: the more layers owned, the harder the company is to displace — and the more of the value it keeps.</p>
+
+  <div class="tear reveal">
+    <div class="tear-hd"><span>Archetype</span><span>Occupancy — L0 ▸ L8</span></div>
+
+    <div class="tear-row"><div class="tear-n">Lithography systems<em>Precision optics, mechatronics and metrology at nanometre scale. Owns the physical layers almost completely; the intelligence layer is a small part of the machine.</em></div>
+      <div><div class="occ" style="--own:var(--h2)"><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i><i></i><i data-own="1"></i><i></i><i></i></div>
+      <div class="occ-key"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div></div></div>
+
+    <div class="tear-row"><div class="tear-n">Machine vision incumbent<em>Sensors, optics, lighting, embedded processing and the inspection software, sold as one box. Owns the whole inspection column — which is why an AI model alone rarely displaces them.</em></div>
+      <div><div class="occ" style="--own:var(--h3)"><i></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i></div>
+      <div class="occ-key"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div></div></div>
+
+    <div class="tear-row"><div class="tear-n">Industrial robot maker<em>Mechanics, drives, controllers, motion planning and teach pendants. Historically thin at the intelligence layer — which is exactly where the current wave of robotics startups attacks.</em></div>
+      <div><div class="occ" style="--own:var(--h4)"><i></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i><i></i><i></i><i data-own="1"></i></div>
+      <div class="occ-key"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div></div></div>
+
+    <div class="tear-row"><div class="tear-n">Automation platform vendor<em>PLCs, drives, industrial networking, historians, SCADA and the software above. Owns the middle of the stack and rents it to everyone — the most quietly profitable position in industry.</em></div>
+      <div><div class="occ" style="--own:var(--h5)"><i></i><i></i><i data-own="1"></i><i></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i></div>
+      <div class="occ-key"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div></div></div>
+
+    <div class="tear-row"><div class="tear-n">Typical industrial-AI startup<em>A model and a dashboard. Rents the camera, the edge box, the network, the historian and the plant. Two layers of nine — which is why pricing pressure arrives within about eighteen months.</em></div>
+      <div><div class="occ" style="--own:var(--h7)"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i data-own="1"></i><i data-own="1"></i></div>
+      <div class="occ-key"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div></div></div>
+
+    <div class="tear-row"><div class="tear-n">Vertically integrated manufacturer<em>Rare and expensive: own silicon, own power electronics, own mechanics, own control, own data, own models, own interface. Extremely hard to copy, extremely hard to build.</em></div>
+      <div><div class="occ" style="--own:var(--h1)"><i></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i><i data-own="1"></i></div>
+      <div class="occ-key"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div></div></div>
+  </div>
+
+  <div class="note reveal"><h4>The uncomfortable read</h4>
+    <p>Almost every Indian AI startup occupies L7 and L8 only. That is a real business, but it is <strong>two layers of nine</strong>, and every one of them is defended by a model that any competitor can retrain. The differentiated position — for a company or a career — is holding one deep layer nobody else wants to touch, and one shallow layer where the money is.</p>
+    <p>These occupancy readings are ours, drawn as teaching examples. Argue with them. That argument <em>is</em> the Frontier session.</p></div>
+
+  <div class="sub">How a teardown runs <span class="rule"></span> Twenty minutes, every Saturday</div>
+  <div class="steps reveal">
+    <div class="step"><span class="n">01</span><h5>Pick the artifact</h5><p>Not the company — one product it actually sells. A machine, a module, a subscription. Companies are stories; products have bills of materials.</p></div>
+    <div class="step"><span class="n">02</span><h5>Decompose by layer</h5><p>Walk L0 to L8 and ask what physically must exist for this to work. Most of the effort is here, and most of it is reading datasheets and job postings.</p></div>
+    <div class="step"><span class="n">03</span><h5>Mark own vs rent</h5><p>Owned means they design or manufacture it. Careers page and supplier lists give this away faster than any annual report.</p></div>
+    <div class="step"><span class="n">04</span><h5>Find the moat layer</h5><p>Usually exactly one layer is genuinely hard to copy. Name it. If you cannot find one, that is the finding.</p></div>
+    <div class="step"><span class="n">05</span><h5>Write the entry</h5><p>Two hundred words plus the occupancy strip, into the Layer Map. One entry per session compounds into a resource nobody else in India maintains.</p></div>
+  </div>
+</section>
+
+<section class="wrap band" id="tracks">
+  <div class="eyebrow"><b>05</b> Tracks <span class="rule"></span> Five, plus one</div>
+  <h2 class="head">Communities of practice,<br>not courses</h2>
+  <p class="lede">Each track has a lead, a fixed weekly slot, a public artifact stream, and one quarterly deliverable an outsider could look at and understand. A track that has produced nothing public in thirty days is dormant, and says so.</p>
+  <div class="tracks reveal">
+    <div class="track"><span class="id">T1 · L1–L7</span><h3>Physical AI</h3><span class="what">Machines that see, predict, act</span>
+      <p>Industrial computer vision, defect detection, predictive maintenance, robotics, edge inference, digital twins — starting with the machines that already exist in this city.</p>
+      <div class="deliver"><b>Quarterly</b><span>One system deployed and running in one real facility.</span><span style="display:block;margin-top:10px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)">Tuesdays · L1 artifact: a model finding a real defect on real images, with an honest failure analysis</span></div></div>
+    <div class="track track-hero"><span class="id">T2 · L0–L2 · identity track</span><h3>Foundry</h3><span class="what">Silicon &amp; chokepoint systems</span>
+      <p>The whole Atlas lives here, in five cells: Silicon, Compute Systems, Matter, Energy &amp; Light, Frontier Substrate. This is what makes Crucible different from every other builder community in India.</p>
+      <div class="deliver"><b>Quarterly</b><span>One artifact per active cell — a tape-out, a benchmark, a proof, a simulation, a built instrument.</span><span style="display:block;margin-top:10px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)">Wednesdays · L1 artifact: synthesised RTL, a faster kernel, a proof, a validated sim, or a built instrument</span></div></div>
+    <div class="track"><span class="id">T3 · L7–L8</span><h3>Ship</h3><span class="what">Strangers, and money</span>
+      <p>Indie products, revenue, distribution, launches. The counterweight to Foundry's long horizons — and the on-ramp, because shipping something small is what turns a student into a builder.</p>
+      <div class="deliver"><b>Quarterly</b><span>Aggregate revenue and users across member projects, published openly.</span><span style="display:block;margin-top:10px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)">Mondays · L1 artifact: one paying user. Not one signup. One person who gave you money.</span></div></div>
+    <div class="track"><span class="id">T4 · all layers</span><h3>Frontier</h3><span class="what">Know it before it's obvious</span>
+      <p>Paper reading, technology scouting, layer-occupancy teardowns, lab and funding-flow mapping. Every session produces a written artifact, never just a conversation.</p>
+      <div class="deliver"><b>Quarterly</b><span>A published State of the Chokepoints brief — useful to people outside Jamshedpur.</span><span style="display:block;margin-top:10px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)">Fridays · L1 artifact: one teardown a domain practitioner reads and confirms is correct</span></div></div>
+    <div class="track"><span class="id">T5 · L1–L6</span><h3>Red</h3><span class="what">Break, understand, defend</span>
+      <p>Application and hardware security, side channels, firmware, OT and SCADA security, reverse engineering, cryptography. Free, open, no gatekeeping.</p>
+      <div class="deliver"><b>Quarterly</b><span>One public writeup, one workshop, one disclosure or CTF result.</span><span style="display:block;margin-top:10px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)">Thursdays · L1 artifact: a documented vulnerability, a CTF category, or a hardened system</span></div></div>
+    <div class="track"><span class="id">T0 · everyone</span><h3>Body</h3><span class="what">6:00 AM, all weather</span>
+      <p>Sunday run at Jubilee Park, every week, free. Trust is built faster by suffering together at dawn than by three months of messages — and people come back for the people in the weeks when their project is stuck.</p>
+      <div class="deliver"><b>Quarterly</b><span>One genuinely hard thing. A long trail run, a hill climb, a night hike.</span><span style="display:block;margin-top:10px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)">Sundays 6:00 AM · No L1 artifact. You just come.</span></div></div>
+  </div>
+</section>
+
+<section class="wrap band" id="projects">
+  <div class="eyebrow"><b>06</b> Projects <span class="rule"></span> The board</div>
+  <h2 class="head">What we are<br>actually building</h2>
+  <p class="lede">Eighteen projects, each tagged with the layers it touches and the chokepoints it attacks. Status is honest: most of these are queued, because a community that claims fourteen live projects in month one is lying. Anyone can claim an unowned project by showing up and starting it — you claim it by demoing something running, not by putting your name on it.</p>
+  <div class="legend reveal">
+    <span class="lg">Physical AI <b>5</b></span><span class="lg">Foundry <b>6</b></span>
+    <span class="lg">Ship <b>2</b></span><span class="lg">Frontier <b>2</b></span><span class="lg">Red <b>2</b></span>
+    <span class="lg">Cross-track <b>1</b></span>
+    <span class="lg">Zero capital <b>12</b></span><span class="lg">Needs a bench <b>6</b></span>
+  </div>
+
+  <div class="sub">Physical AI <span class="rule"></span> L1 · L4 · L6 · L7</div>
+  <div class="board reveal">
+    <div class="proj"><div class="proj-top"><span class="proj-id">PR-01</span><span class="pill q2">Q2</span></div>
+      <h4>Coilwatch</h4><span class="tag">Zero-label defect detection</span>
+      <p>Surface anomaly detection on rolled steel where no labelled defects exist — because the defect that matters happens twice a year. Normality modelling, reconstruction error, embedding distance. The regime foundation models are structurally bad at.</p>
+      <div class="stackline"><b>Layers</b> L1 · L6 · L7<br><b>Chokepoints</b> CP-05 · CP-02<br><b>Stack</b> PyTorch, Anomalib, FiftyOne, GStreamer</div></div>
+
+    <div class="proj"><div class="proj-top"><span class="proj-id">PR-02</span><span class="pill">Q3</span></div>
+      <h4>Caliper</h4><span class="tag">Vision with an error bound</span>
+      <p>Sub-pixel dimensional measurement from a single camera, reported as a measurement <em>with an uncertainty interval</em> rather than a bounding box. This is the difference between a demo and an instrument.</p>
+      <div class="stackline"><b>Layers</b> L1 · L7<br><b>Chokepoints</b> CP-05<br><b>Stack</b> OpenCV, calibration targets, NumPy, uncertainty propagation</div></div>
+
+    <div class="proj"><div class="proj-top"><span class="proj-id">PR-03</span><span class="pill">Q3</span></div>
+      <h4>Bearing Oracle</h4><span class="tag">Multimodal failure lead time</span>
+      <p>Vibration, thermal and motor-current signature fusion on rotating equipment, targeting useful lead time rather than post-hoc accuracy. Six modalities, one camera among them.</p>
+      <div class="stackline"><b>Layers</b> L1 · L4 · L6 · L7<br><b>Chokepoints</b> CP-08 · CP-05<br><b>Stack</b> scipy.signal, PyTorch, InfluxDB, Grafana</div></div>
+
+    <div class="proj"><div class="proj-top"><span class="proj-id">PR-04</span><span class="pill">Q4</span></div>
+      <h4>Shopfloor Twin</h4><span class="tag">L4 → L6 in one line</span>
+      <p>One AIADA production line instrumented end to end: PLC tags over OPC-UA into a time-series store into a live twin. Unglamorous, and the thing every AI project in a factory silently needs first.</p>
+      <div class="stackline"><b>Layers</b> L4 · L5 · L6<br><b>Chokepoints</b> CP-08<br><b>Stack</b> open62541, Telegraf, TimescaleDB, Node-RED, Grafana</div></div>
+
+    <div class="proj"><div class="proj-top"><span class="proj-id">PR-17</span><span class="pill q2">Q2</span></div>
+      <h4>Mirror</h4><span class="tag">3D twin · synthetic data · sim-to-real</span>
+      <p>The geometric half of the twin. A photoreal 3D reconstruction of one real cell — machine, lighting, camera positions, materials — used to author defects that have never been photographed, render them with pixel-perfect labels for free, and train a model before a single real example exists.</p>
+      <div class="stackline"><b>Layers</b> L1 · L3 · L6 · L7<br><b>Chokepoints</b> CP-05 · CP-02<br><b>Stack</b> Blender, OpenUSD, BlenderProc, Isaac Sim, Gazebo, PyTorch</div></div>
+
+    <div class="proj"><div class="proj-top"><span class="proj-id">PR-18</span><span class="pill">Year 2</span></div>
+      <h4>Handoff</h4><span class="tag">Sim-to-real policy transfer</span>
+      <p>A manipulation or inspection policy trained entirely in simulation and transferred to real hardware, with the reality gap measured rather than hand-waved. Domain randomisation, system identification, and an honest table of what broke on contact with the world.</p>
+      <div class="stackline"><b>Layers</b> L3 · L4 · L7<br><b>Chokepoints</b> CP-08 · CP-02<br><b>Stack</b> Isaac Sim, MuJoCo, ROS 2, MoveIt, domain randomisation</div></div>
+  </div>
+
+  <div class="sub">Foundry <span class="rule"></span> L0 · L1 · L2</div>
+  <div class="board reveal">
+    <div class="proj"><div class="proj-top"><span class="proj-id">PR-05</span><span class="pill q2">Q2</span></div>
+      <h4>Tapeout Zero</h4><span class="tag">RTL to silicon</span>
+      <p>A small RISC-V accelerator core taken from Verilog through synthesis, place and route, DRC and LVS to a shuttle submission on an open PDK. Not a simulation. A physical chip.</p>
+      <div class="stackline"><b>Layers</b> L1<br><b>Chokepoints</b> CP-01<br><b>Stack</b> Yosys, OpenLane, OpenROAD, Verilator, cocotb, Sky130</div></div>
+
+    <div class="proj"><div class="proj-top"><span class="proj-id">PR-06</span><span class="pill q2">Q2</span></div>
+      <h4>Furnacekernel</h4><span class="tag">30 ms on a ₹15,000 box</span>
+      <p>Fused inference kernels for industrial vision on cheap edge hardware, benchmarked honestly against the framework default. Quantisation, operator fusion, memory layout, roofline analysis.</p>
+      <div class="stackline"><b>Layers</b> L6 · L7<br><b>Chokepoints</b> CP-02<br><b>Stack</b> Triton, TVM, ONNX Runtime, OpenVINO, TensorRT, Nsight</div></div>
+
+    <div class="proj"><div class="proj-top"><span class="proj-id">PR-07</span><span class="pill">Q3</span></div>
+      <h4>Proof of Line</h4><span class="tag">Interlocks you can prove</span>
+      <p>A machine-checked safety property for a real PLC interlock — the kind where "we tested it" is not a satisfying answer because the failure mode involves a person.</p>
+      <div class="stackline"><b>Layers</b> L4<br><b>Chokepoints</b> CP-03<br><b>Stack</b> TLA+, Z3, nuXmv, OpenPLC, IEC 61131-3</div></div>
+
+    <div class="proj"><div class="proj-top"><span class="proj-id">PR-08</span><span class="pill">Q4</span></div>
+      <h4>Alloysim</h4><span class="tag">Simulation validated on plant data</span>
+      <p>Phase-field simulation of a real heat-treatment schedule, checked against measurements from an actual furnace. Most simulation work is never validated. This one is, or it doesn't count.</p>
+      <div class="stackline"><b>Layers</b> L0<br><b>Chokepoints</b> CP-04<br><b>Stack</b> FEniCS, LAMMPS, pymatgen, ASE, PreCICE</div></div>
+
+    <div class="proj"><div class="proj-top"><span class="proj-id">PR-09</span><span class="pill">Q4</span></div>
+      <h4>Interferometer Zero</h4><span class="tag">An instrument, not a demo</span>
+      <p>A built optical surface-profiling bench with a written calibration record and a stated uncertainty budget. The first capital expenditure, and the first thing on this page you can put your hand on.</p>
+      <div class="stackline"><b>Layers</b> L1 · L3<br><b>Chokepoints</b> CP-05 · CP-07<br><b>Stack</b> Optics bench, machine vision camera, Python, Meep for design</div></div>
+
+    <div class="proj"><div class="proj-top"><span class="proj-id">PR-10</span><span class="pill">Year 2</span></div>
+      <h4>Drive</h4><span class="tag">Wide bandgap under load</span>
+      <p>A silicon-carbide three-phase inverter driving a real motor, with thermal characterisation and EMC measurement. The layer under every EV, every solar plant and every rolling mill.</p>
+      <div class="stackline"><b>Layers</b> L2 · L4<br><b>Chokepoints</b> CP-06<br><b>Stack</b> KiCad, ngspice, SiC MOSFETs, thermal camera, oscilloscope</div></div>
+  </div>
+
+  <div class="sub">Ship · Frontier · Red <span class="rule"></span> L5 · L7 · L8</div>
+  <div class="board reveal">
+    <div class="proj"><div class="proj-top"><span class="proj-id">PR-11</span><span class="pill">Q3</span></div>
+      <h4>The Mill</h4><span class="tag">Autonomous portfolio system</span>
+      <p>Five engines that spawn, test and kill small products continuously — with a human at the gate. Fed by a demand corpus no competitor has: the problem statements written down on factory visits. Detailed below.</p>
+      <div class="stackline"><b>Layers</b> L7 · L8<br><b>Chokepoints</b> CP-03 · CP-02<br><b>Stack</b> LangGraph, DSPy, vLLM, Postgres, Supabase, Vercel, Playwright</div></div>
+
+    <div class="proj"><div class="proj-top"><span class="proj-id">PR-12</span><span class="pill">Q3</span></div>
+      <h4>Indie Line</h4><span class="tag">Small tools, real users</span>
+      <p>A rolling set of member-built products on commodity models — no ego about the stack. The L1 entry artifact for the Ship track is not a signup. It is one person who gave you money.</p>
+      <div class="stackline"><b>Layers</b> L7 · L8<br><b>Chokepoints</b> —<br><b>Stack</b> Whatever ships fastest. That is the point.</div></div>
+
+    <div class="proj"><div class="proj-top"><span class="proj-id">PR-13</span><span class="pill q2">Q2</span></div>
+      <h4>Layer Map</h4><span class="tag">Open teardown database</span>
+      <p>A public, growing database of companies scored on layer occupancy, with the reasoning attached. Every Frontier session adds one entry. Within two years this is a resource nobody else in India maintains.</p>
+      <div class="stackline"><b>Layers</b> all<br><b>Chokepoints</b> —<br><b>Stack</b> Static site, open data, public repo</div></div>
+
+    <div class="proj"><div class="proj-top"><span class="proj-id">PR-14</span><span class="pill">Q3</span></div>
+      <h4>Chokepoint Brief</h4><span class="tag">Quarterly, then annual</span>
+      <p>What moved in the ten Atlas domains, what policy changed, what opened in the eastern corridor. Rigorous, free, and the best marketing asset this community will ever have.</p>
+      <div class="stackline"><b>Layers</b> all<br><b>Chokepoints</b> —<br><b>Stack</b> Writing. Sources cited. No hype.</div></div>
+
+    <div class="proj"><div class="proj-top"><span class="proj-id">PR-15</span><span class="pill">Q4</span></div>
+      <h4>Glasshouse</h4><span class="tag">OT security testbed</span>
+      <p>A deliberately vulnerable industrial control rig — PLC, fieldbus, historian — for attack and defence practice. A steel town is exactly where people should understand what a Modbus write can do.</p>
+      <div class="stackline"><b>Layers</b> L4 · L5 · L6<br><b>Chokepoints</b> CP-03<br><b>Stack</b> OpenPLC, Wireshark, Scapy, Ghidra, pymodbus, Snort</div></div>
+
+    <div class="proj"><div class="proj-top"><span class="proj-id">PR-16</span><span class="pill">Year 2</span></div>
+      <h4>Sideband</h4><span class="tag">Where Red meets metrology</span>
+      <p>A power side-channel measurement rig — extracting secrets from a device by watching its current draw. Security work that is really an instrumentation problem, which is why it sits across two tracks.</p>
+      <div class="stackline"><b>Layers</b> L1 · L2<br><b>Chokepoints</b> CP-05 · CP-01<br><b>Stack</b> ChipWhisperer-class rig, oscilloscope, NumPy, statistical analysis</div></div>
+  </div>
+</section>
+
+<section class="wrap band" id="mirror">
+  <div class="eyebrow"><b>07</b> Mirror <span class="rule"></span> PR-17 · PR-18</div>
+  <h2 class="head">Build the factory<br>twice</h2>
+  <p class="lede">Once in steel, once in geometry. A digital twin is usually sold as a dashboard — live tags on a screen — which is the shallowest version of the idea and the least useful. The version that pays is <strong>geometric and sensor-accurate</strong>: a 3D reconstruction of a real cell, complete with materials, lighting and camera optics, in which you can author events that have never happened, render them with perfect labels, and train against them before a single real example exists. It is the most direct answer this community has to the no-data regime.</p>
+
+  <div class="sub">Twin fidelity <span class="rule"></span> Five levels, and most people stop at one</div>
+  <div class="fid reveal">
+    <div class="fid-r"><span class="hb" style="background:var(--h8)"></span><span class="fc">F0</span><div class="fi"><h5>Dashboard twin</h5><p>Live tag values on a screen. Useful for operators, useless for training anything. This is what most vendors mean by "digital twin."</p></div><div class="fw">PR-04 · Q4</div></div>
+    <div class="fid-r"><span class="hb" style="background:var(--h6)"></span><span class="fc">F1</span><div class="fi"><h5>Geometric twin</h5><p>Accurate 3D of the cell — machine, guarding, conveyor, fixtures, camera mounts. Built from CAD where it exists, photogrammetry or laser scan where it doesn't. Suddenly you can answer "where would the camera go" without visiting.</p></div><div class="fw">PR-17 · Q2</div></div>
+    <div class="fid-r"><span class="hb" style="background:var(--h4)"></span><span class="fc">F2</span><div class="fi"><h5>Kinematic twin</h5><p>Things move correctly. Joints, cycle times, conveyor speeds, robot reach, collisions. Now you can test a layout change or an inspection trigger point before anyone stops the line.</p></div><div class="fw">PR-17 · Q3</div></div>
+    <div class="fid-r"><span class="hb" style="background:var(--h2)"></span><span class="fc">F3</span><div class="fi"><h5>Sensor-accurate twin</h5><p>Simulated cameras with real lens parameters, real exposure, real noise. Physically-based materials — oxide, scale, oil film, machined aluminium. Lighting that matches the actual fixtures. <b>This is the level where synthetic training data starts to transfer.</b></p></div><div class="fw">PR-17 · Q4</div></div>
+    <div class="fid-r"><span class="hb" style="background:var(--h0)"></span><span class="fc">F4</span><div class="fi"><h5>Predictive twin</h5><p>Closed loop. The twin runs ahead of the real cell, a policy is trained inside it, and the reality gap is measured and fed back. The point at which the simulation earns the word "twin."</p></div><div class="fw">PR-18 · Year 2</div></div>
+  </div>
+
+  <div class="sub">The synthetic data loop <span class="rule"></span> Why this solves the no-data problem</div>
+  <div class="flow reveal">
+    <div class="fl"><span class="n">01</span><h5>Capture</h5><p>CAD, photogrammetry, or laser scan of the real cell and the parts moving through it.</p></div>
+    <div class="fl"><span class="n">02</span><h5>Assemble</h5><p>Scene built in Blender or OpenUSD. Materials, lighting rig, camera placed where the real one is.</p></div>
+    <div class="fl gain"><span class="n">03</span><h5>Author the defect</h5><p>Model the flaw that happens twice a year — the one you have no photographs of. This step is the whole reason.</p></div>
+    <div class="fl"><span class="n">04</span><h5>Randomise</h5><p>Vary lighting, pose, surface finish, dust, exposure, focus. Domain randomisation is what makes it generalise.</p></div>
+    <div class="fl gain"><span class="n">05</span><h5>Render</h5><p>Ten thousand images with pixel-perfect masks, depth, and normals. Labels are free because the renderer knows the truth.</p></div>
+    <div class="fl"><span class="n">06</span><h5>Train</h5><p>Pretrain on synthetic, fine-tune on the handful of real frames you do have.</p></div>
+    <div class="fl"><span class="n">07</span><h5>Measure the gap</h5><p>Validate on real data and report the sim-to-real drop honestly. Unmeasured, this whole pipeline is a graphics demo.</p></div>
+  </div>
+
+  <div class="sub">Simulated sensors <span class="rule"></span> What each one actually needs</div>
+  <div class="sens reveal">
+    <div class="sn"><b>RGB camera</b><span class="g">Tractable</span><p>Lens model, sensor noise, exposure, rolling shutter, and physically-based materials. The gap is usually lighting and surface finish, not geometry.</p></div>
+    <div class="sn"><b>Depth &amp; stereo</b><span class="g">Tractable</span><p>Nearly free in a renderer, which is why depth-supervised models transfer well. Real depth sensors fail on shiny metal; simulate that failure too.</p></div>
+    <div class="sn"><b>LiDAR</b><span class="g">Moderate</span><p>Ray casting with beam divergence, intensity return and dropout. Reflectivity of the actual material matters more than people expect.</p></div>
+    <div class="sn"><b>Thermal</b><span class="g">Hard</span><p>Needs a thermal solve, not a shader. Emissivity varies with oxide and roughness. Worth it in a steel plant, where thermal is often the only signal.</p></div>
+    <div class="sn"><b>IMU &amp; encoders</b><span class="g">Easy</span><p>Falls out of the physics step. Add realistic bias drift and quantisation or your state estimator will be optimistic.</p></div>
+    <div class="sn"><b>Force–torque</b><span class="g">Hard</span><p>Contact-rich simulation is where sim-to-real most often breaks. Stiffness, friction and compliance need system identification against the real rig.</p></div>
+    <div class="sn"><b>Vibration</b><span class="g">Hard</span><p>Requires modal analysis rather than rigid-body physics. Usually cheaper to gather real data than to simulate it well.</p></div>
+    <div class="sn"><b>Process signals</b><span class="g">Moderate</span><p>Motor current, pressure, flow. Best simulated from a plant model rather than a renderer, then fused with the visual stream.</p></div>
+  </div>
+
+  <div class="note reveal"><h4>The honest caveat</h4>
+    <p>Synthetic data is not free accuracy. The sim-to-real gap is real, it is domain-specific, and <strong>a pipeline that never measures it is a graphics project wearing a lab coat</strong>. Every Mirror deliverable carries the same three numbers: performance on synthetic, performance on real, and the drop between them.</p>
+    <p>The second caveat is scope. F1 and F2 are achievable by one person in a quarter. F3 takes a real camera calibration and a real lighting survey. F4 needs hardware and a year. Anyone who tells you they built F4 in a hackathon built F1.</p></div>
+</section>
+
+<section class="wrap band" id="mill">
+  <div class="eyebrow"><b>08</b> The Mill <span class="rule"></span> PR-11</div>
+  <h2 class="head">A company that runs<br>most of itself</h2>
+  <p class="lede">Not "an AI company that runs itself" — that phrase hides a category error. Autonomy is not one dial; it is per-function, and a company is bottlenecked by its worst critical function, not its average one. A mill takes raw input continuously and rolls out product. That is the correct model: five engines that spawn, test and kill small products, with a human at the gate.</p>
+
+  <div class="engines reveal">
+    <div class="eng"><span class="n">01</span><h4>Discovery</h4><p>Mines demand signals — factory visit notes, forum complaints, store reviews, marketplace friction — into ranked hypotheses with evidence attached.</p><span class="lvl">Target L3 · gate: 3 cited humans</span></div>
+    <div class="eng"><span class="n">02</span><h4>Build</h4><p>Spec to scaffold to deployed URL. Agentic, with the test suite as the verification gate rather than a human reading diffs.</p><span class="lvl">Target L4 · gate: tests + smoke</span></div>
+    <div class="eng"><span class="n">03</span><h4>Distribute</h4><p>Content, landing pages, outreach, search. The engine built last, because a failure here is publicly visible and reputationally expensive.</p><span class="lvl">Target L4 · gate: human sign-off, 90 days</span></div>
+    <div class="eng"><span class="n">04</span><h4>Measure</h4><p>Every product instrumented identically. Built <em>first</em>, because you cannot delegate what you cannot audit. Halts if numbers don't reconcile against the payment processor.</p><span class="lvl">Target L4 · gate: reconciliation</span></div>
+    <div class="eng human"><span class="n">05</span><h4>Gate</h4><p>Kill or scale. Ten minutes a week. Kill criteria pre-registered <em>before</em> launch, decision date in the calendar at launch. Products die on schedule or they never die.</p><span class="lvl">Human. Permanently.</span></div>
+  </div>
+
+  <div class="sub">Why it can't be fully autonomous <span class="rule"></span> Two walls</div>
+  <div class="twocol">
+    <div><p><strong>Error compounding.</strong> At 95% reliability per step, a twenty-step chain succeeds 36% of the time. At 99%, 82%. Autonomous operation over weeks means thousands of steps. No prompt fixes this — only verification gates that catch and retry, or short chains with checkpoints between them. <strong>Verification is the unlock, not model capability.</strong> That is why CP-03 sits underneath this project rather than beside it.</p></div>
+    <div><p><strong>Legal personhood.</strong> A company needs a natural person who signs, is liable and passes KYC — a director, a bank account, filings someone is accountable for, a payment gateway that requires a responsible individual. The operational layer can approach full autonomy. <strong>The accountable layer cannot.</strong> Design for that instead of fighting it.</p></div>
+  </div>
+
+  <div class="sub">Autonomy ceilings, honestly <span class="rule"></span> Today</div>
+  <div class="ceil reveal">
+    <div class="ceil-r hd"><span>Function</span><span>Ceiling</span><span>What blocks the next level</span></div>
+    <div class="ceil-r"><span class="ceil-f">Content, distribution, search</span><span class="ceil-l">L4</span><span class="ceil-w">Quality drift, platform detection</span></div>
+    <div class="ceil-r"><span class="ceil-f">Tier-1 support</span><span class="ceil-l">L4</span><span class="ceil-w">Edge cases needing authority to make exceptions</span></div>
+    <div class="ceil-r"><span class="ceil-f">Code from spec</span><span class="ceil-l">L3–L4</span><span class="ceil-w">Long-horizon coherence in large codebases</span></div>
+    <div class="ceil-r"><span class="ceil-f">Niche discovery</span><span class="ceil-l">L3</span><span class="ceil-w">Taste — knowing which of 200 ideas is real</span></div>
+    <div class="ceil-r"><span class="ceil-f">Pricing, experiment ops</span><span class="ceil-l">L3</span><span class="ceil-w">Judgment on when a signal is noise</span></div>
+    <div class="ceil-r"><span class="ceil-f">B2B sales, partnerships</span><span class="ceil-l low">L1–L2</span><span class="ceil-w">People buy from people they can hold responsible</span></div>
+    <div class="ceil-r"><span class="ceil-f">Legal, tax, banking</span><span class="ceil-l low">L0–L1</span><span class="ceil-w">Structural, not technical. Will not move.</span></div>
+    <div class="ceil-r"><span class="ceil-f">Capital allocation</span><span class="ceil-l low">L1</span><span class="ceil-w">Consequence asymmetry</span></div>
+  </div>
+
+  <div class="note reveal"><h4>The unfair input</h4>
+    <p>Most people building this have no demand signal, so they generate ideas from a model's imagination — which is why they all converge on the same twelve product clichés. We will have <strong>factory visits</strong>: a monthly discipline of walking into real units and writing down one unsolved problem, in a fixed format, into a growing corpus.</p>
+    <p>Ten visits a year is a hundred problem statements over a decade <strong>that exist nowhere else on earth</strong>. That is the moat, and it is the reason to run this in Jamshedpur rather than anywhere else.</p></div>
+
+  <div class="sub">Pre-registered kill criteria <span class="rule"></span> Filled before a line of code</div>
+  <div class="kill reveal">
+    <h5>Template · every Mill product</h5>
+    <span>HYPOTHESIS</span> &nbsp;<b>[who]</b> has <b>[problem]</b> badly enough to pay <b>[price]</b> for <b>[solution]</b><br>
+    <span>EVIDENCE</span> &nbsp;&nbsp;&nbsp;3+ links to real humans complaining, with dates<br>
+    <span>BUILD BUDGET</span> &nbsp;___ hours &nbsp;<b>(hard cap)</b><br>
+    <span>KILL IF BY DAY 30</span> &nbsp;&lt; ___ signups &nbsp;·&nbsp; &lt; ___ paying &nbsp;·&nbsp; CAC &gt; ₹___ &nbsp;·&nbsp; &gt; ___ h/week of my time<br>
+    <span>SCALE IF BY DAY 30</span> &nbsp;___ paying users AND retention above ___%<br>
+    <span>DECISION DATE</span> &nbsp;______ &nbsp;<b>← in the calendar at launch</b>
+  </div>
+  <p class="lede" style="margin-top:20px">If you cannot fill this in, you do not understand the hypothesis well enough to test it. Products die on schedule, or they never die — and a portfolio of undead products is indistinguishable from having no portfolio at all.</p>
+</section>
+
+<section class="wrap band" id="forge">
+  <div class="eyebrow"><b>09</b> Forge <span class="rule"></span> AI · ML · DL · CV</div>
+  <h2 class="head">From scratch,<br>where it actually pays</h2>
+  <p class="lede">"From scratch" means four different things with wildly different returns. Pedagogical — implement backprop once, then never again. Architectural — worth it only in constrained regimes. Infrastructural — your own harness, pipeline and eval stack, and the most underrated of the four. Foundational — pretraining a large model, which for a solo builder is arithmetic, not ambition. We do the third one, in one narrow domain, and use commodity models shamelessly everywhere else.</p>
+
+  <div class="stages reveal">
+    <div class="stg"><div class="bar" style="background:var(--h1)"></div><div class="in"><span class="n">Stage 1</span><h4>Harness</h4><span class="wk">Weeks 1–8</span>
+      <p>Your own training loop, config system, deterministic seeding, checkpointing, and an eval harness reporting calibrated uncertainty rather than just accuracy. The thing you'll use for a decade. Don't skip it to reach models faster.</p></div></div>
+    <div class="stg"><div class="bar" style="background:var(--h2)"></div><div class="in"><span class="n">Stage 2</span><h4>Data engine</h4><span class="wk">Weeks 6–16</span>
+      <p>Ingestion from real industrial cameras. Physically plausible augmentation — lighting, scale, oxide, motion blur, modelled on the actual process. Active learning so an operator labels the <em>right</em> thirty images a week. <b>The data engine is the moat, not the model.</b></p></div></div>
+    <div class="stg"><div class="bar" style="background:var(--h3)"></div><div class="in"><span class="n">Stage 3</span><h4>Model line</h4><span class="wk">Weeks 12–28</span>
+      <p>Anomaly detection with zero defect labels first. Then supervised detection where labels exist. Then sub-pixel measurement with an error bound. Written from scratch where the constraint demands it, borrowed where it doesn't.</p></div></div>
+    <div class="stg"><div class="bar" style="background:var(--h4)"></div><div class="in"><span class="n">Stage 4</span><h4>Edge</h4><span class="wk">Weeks 20–36</span>
+      <p>Quantisation, pruning, kernel fusion, target hardware profiling. Where CP-02 stops being theoretical. Ship to one real device on one real line, in the real ambient temperature.</p></div></div>
+    <div class="stg"><div class="bar" style="background:var(--h5)"></div><div class="in"><span class="n">Stage 5</span><h4>Evidence</h4><span class="wk">Ongoing</span>
+      <p>Every shipped model carries a failure analysis, a calibration curve, a drift monitor, and an honest statement of where it breaks. This is what separates an industrial system from a demo — and what a plant manager actually buys.</p></div></div>
+  </div>
+
+  <div class="sub">The niche: industrial vision in the no-data regime <span class="rule"></span> Where foundation models stay bad</div>
+  <div class="regime reveal">
+    <div class="reg"><b>Zero-label anomaly detection</b><p>The defect that matters happens twice a year. No examples exist to pretrain on, anywhere — so no amount of scale helps.</p></div>
+    <div class="reg"><b>Metrology-grade vision</b><p>You need a measurement with an uncertainty bound, not a bounding box. Detection models have no calibrated error model at all.</p></div>
+    <div class="reg"><b>Physics-informed vision</b><p>Constrained by what the metallurgy makes possible, not just by pixels. Requires domain physics inside the loss function.</p></div>
+    <div class="reg"><b>Multimodal fusion</b><p>The camera is one of six sensors. Internet-scale pretraining data is overwhelmingly unimodal.</p></div>
+    <div class="reg"><b>Hard-constrained edge</b><p>30 ms on a ₹15,000 box, at 55 °C, with vibration, and no cloud. Almost nobody optimises for this regime.</p></div>
+    <div class="reg"><b>Never build yourself</b><p>Auth, payments, hosting, generic detection, OCR, embeddings, vector search. Every hour rebuilding a solved commodity is an hour not spent where nobody else can go.</p></div>
+  </div>
+
+  <div class="sub">Skills, by temperature <span class="rule"></span> What each rung actually means</div>
+  <div class="skills reveal">
+    <div class="sk-r hd"><div class="sk-c">Domain</div><div class="sk-c">L0 · Cold</div><div class="sk-c">L1 · 550 °C</div><div class="sk-c">L2 · 950 °C</div><div class="sk-c">L3 · 1300 °C</div></div>
+    <div class="sk-r"><div class="sk-c dom">Machine learning</div><div class="sk-c">Fit a model with a library, read a confusion matrix</div><div class="sk-c">Own training loop, proper splits, no leakage, honest baseline</div><div class="sk-c">Custom losses, calibration, uncertainty, active learning</div><div class="sk-c">Designs the eval other people trust and argue about</div></div>
+    <div class="sk-r"><div class="sk-c dom">Deep learning</div><div class="sk-c">Fine-tune a pretrained backbone</div><div class="sk-c">Implement backprop, conv and attention from scratch once</div><div class="sk-c">Architecture choices justified by the constraint, not the paper</div><div class="sk-c">Publishes or ships something with a novel training regime</div></div>
+    <div class="sk-r"><div class="sk-c dom">Computer vision</div><div class="sk-c">Run detection on a public dataset</div><div class="sk-c">Camera calibration, lighting, optics, real capture conditions</div><div class="sk-c">Zero-label anomaly detection, sub-pixel measurement with error bars</div><div class="sk-c">Builds inspection systems a plant manager signs off on</div></div>
+    <div class="sk-r"><div class="sk-c dom">3D &amp; synthetic data</div><div class="sk-c">Model a part in Blender</div><div class="sk-c">Scene assembly, PBR materials, rendered labels</div><div class="sk-c">Domain randomisation, simulated sensors, measured sim-to-real gap</div><div class="sk-c">Closed-loop twin driving a policy on real hardware</div></div>
+    <div class="sk-r"><div class="sk-c dom">Systems &amp; kernels</div><div class="sk-c">Export to ONNX and run it</div><div class="sk-c">Quantise, profile, hit a latency target on real hardware</div><div class="sk-c">Write a fused kernel that beats the framework default</div><div class="sk-c">Extends a compiler; others use the kernels you wrote</div></div>
+    <div class="sk-r"><div class="sk-c dom">Silicon</div><div class="sk-c">Write and simulate testbench Verilog</div><div class="sk-c">Synthesise a design, close timing on an open PDK</div><div class="sk-c">Full RTL-to-GDS flow, DRC and LVS clean, shuttle submitted</div><div class="sk-c">Has silicon back that works, and knows why the first one didn't</div></div>
+    <div class="sk-r"><div class="sk-c dom">Control &amp; embedded</div><div class="sk-c">Blink an LED, read a sensor</div><div class="sk-c">Close a PID loop on real hardware and tune it deliberately</div><div class="sk-c">State estimation, system identification, deterministic timing</div><div class="sk-c">Certifiable safety-critical control with a stability argument</div></div>
+    <div class="sk-r"><div class="sk-c dom">Verification</div><div class="sk-c">Write unit tests</div><div class="sk-c">Property-based testing and fuzzing on real code</div><div class="sk-c">Model-check a protocol or an interlock</div><div class="sk-c">Machine-checked proofs of properties people rely on</div></div>
+    <div class="sk-r"><div class="sk-c dom">Industrial stack</div><div class="sk-c">Knows what a PLC is</div><div class="sk-c">Reads Modbus and OPC-UA off a real line</div><div class="sk-c">Builds the L4→L6 path: tags to historian to model</div><div class="sk-c">Designs plant architecture others deploy</div></div>
+    <div class="sk-r"><div class="sk-c dom">Shipping</div><div class="sk-c">Deployed something to a URL</div><div class="sk-c">One paying user</div><div class="sk-c">A product that survived its own kill criteria</div><div class="sk-c">A portfolio with a repeatable discovery-to-revenue loop</div></div>
+  </div>
+
+  <div class="note reveal"><h4>The build-or-buy test</h4>
+    <p>One question: <strong>does the off-the-shelf option fail on my specific constraint?</strong> Yes — build it. No — you're doing a hobby, which is fine, but label it honestly. Someone who hand-rolls an auth flow because "from scratch" is a value has misunderstood what the value is for.</p></div>
+</section>
+
+<section class="wrap band" id="tools">
+  <div class="eyebrow"><b>10</b> Toolchain <span class="rule"></span> Mostly open source</div>
+  <h2 class="head">What we work with</h2>
+  <p class="lede">Grouped by the layer they operate on. Almost all of it is free, which is the quiet reason a community in a tier-two Indian city can now do work that required a corporate lab twenty years ago. The exceptions are the benches — optics, oscilloscopes, thermal cameras — and those are the reason Tier 1 has a capital number attached.</p>
+
+  <div class="tools reveal">
+    <div class="tgrp"><h4>Silicon &amp; EDA<em>L1 · CP-01</em></h4><div class="tlist">
+      <span class="t">Yosys</span><span class="t">OpenLane</span><span class="t">OpenROAD</span><span class="t">Verilator</span><span class="t">cocotb</span><span class="t">GTKWave</span><span class="t">Magic</span><span class="t">KLayout</span><span class="t">ngspice</span><span class="t">Sky130 PDK</span><span class="t">IHP PDK</span><span class="t">GF180</span><span class="t">Chisel</span><span class="t">Amaranth</span><span class="t">RISC-V</span></div></div>
+
+    <div class="tgrp"><h4>Compilers &amp; kernels<em>L7 · CP-02</em></h4><div class="tlist">
+      <span class="t">MLIR</span><span class="t">TVM</span><span class="t">Triton</span><span class="t">CUDA</span><span class="t">XLA</span><span class="t">ONNX Runtime</span><span class="t">TensorRT</span><span class="t">OpenVINO</span><span class="t">TFLite</span><span class="t">llama.cpp</span><span class="t">ggml</span><span class="t">Nsight</span><span class="t">perf</span></div></div>
+
+    <div class="tgrp"><h4>Verification<em>L4 · L7 · CP-03</em></h4><div class="tlist">
+      <span class="t">Z3</span><span class="t">TLA+</span><span class="t">nuXmv</span><span class="t">Lean</span><span class="t">Rocq</span><span class="t">SystemVerilog assertions</span><span class="t">UVM</span><span class="t">Hypothesis</span><span class="t">AFL++</span><span class="t">angr</span></div></div>
+
+    <div class="tgrp"><h4>Matter &amp; simulation<em>L0 · L3 · CP-04</em></h4><div class="tlist">
+      <span class="t">Quantum ESPRESSO</span><span class="t">LAMMPS</span><span class="t">OpenFOAM</span><span class="t">FEniCS</span><span class="t">CalculiX</span><span class="t">PreCICE</span><span class="t">pymatgen</span><span class="t">ASE</span><span class="t">MOOSE</span><span class="t">FreeCAD</span><span class="t">Elmer</span></div></div>
+
+    <div class="tgrp"><h4>Vision &amp; learning<em>L7</em></h4><div class="tlist">
+      <span class="t">PyTorch</span><span class="t">OpenCV</span><span class="t">timm</span><span class="t">Albumentations</span><span class="t">Anomalib</span><span class="t">MMDetection</span><span class="t">Ultralytics</span><span class="t">Kornia</span><span class="t">scikit-learn</span><span class="t">FiftyOne</span><span class="t">Label Studio</span><span class="t">DVC</span><span class="t">MLflow</span><span class="t">Optuna</span></div></div>
+
+    <div class="tgrp"><h4>3D, twins &amp; synthesis<em>L3 · L6 · L7 · PR-17</em></h4><div class="tlist">
+      <span class="t">Blender</span><span class="t">OpenUSD</span><span class="t">BlenderProc</span><span class="t">Isaac Sim</span><span class="t">Omniverse Replicator</span><span class="t">Gazebo</span><span class="t">MuJoCo</span><span class="t">PyBullet</span><span class="t">Genesis</span><span class="t">NVIDIA Warp</span><span class="t">Open3D</span><span class="t">COLMAP</span><span class="t">Meshroom</span><span class="t">CloudCompare</span><span class="t">nerfstudio</span><span class="t">Mitsuba</span><span class="t">Three.js</span></div></div>
+
+    <div class="tgrp"><h4>Industrial &amp; control<em>L4 · L5 · CP-08</em></h4><div class="tlist">
+      <span class="t">OpenPLC</span><span class="t">open62541</span><span class="t">pymodbus</span><span class="t">Node-RED</span><span class="t">Mosquitto</span><span class="t">FreeRTOS</span><span class="t">Zephyr</span><span class="t">PlatformIO</span><span class="t">ROS 2</span><span class="t">Gazebo</span><span class="t">MoveIt</span><span class="t">python-control</span><span class="t">CasADi</span><span class="t">acados</span></div></div>
+
+    <div class="tgrp"><h4>Data &amp; edge<em>L6</em></h4><div class="tlist">
+      <span class="t">InfluxDB</span><span class="t">TimescaleDB</span><span class="t">Telegraf</span><span class="t">Kafka</span><span class="t">Grafana</span><span class="t">DuckDB</span><span class="t">Postgres</span><span class="t">GStreamer</span><span class="t">Docker</span><span class="t">Prometheus</span></div></div>
+
+    <div class="tgrp"><h4>Power &amp; electronics<em>L2 · CP-06 · CP-07</em></h4><div class="tlist">
+      <span class="t">KiCad</span><span class="t">ngspice</span><span class="t">Qucs-S</span><span class="t">FEMM</span><span class="t">Meep</span><span class="t">openEMS</span><span class="t">Sigrok</span><span class="t">PulseView</span></div></div>
+
+    <div class="tgrp"><h4>Adversarial<em>L1–L6 · Red</em></h4><div class="tlist">
+      <span class="t">Ghidra</span><span class="t">Wireshark</span><span class="t">Scapy</span><span class="t">radare2</span><span class="t">Burp</span><span class="t">Volatility</span><span class="t">Snort</span><span class="t">Zeek</span><span class="t">ChipWhisperer</span><span class="t">binwalk</span></div></div>
+
+    <div class="tgrp"><h4>Agents &amp; shipping<em>L7 · L8</em></h4><div class="tlist">
+      <span class="t">LangGraph</span><span class="t">DSPy</span><span class="t">vLLM</span><span class="t">Ollama</span><span class="t">Playwright</span><span class="t">FastAPI</span><span class="t">Next.js</span><span class="t">Supabase</span><span class="t">Vercel</span><span class="t">Caddy</span><span class="t">Plausible</span></div></div>
+  </div>
+</section>
+
+<section class="wrap band" id="notes">
+  <div class="eyebrow"><b>11</b> Notes <span class="rule"></span> Engineering booklets</div>
+  <h2 class="head">Crucible Notes</h2>
+  <p class="lede">Short technical booklets — twenty to forty pages, free, written by whoever did the work. Not tutorials, and not blog posts. The kind of document you wished existed when you were three weeks into a problem and everything online was either a toy example or a paywalled standard. One per quarter, minimum — twelve planned. The booklet is how a project becomes something other people can stand on.</p>
+
+  <div class="notes reveal">
+    <div class="nrow"><span class="nn">N-01</span><div><div class="nt">Reading a Factory</div><div class="nd">How to walk a shop floor, find the repetitive human judgement, and tell a solvable problem from an interesting one.</div></div><span class="nw">Q2 · Physical AI</span></div>
+    <div class="nrow"><span class="nn">N-02</span><div><div class="nt">The No-Data Regime</div><div class="nd">Anomaly detection when you have zero labelled defects and the one that matters happens twice a year.</div></div><span class="nw">Q3 · Physical AI</span></div>
+    <div class="nrow"><span class="nn">N-03</span><div><div class="nt">RTL to GDSII on Zero Budget</div><div class="nd">The full open-source path from Verilog to a shuttle submission, including every place it silently fails.</div></div><span class="nw">Q3 · Foundry</span></div>
+    <div class="nrow"><span class="nn">N-04</span><div><div class="nt">Kernels for the Shop Floor</div><div class="nd">Making a vision model fit a cheap edge box: quantisation, fusion, memory layout, and honest benchmarking.</div></div><span class="nw">Q3 · Foundry</span></div>
+    <div class="nrow"><span class="nn">N-05</span><div><div class="nt">Measurement With Uncertainty</div><div class="nd">Metrology for computer vision people. Calibration, traceability, error budgets, and why a bounding box is not a measurement.</div></div><span class="nw">Q4 · Foundry</span></div>
+    <div class="nrow"><span class="nn">N-06</span><div><div class="nt">The Layer Map</div><div class="nd">How to tear down any company by what it owns versus rents, and what occupancy predicts about its next five years.</div></div><span class="nw">Q4 · Frontier</span></div>
+    <div class="nrow"><span class="nn">N-07</span><div><div class="nt">Interlocks You Can Prove</div><div class="nd">Formal methods for industrial control, for engineers who have never written a specification in their lives.</div></div><span class="nw">Year 2 · Foundry</span></div>
+    <div class="nrow"><span class="nn">N-08</span><div><div class="nt">Fieldbus Field Guide</div><div class="nd">Modbus, OPC-UA, PROFINET, MQTT — what each is for, what actually breaks, and how to read the wire.</div></div><span class="nw">Year 2 · Red</span></div>
+    <div class="nrow"><span class="nn">N-09</span><div><div class="nt">Wide Bandgap, Plainly</div><div class="nd">Silicon carbide and gallium nitride for people who studied computer science and now need to switch 400 volts.</div></div><span class="nw">Year 2 · Foundry</span></div>
+    <div class="nrow"><span class="nn">N-10</span><div><div class="nt">Autonomy Ceilings</div><div class="nd">What agentic systems can and cannot run unsupervised, measured rather than asserted, with the failure data attached.</div></div><span class="nw">Year 2 · Ship</span></div>
+    <div class="nrow"><span class="nn">N-11</span><div><div class="nt">Defects That Never Happened</div><div class="nd">Authoring synthetic training data in 3D: scene assembly, physically-based materials, domain randomisation, and how to measure the sim-to-real gap instead of hiding it.</div></div><span class="nw">Q4 · Physical AI</span></div>
+    <div class="nrow"><span class="nn">N-12</span><div><div class="nt">Five Kinds of Twin</div><div class="nd">What "digital twin" means at each fidelity level, what each one actually costs to build, and which vendor claims to distrust.</div></div><span class="nw">Year 2 · Physical AI</span></div>
+  </div>
+  <p class="lede" style="margin-top:24px">A booklet is written by the person who did the work, not the person who read about it. That constraint is why there will only ever be four a year — and why they will be worth reading.</p>
+</section>
+
+<section class="wrap band" id="loop">
+  <div class="eyebrow"><b>12</b> Loop <span class="rule"></span> Saturday</div>
+  <h2 class="head">The community<br>is the Saturday</h2>
+  <p class="lede">Three hours, same day, same time, forever. Everything else on this page is commentary on how to protect it. If nobody has anything to demo, the demo round is cancelled openly and the reason stated — it is never filled with talk.</p>
+  <div class="loop reveal">
+    <div class="loop-row"><span class="loop-t">0:00 — 0:10</span><span class="loop-n">Open</span><span class="loop-d">New faces introduce themselves in one sentence: name, and what they're building.</span></div>
+    <div class="loop-row"><span class="loop-t">0:10 — 0:30</span><span class="loop-n">Teardown</span><span class="loop-d">One member dissects a company by layer occupancy, or a paper, or a failure. Rotates weekly. Written artifact required.</span></div>
+    <div class="loop-row deep"><span class="loop-t">0:30 — 2:00</span><span class="loop-n">Deep block</span><span class="loop-d">Silent work. Phones face-down. No talking in the main room; a side room for pairs. This block never gets shortened.</span></div>
+    <div class="loop-row"><span class="loop-t">2:00 — 2:40</span><span class="loop-n">Demos</span><span class="loop-d">Three minutes each. Must show something running. Broken is fine. Slides are not.</span></div>
+    <div class="loop-row"><span class="loop-t">2:40 — 3:00</span><span class="loop-n">Blockers</span><span class="loop-d">Each person names one thing they're stuck on. Others claim what they can help with. Written down.</span></div>
+    <div class="loop-row"><span class="loop-t">after</span><span class="loop-n">Chai</span><span class="loop-d">Unstructured. This is where the community actually forms. Not optional.</span></div>
+  </div>
+</section>
+
+<section class="wrap band" id="ladder">
+  <div class="eyebrow"><b>13</b> Ladder <span class="rule"></span> Progression</div>
+  <h2 class="head">Four temperatures</h2>
+  <p class="lede">Levels are named for the colour steel glows at temperature, because it is the one metaphor here that is literally true in this city. Cold expires after eight weeks — you either produce something, or you drop back to the ambient ring. That rule is what keeps the room from filling with spectators.</p>
+  <div class="ladder reveal">
+    <div class="rung"><div class="heat" style="background:var(--t-cold)"></div><div class="in"><span class="lvl">L0</span><h4>Cold</h4><span class="temp">Ambient</span><p>Attending, reading, no output yet. Expires in eight weeks.</p></div></div>
+    <div class="rung"><div class="heat" style="background:var(--t-550)"></div><div class="in"><span class="lvl">L1</span><h4>Dull red</h4><span class="temp">550 °C</span><p>Completed one guided build and demoed it. Typically one to three months.</p></div></div>
+    <div class="rung"><div class="heat" style="background:var(--t-950)"></div><div class="in"><span class="lvl">L2</span><h4>Orange</h4><span class="temp">950 °C</span><p>Shipped one independent artifact judged real by two people above you.</p></div></div>
+    <div class="rung"><div class="heat" style="background:var(--t-1300)"></div><div class="in"><span class="lvl">L3</span><h4>White heat</h4><span class="temp">1300 °C</span><p>Can teach it, can unblock others, has produced something outsiders cite.</p></div></div>
+  </div>
+</section>
+
+<section class="wrap band" id="sequence">
+  <div class="eyebrow"><b>14</b> Sequence <span class="rule"></span> First year</div>
+  <h2 class="head">Twelve months</h2>
+  <p class="lede">Nothing but Build Night and the Sunday run for the entire first quarter. Adding tracks early is the single most reliable way to end up with nothing.</p>
+  <div class="seq reveal">
+    <div class="seq-row"><div class="seq-q">Q1<em>Months 1–3</em></div>
+      <div><div class="seq-h">Prove the loop exists</div><p class="seq-b">Five people, found individually. Build Night #1 in a flat or a café within three weeks — before the logo, before the site, before the Discord. Then every single week, adding one person at a time by invitation.</p></div>
+      <div class="seq-side">12 / 12 sessions held<br><span>≥30 demos given</span><br>12 writeups published<br><span>3 sessions hosted by someone else</span></div></div>
+    <div class="seq-row"><div class="seq-q">Q2<em>Months 4–6</em></div>
+      <div><div class="seq-h">Two tracks, one public face</div><p class="seq-b">Physical AI and Foundry only, with two zero-capital cells. First Forge. This page goes live. Culture code published, ladders written. First Demo Day.</p></div>
+      <div class="seq-side">Cells: CP-02, CP-01<br><span>PR-01, PR-05, PR-06, PR-13, PR-17 open</span><br>Capital spent: ₹0<br><span>First Forge · first twin at F1</span></div></div>
+    <div class="seq-row"><div class="seq-q">Q3<em>Months 7–9</em></div>
+      <div><div class="seq-h">Ship, Frontier, first revenue</div><p class="seq-b">First Chokepoint Brief. First 48-hour hack with problems sourced from real factory floors. First paid industry workshop — this is where the money model starts. The Mill's Measure engine goes unattended.</p></div>
+      <div class="seq-side">First revenue<br><span>First deployed system</span><br>Twin reaches F2 · synthetic set v1<br><span>N-02, N-03, N-04 drafted</span></div></div>
+    <div class="seq-row"><div class="seq-q">Q4<em>Months 10–12</em></div>
+      <div><div class="seq-h">Red, hardware, the flagship</div><p class="seq-b">First physical bench — metrology, and the first capital expenditure, voted on. FURNACE, the annual two-day event. A design submitted to a shuttle run. Core ring formalised, first expiries applied.</p></div>
+      <div class="seq-side">First bench: PR-09<br><span>Tapeout Zero submitted</span><br>FURNACE<br><span>First Core expiries</span></div></div>
+  </div>
+</section>
+
+<section class="wrap band" id="code">
+  <div class="eyebrow"><b>15</b> Code <span class="rule"></span> How we behave</div>
+  <h2 class="head">Ten rules,<br>enforced in the moment</h2>
+  <p class="lede">Read aloud at every intake. The first four are adapted from Recurse Center's social rules, which remain the best-designed set in existence for a learning environment.</p>
+  <div class="code reveal">
+    <div class="rule"><span class="n">01</span><div><b>No feigned surprise</b><p>"You've never used a debugger?" Feigned surprise makes people hide what they don't know, which is the fastest way to kill learning.</p></div></div>
+    <div class="rule"><span class="n">02</span><div><b>No well-actually's</b><p>Corrections that add nothing but status. Correct things that matter, kindly.</p></div></div>
+    <div class="rule"><span class="n">03</span><div><b>No backseat driving</b><p>Don't lob advice across the room into a conversation you're not part of. Join properly or stay out.</p></div></div>
+    <div class="rule"><span class="n">04</span><div><b>No subtle -isms</b><p>Small demeaning remarks about background, college, employer, English, gender or caste. Called out lightly, apologised for lightly, moved on from lightly.</p></div></div>
+    <div class="rule"><span class="n">05</span><div><b>Show, don't announce</b><p>You may not present an idea. You present a thing that exists, however broken.</p></div></div>
+    <div class="rule"><span class="n">06</span><div><b>Publish or it didn't happen</b><p>Every session produces a public artifact. If there's no record, it didn't occur.</p></div></div>
+    <div class="rule"><span class="n">07</span><div><b>Contribution over attendance</b><p>Presence is not membership. Output is.</p></div></div>
+    <div class="rule"><span class="n">08</span><div><b>One layer down</b><p>When stuck, ask what the problem stands on, and work on that instead. On the stack diagram, that direction is down.</p></div></div>
+    <div class="rule"><span class="n">09</span><div><b>Credentials are invisible</b><p>Nobody's college, employer or title is mentioned in a technical discussion. What you built is the only relevant fact.</p></div></div>
+    <div class="rule"><span class="n">10</span><div><b>No spectators in the core</b><p>Ship every quarter or step back. Membership is regained the same way it was earned.</p></div></div>
+  </div>
+  <div class="phrases reveal">
+    <span class="phrase">"Show me it running."</span>
+    <span class="phrase">"What does that stand on?"</span>
+    <span class="phrase">"How many layers do they own?"</span>
+  </div>
+</section>
+
+<section class="wrap join" id="join">
+  <h2>Come on<br>a Saturday</h2>
+  <div class="join-grid">
+    <div>
+      <p>There are no fees, no applications to write, and nothing to pitch. Turn up twice, then pick a track and name the one thing you'll have made in eight weeks.</p>
+      <p style="margin-top:14px;color:var(--dim);font-size:15px">Any project on the board without an owner is claimable. You claim it by starting it and demoing something running.</p>
+    </div>
+    <div class="req"><b>What to bring</b>
+      <ul><li>A laptop</li><li>Something you're building</li><li>One thing you're stuck on</li><li>Willingness to show it running</li></ul></div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="foot">
+    <span>Crucible</span><span>Jamshedpur · Jharkhand</span><span>Rev 1.2 · forming</span>
+    <span class="r">The community is the Saturday</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.atlas-item').forEach(function(item, i){
+    var btn = item.querySelector('.atlas-row');
+    var body = item.querySelector('.atlas-body');
+    body.id = 'chokepoint-detail-' + (i + 1);
+    btn.setAttribute('aria-controls', body.id);
+    btn.addEventListener('click', function(){
+      var open = item.getAttribute('data-open') === 'true';
+      item.setAttribute('data-open', open ? 'false' : 'true');
+      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+    });
+  });
+  if(!reduce && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+    }, {threshold:0.05, rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('on'); });
+  }
+})();
+</script>
+</body>
+</html>
