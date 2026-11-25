@@ -34,7 +34,7 @@ export default async function TrackPage({ params }: Props) {
           <p className="panel-meta"><span className="dot" /> PORTFOLIO TARGET</p>
           <p>{path.capstone[0]}</p>
           <p className="career-target-proof">{path.capstone[1]}</p>
-          <div className="hero-ladder"><span>{path.subjects.length} core subjects</span><span>{content.readings.length} links</span></div>
+          <div className="hero-ladder"><span>{content.plan.length} study weeks</span><span>{content.resourceCount} resources</span></div>
         </div>
       </CareerHero>
       <CareerNav current="path" />

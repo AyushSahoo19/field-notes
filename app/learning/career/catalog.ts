@@ -1,4 +1,10 @@
 import source from "./source-data.json";
+import { pathReference } from "./path-references";
+import { quantPhaseReferences } from "./quant-phase-references";
+import { advancedStudyPlans } from "./study-advanced";
+import type { StudyPlan, StudyResource } from "./study-plan-types";
+import { systemsStudyPlans } from "./study-systems";
+import { workbookReference, workbookWeekReferences } from "./workbook-references";
 
 export type Subject = [title: string, topics: string, proof: string];
 export type Reading = [kind: string, title: string, url: string, use?: string];
@@ -105,7 +111,7 @@ export const paths = [
       ["Transactions and recovery", "Isolation levels, MVCC, write-ahead logging, checkpoints and recovery", "Reproduce a transaction anomaly and test replay after a simulated crash."],
     ],
     capstone: ["Small storage or query engine", "Provide a recovery test, documented query plan, and reproducible performance comparisons."],
-    readings: [ddia, ["Paper", "Architecture of a Database System", "https://doi.org/10.1561/1900000002"], ["Repository", "CMU BusTub", "https://github.com/cmu-db/bustub"]],
+    readings: [ddia, ["Paper", "Architecture of a Database System", "https://people.eecs.berkeley.edu/~kubitron/courses/cs262a-F19/handouts/papers/fntdb07-architecture.pdf"], ["Repository", "CMU BusTub", "https://github.com/cmu-db/bustub"]],
   },
   {
     id: "backend", title: "Backend & API Engineering", family: systems, domains: ["Backend"], weeks: [14,21,22,26],
@@ -177,7 +183,7 @@ export const paths = [
       ["Portfolio and execution", "Sizing, drawdown, attribution, execution models, market making and feed latency", "Simulate execution with explicit assumptions and inspect the difference from gross returns."],
     ],
     capstone: ["Auditable strategy research report", "Publish a timestamp-safe backtest, benchmark, cost model, holdout results, and limitations."],
-    readings: [varsity, ["Book", "Algorithmic and High-Frequency Trading", "https://sebastian.statistics.utoronto.ca/books/algo-and-hf-trading/"], ["Paper", "The Probability of Backtest Overfitting", "https://ssrn.com/abstract=2326253"], ["Paper", "Common risk factors in the returns on stocks and bonds", "https://doi.org/10.1016/0304-405X(93)90023-5", "Trace how the factors are defined and evaluated."], ["Paper", "Algorithmic Trading, Stochastic Control, and Mutually Exciting Processes", "https://epubs.siam.org/doi/10.1137/18M1176968", "Read how the order-flow model enters the execution problem."], ["Repository", "QuantConnect LEAN", "https://github.com/QuantConnect/Lean"]],
+    readings: [varsity, ["Book", "Algorithmic and High-Frequency Trading", "https://sebastian.statistics.utoronto.ca/books/algo-and-hf-trading/"], ["Paper", "The Probability of Backtest Overfitting", "https://escholarship.org/uc/item/4w1110bb"], ["Paper", "Common risk factors in the returns on stocks and bonds", "https://doi.org/10.1016/0304-405X(93)90023-5", "Trace how the factors are defined and evaluated."], ["Paper", "Algorithmic Trading, Stochastic Control, and Mutually Exciting Processes", "https://oxford-man.ox.ac.uk/wp-content/uploads/2020/05/Algorithmic-Trading-Stochastic-Control-and-Mutually-Exciting-Processes.pdf", "Read how the order-flow model enters the execution problem."], ["Repository", "QuantConnect LEAN", "https://github.com/QuantConnect/Lean"]],
   },
   {
     id: "robotics", title: "Robotics & Computer Vision", family: hardware, domains: ["Robotics / CV"],
@@ -213,7 +219,7 @@ export const paths = [
       ["Interview preparation", "Problem solving, design trade-offs, behavioral examples and portfolio storytelling", "Explain a project’s architecture and a decision you changed after testing."],
     ],
     capstone: ["Evidence-backed portfolio release", "Show a reproducible build, tests, architecture notes, contribution record, and a short demo."],
-    readings: [["Book", "Pro Git", "https://git-scm.com/book/en/v2"], ["Paper", "Expectations, outcomes, and challenges of modern code review", "https://doi.org/10.5281/zenodo.1401198"], ["Repository", "Kiwix JS", "https://github.com/kiwix/kiwix-js"]],
+    readings: [["Book", "Pro Git", "https://git-scm.com/book/en/v2"], ["Paper", "Expectations, outcomes, and challenges of modern code review", "https://zenodo.org/records/1401198"], ["Repository", "Kiwix JS", "https://github.com/kiwix/kiwix-js"]],
   },
   {
     id: "knowledge-systems", title: "Knowledge Systems & Graphs", family: craft, domains: ["Knowledge Systems"],
@@ -297,19 +303,91 @@ function uniqueBy<T>(items: T[], key: (item: T) => string) {
   return [...new Map(items.map((item) => [key(item), item])).values()];
 }
 
+const studyPlans: Record<string, StudyPlan> = { ...systemsStudyPlans, ...advancedStudyPlans };
+const workbookById = new Map(source.resources.map((resource) => [resource.id, workbookReference(resource)]));
+const workbookByUrl = new Map([...workbookById.values()].map((resource) => [resource.url, resource]));
+
+const quantRepositoryTools: Record<string, [string[], string[]]> = {
+  vectorbt: [["Vectorized signals", "parameter sweeps", "portfolio statistics"], ["Python", "NumPy", "pandas"]],
+  "Microsoft Qlib": [["Data handlers", "model baselines", "experiment tracking"], ["Python", "Qlib", "YAML"]],
+  "FinRL / AI4Finance": [["Trading environments", "reward design", "benchmarking"], ["Python", "Gymnasium", "historical data"]],
+  ABIDES: [["Discrete events", "market agents", "simulated order books"], ["Python", "ABIDES", "simulation logs"]],
+};
+
+function quantRepositoryReferences(): StudyResource[] {
+  return source.quant.repos.flatMap(([repo, purpose, contribution]) => {
+    if (!repo.url || !quantRepositoryTools[repo.text]) return [];
+    const [concepts, tools] = quantRepositoryTools[repo.text];
+    return [{
+      kind: "Repository", title: repo.text, url: repo.url,
+      coverage: purpose.text.trim(), concepts, tools,
+      why: "Compare its research or simulation workflow with the assumptions in your own backtest.",
+      activity: contribution.text.trim(),
+    }];
+  });
+}
+
+function quantPhases() {
+  const fromWorkbook = (id: string) => workbookById.get(id)!;
+  const extra = quantPhaseReferences;
+  const references = [
+    [fromWorkbook("EXT-015"), pathReference(varsity)],
+    [extra.precalculus],
+    [pathReference(["Course", "MIT 18.06 Linear Algebra", "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"]),
+      pathReference(["Book", "Convex Optimization", "https://web.stanford.edu/~boyd/cvxbook/"])],
+    [extra.probability],
+    [extra.inference],
+    [fromWorkbook("RES-042"), fromWorkbook("EXT-011")],
+    [fromWorkbook("RES-014"), fromWorkbook("RES-003")],
+    [fromWorkbook("EXT-012"), fromWorkbook("RES-031")],
+    [extra.regression, extra.inference],
+    [extra.timeSeries],
+    [pathReference(varsity)],
+    [pathReference(["Paper", "Common risk factors in the returns on stocks and bonds", "https://doi.org/10.1016/0304-405X(93)90023-5"]), fromWorkbook("EXT-015")],
+    [pathReference(["Paper", "The Probability of Backtest Overfitting", "https://escholarship.org/uc/item/4w1110bb"]), fromWorkbook("EXT-015")],
+    [fromWorkbook("RES-029"), extra.timeSeries],
+    [pathReference(["Book", "Convex Optimization", "https://web.stanford.edu/~boyd/cvxbook/"]), extra.regression],
+    [pathReference(["Book", "Algorithmic and High-Frequency Trading", "https://sebastian.statistics.utoronto.ca/books/algo-and-hf-trading/"]), fromWorkbook("RES-030")],
+    [extra.stochastic],
+    [extra.reproducibility, fromWorkbook("RES-043")],
+    [extra.probability, fromWorkbook("EXT-004")],
+  ];
+  return source.quant.phases.map((phase, index) => ({ ...phase, references: references[index] }));
+}
+
 export function pathContent(path: CareerPath) {
   const domain = (value: string) => path.domains?.includes(value) ?? false;
   const week = (value: number) => path.weeks?.includes(value) ?? false;
-  const imported: Reading[] = source.resources.filter((r) => domain(r.domain) && /^https:\/\//.test(r.url)).map((r) => [r.kind, r.title, r.url, r.detail]);
-  const readings = uniqueBy([...imported, ...path.readings], (r) => r[2]);
+  const plan = studyPlans[path.id];
+  const assigned = plan.flatMap((module) => module.resources);
+  const resourceKey = (resource: StudyResource) => resource.url.replace(/\/$/, "");
+  const assignedUrls = new Set(assigned.map(resourceKey));
+  const assignedTitles = new Set(assigned.map((resource) => resource.title.toLowerCase()));
+  const imported = source.resources.filter((r) => domain(r.domain)).map((r) => workbookById.get(r.id)!);
+  const existing = path.readings.map((reading) => workbookByUrl.get(reading[2]) ?? pathReference(reading));
+  const quant = path.id === "finance" ? { ...source.quant, phases: quantPhases() } : null;
+  const phaseResources = quant?.phases.flatMap((phase) => phase.references) ?? [];
+  const supplemental = uniqueBy([...phaseResources, ...imported, ...existing, ...(quant ? quantRepositoryReferences() : [])], resourceKey)
+    .filter((resource) => !assignedUrls.has(resourceKey(resource)) && !assignedTitles.has(resource.title.toLowerCase()));
   return {
     weeks: source.weeks.filter((r) => week(r.week)),
     lessons: source.lessons.filter((r) => week(r.week)),
     subjects: source.subjects.filter((r) => domain(r.domain)),
     projects: source.projects.filter((r) => domain(r.domain) || (path.id === "ai-agents" && r.week === 26)),
-    readings,
-    quant: path.id === "finance" ? source.quant : null,
+    plan,
+    supplemental,
+    resourceCount: new Set([...assigned, ...supplemental].map(resourceKey)).size,
+    quant,
   };
 }
 
 export const curriculum = source;
+
+export function workbookStudyResources() {
+  const byWeek = workbookWeekReferences.map((ids) => ids.map((id) => workbookById.get(id)!));
+  const assigned = uniqueBy(byWeek.flat(), (resource) => resource.url);
+  const assignedUrls = new Set(assigned.map((resource) => resource.url));
+  const supplemental = uniqueBy([...workbookById.values()], (resource) => resource.url)
+    .filter((resource) => !assignedUrls.has(resource.url));
+  return { byWeek, assigned, supplemental };
+}

@@ -1,7 +1,7 @@
 import { sitePath } from "../../../lib/site-path";
 import type { Metadata } from "next";
 import { Icon } from "../../site-chrome";
-import { curriculum } from "../career/catalog";
+import { curriculum, workbookStudyResources } from "../career/catalog";
 import { CareerHero, CareerNav } from "../career/hero";
 import { MasterWorkbench } from "../career/master-workbench";
 import "../career/career.css";
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default async function MasterRoadmap({ searchParams }: { searchParams: Promise<{ week?: string }> }) {
   const { week } = await searchParams;
-  const { weeks, lessons, projects, resources, skills, oss, milestones } = curriculum;
+  const { weeks, lessons, projects, skills, oss, milestones } = curriculum;
   return (
     <>
       <CareerNav current="master" />
@@ -29,7 +29,7 @@ export default async function MasterRoadmap({ searchParams }: { searchParams: Pr
         </div>
       </CareerHero>
       <section id="master-plan" className="notebook-section paper career-path-section" aria-label="Workbook explorer">
-        <div className="wrap"><MasterWorkbench initialWeek={Number(week) || 1} data={{ weeks, lessons, projects, resources, skills, oss, milestones }} /></div>
+        <div className="wrap"><MasterWorkbench initialWeek={Number(week) || 1} data={{ weeks, lessons, projects, skills, oss, milestones }} references={workbookStudyResources()} /></div>
       </section>
     </>
   );

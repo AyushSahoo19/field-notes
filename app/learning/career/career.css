@@ -35,8 +35,7 @@
 .career-card .topic-tags { margin-top: 10px; }
 .career-card .career-card-meta { color: #576479; margin-top: auto; padding-top: 5px; font: 10px/1.5 var(--mono); }
 .career-card-footer { margin-top: 7px; width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; column-gap: 6px; border-top: 1px solid var(--line); }
-.career-checklist label { display: inline-flex; align-items: center; gap: 5px; color: #455573; font-size: 12px; }
-.career-checklist input, .career-table input { accent-color: #4865a8; width: 15px; height: 15px; }
+.career-table input { accent-color: #4865a8; width: 15px; height: 15px; }
 .compare-panel { background: #eaf0fc; border: 1px solid #c2cde4; padding: 13px; border-radius: 8px; margin-bottom: 13px; }
 .compare-panel > div:first-child { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 7px; }
 .compare-panel h3 { font-size: 17px; }
@@ -81,9 +80,60 @@
 .career-subheading { margin: 18px 0 5px; color: #26395f; font-size: 16px; text-wrap: initial; }
 .career-progress { display: grid; gap: 5px; margin-top: 10px; color: #3c527c; font-size: 12px; }
 .career-progress progress { width: 100%; height: 9px; accent-color: #5072b8; }
-.career-checklist { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-block: 8px 12px; }
-.career-checklist label { min-height: 30px; }
 .highlight-week { background: #d9e5ff; padding: 2px 5px; border-radius: 3px; color: #213d79; white-space: nowrap; }
+
+.study-sequence, .study-resource-list { display: grid; gap: 13px; margin: 16px 0 20px; }
+.study-sequence { padding: 0; list-style: none; }
+.study-card {
+  min-width: 0;
+  padding: clamp(13px, 2.5vw, 22px);
+  border: 1px solid #ccd6e8;
+  border-left: 3px solid #7692d4;
+  border-radius: 7px;
+  background: #fffefa;
+  color: #3c4860;
+  overflow-wrap: anywhere;
+}
+.study-card header { margin-bottom: 13px; }
+.study-meta { margin-bottom: 4px; color: #496293; font: 650 11px/1.45 var(--mono); }
+.study-card h3, .study-card header h4 { margin: 0; color: #253453; font-size: clamp(18px, 2.3vw, 25px); line-height: 1.16; text-wrap: initial; }
+.study-topic-groups, .study-assignment, .study-resource-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: 12px 18px;
+}
+.study-topic-groups > div { padding: 10px 11px; border-radius: 5px; background: #edf1f9; }
+.study-card h4, .study-resource-details dt { margin: 0 0 3px; color: #26395f; font-size: 13px; font-weight: 700; }
+.study-topic-groups ul, .study-resource-details ul:not(.topic-tags), .study-reference-list { margin: 0; padding-left: 18px; }
+.study-card li, .study-resource-details dd, .study-practice { font-size: 13px; line-height: 1.5; }
+.study-card li + li { margin-top: 2px; }
+.study-tools { margin: 12px 0 0; }
+.study-practice { margin: 10px 0 0; }
+.study-practice strong { display: block; color: #26395f; font-weight: 700; }
+.study-assignment { margin-top: 14px; padding-top: 12px; border-top: 1px solid #dce2ed; }
+.study-assignment .study-practice:first-child { margin-top: 0; }
+.study-card a, .study-link { color: #2e4891; text-decoration: underline; text-underline-offset: 3px; }
+.study-card a:hover, .study-link:hover { color: #21396f; }
+.study-link { padding: 6px 0; margin-top: 5px; border: 0; background: none; font: 650 13px/1.4 var(--sans); text-align: left; }
+.study-complete { display: inline-flex; gap: 7px; align-items: center; min-height: 36px; margin-top: 10px; color: #324a7a; font-size: 13px; font-weight: 650; cursor: pointer; }
+.study-complete input { width: 16px; height: 16px; margin: 0; accent-color: #4865a8; }
+.study-resource-controls .career-search select { max-width: min(100%, 270px); text-overflow: ellipsis; }
+.study-resource-group { margin-top: 17px; }
+.study-resource-group > h3 { padding-bottom: 6px; border-bottom: 1px solid #cbd4e4; color: #26395f; font-size: 17px; text-wrap: initial; }
+.study-resource-list { padding-left: 25px; margin-top: 10px; }
+.study-resource-list > li::marker { color: #496293; font: 700 12px var(--mono); }
+.study-resource header h3, .study-resource header h4 { font-size: clamp(16px, 2vw, 21px); }
+.study-resource-details { margin: 0; }
+.study-resource-details dd { margin: 0; }
+.study-resource-details .study-tools { margin-top: 3px; }
+.study-resource-details .study-tools li { margin-top: 0; font-size: 11px; }
+.study-phase-section .study-sequence { margin-top: 8px; gap: 7px; }
+.study-phase { padding: 9px 12px; }
+.study-phase summary { padding-block: 3px; cursor: pointer; }
+.study-phase summary strong { color: #253453; font-size: 15px; }
+.study-phase-pace { display: block; padding-left: 15px; color: var(--muted); font-size: 12px; }
+.study-phase .study-assignment { margin-top: 7px; padding-bottom: 4px; }
+
 @media (max-width: 760px) {
   .career-hero .chapter-hero-grid { gap: 19px; }
   .career-workbench { grid-template-columns: minmax(0, 1fr); }

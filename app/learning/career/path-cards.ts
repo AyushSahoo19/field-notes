@@ -8,6 +8,6 @@ export const pathCards: PathCard[] = paths.map((path) => {
     id: path.id, title: path.title, family: path.family, roles: path.roles, intro: path.intro, needs: path.needs,
     subjects: path.subjects.map(([title]) => title),
     keywords: [...path.subjects.map((s) => s[1]), ...content.subjects.flatMap((s) => s.concepts), ...content.lessons.map((l) => l.title)],
-    resources: content.readings.length, sourced: Boolean(path.domains?.length),
+    resources: content.resourceCount, sourced: Boolean(path.domains?.length),
   };
 });

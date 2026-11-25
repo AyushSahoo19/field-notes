@@ -1,12 +1,10 @@
 "use client";
 
-import { useEffect, useId, useState, type KeyboardEvent, type ReactNode } from "react";
-import type { Reading } from "./catalog";
+import { useEffect, useState, type KeyboardEvent, type ReactNode } from "react";
 
-export function Workbench({ title, tabs, active, onChange, children }: {
-  title: string; tabs: string[]; active: number; onChange: (index: number) => void; children: ReactNode;
+export function Workbench({ id, title, tabs, active, onChange, children }: {
+  id: string; title: string; tabs: string[]; active: number; onChange: (index: number) => void; children: ReactNode;
 }) {
-  const id = useId();
   function navigate(event: KeyboardEvent<HTMLButtonElement>) {
     const keys: Record<string, number> = {
       ArrowDown: (active + 1) % tabs.length, ArrowRight: (active + 1) % tabs.length,
@@ -82,26 +80,6 @@ export function CountFilters({ label, values, selected, onSelect }: {
         </button>
       ))}
     </div>
-  );
-}
-
-export function ResourceShelf({ readings }: { readings: Reading[] }) {
-  const [kind, setKind] = useState("");
-  const [query, setQuery] = useState("");
-  const types = readings.map(([type]) => type);
-  const kinds = [...new Set(types)];
-  const shown = readings.filter((r) => (!kind || kind === r[0]) && matches(query, r));
-  return (
-    <>
-      <CountFilters label="Resource types" values={types} selected={kind} onSelect={setKind} />
-      <div className="career-controls">
-        <SearchField label="Search resources" value={query} onChange={setQuery} placeholder="Title, topic, or provider" />
-        <label className="career-search"><span>Resource type</span><select value={kind} onChange={(e) => setKind(e.target.value)}><option value="">All types</option>{kinds.map((k) => <option key={k}>{k}</option>)}</select></label>
-      </div>
-      <p className="career-result" aria-live="polite">{shown.length} of {readings.length} resources</p>
-      <DataTable label="Resources" columns={["Resource", "Type", "Study note"]}
-        rows={shown.map(([type, title, href, note]) => [href ? <a href={href} target="_blank" rel="noreferrer">{title} <span aria-hidden="true">↗</span></a> : title, type, note || "Reference for this path."])} />
-    </>
   );
 }
 

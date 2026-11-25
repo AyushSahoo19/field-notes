@@ -1,0 +1,60 @@
+import type { StudyResource } from "./study-plan-types";
+
+export const quantPhaseReferences: Record<string, StudyResource> = {
+  precalculus: {
+    kind: "Book", title: "OpenStax Precalculus 2e", url: "https://openstax.org/books/precalculus-2e/pages/preface",
+    coverage: "Use the functions, exponential and logarithmic models, and sequences chapters for the mathematical vocabulary used in later modules.",
+    why: "These operations appear in compounding, transformations, and growth-rate comparisons.",
+    concepts: ["Function composition", "inverse functions", "logarithms", "sequences"],
+    tools: ["Graphing calculator", "Python for numerical checks"],
+    activity: "Compare simple, compound, and logarithmic returns over the same price sequence.",
+  },
+  probability: {
+    kind: "Course", title: "Harvard Statistics 110 · Probability", url: "https://stat110.hsites.harvard.edu/",
+    coverage: "Works through conditional probability, random variables, expectation, and common distributions.",
+    why: "These ideas let you state and check a model's assumptions about randomness.",
+    concepts: ["Conditional probability", "Bayes’ rule", "expectation", "distributions"],
+    tools: ["Course problem sets", "NumPy for simulation"],
+    activity: "Solve a conditional-probability exercise by hand, then check it with a seeded simulation.",
+  },
+  inference: {
+    kind: "Documentation", title: "SciPy statistics reference", url: "https://docs.scipy.org/doc/scipy/reference/stats.html",
+    coverage: "Documents probability distributions, parameter fitting, hypothesis tests, and resampling routines.",
+    why: "Checking estimator assumptions prevents overconfident conclusions from small or dependent samples.",
+    concepts: ["Distribution fitting", "confidence intervals", "hypothesis tests", "bootstrap"],
+    tools: ["Python", "SciPy", "NumPy"],
+    activity: "Estimate a parameter on simulated samples and compare empirical with nominal interval coverage.",
+  },
+  regression: {
+    kind: "Documentation", title: "statsmodels · Linear Regression", url: "https://www.statsmodels.org/stable/regression.html",
+    coverage: "Documents least squares, weighting, covariance assumptions, and regression output.",
+    why: "Inference depends on how residuals and uncertainty are handled, even if fitted coefficients look reasonable.",
+    concepts: ["OLS", "WLS", "residuals", "robust standard errors"],
+    tools: ["Python", "statsmodels", "pandas"],
+    activity: "Fit a baseline model and compare ordinary and robust uncertainty estimates on the same data.",
+  },
+  timeSeries: {
+    kind: "Tutorial", title: "statsmodels · ARIMA Tutorial", url: "https://www.statsmodels.org/stable/examples/notebooks/generated/autoregressive_integrated_moving_average.html",
+    coverage: "Walks through time-ordered forecasting, ARIMA model fitting, and forecast evaluation.",
+    why: "A chronological evaluation shows how the model would behave on data unavailable during training.",
+    concepts: ["Autoregression", "differencing", "forecast errors", "time-based splits"],
+    tools: ["Python", "statsmodels", "notebook"],
+    activity: "Fit an ARIMA model on earlier observations and compare later forecasts with a naive baseline.",
+  },
+  stochastic: {
+    kind: "Course", title: "MIT 6.262 · Discrete Stochastic Processes", url: "https://ocw.mit.edu/courses/6-262-discrete-stochastic-processes-spring-2011/",
+    coverage: "Develops Poisson and renewal processes, Markov chains, random walks, and martingales.",
+    why: "Event-arrival and state-transition models provide a starting point for modeling time-dependent market data.",
+    concepts: ["Poisson processes", "Markov chains", "random walks", "martingales"],
+    tools: ["MIT lecture notes", "Python for simulation"],
+    activity: "Simulate a finite Markov chain and compare observed state occupancy with the stationary distribution.",
+  },
+  reproducibility: {
+    kind: "Guide", title: "The Turing Way · Reproducible Research", url: "https://book.the-turing-way.org/reproducible-research/reproducible-research",
+    coverage: "Introduces reproducible workflows, version control, computational environments, and research records.",
+    why: "A reader should be able to recover the data assumptions and rerun the reported results.",
+    concepts: ["Version control", "environment capture", "research records", "reproducible reports"],
+    tools: ["Git", "environment lockfile", "notebook or scripted report"],
+    activity: "Re-run an analysis from a clean checkout and document the commands, data, and expected outputs.",
+  },
+};
